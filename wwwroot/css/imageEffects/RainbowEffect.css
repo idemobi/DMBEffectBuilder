@@ -1,0 +1,21 @@
+.eb-image-effect-rainbow-var {
+    --eb-image-effect-duration: 500ms;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-rainbow-deg: 360deg;
+    --eb-image-effect-saturation: 2;
+    --eb-image-effect-brightness: 1;
+}
+
+.eb-image-effect-rainbow{
+    transition: filter var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-rainbow:hover{
+    animation: eb_rainbow_keyframes var(--eb-image-effect-duration, 3000ms) var(--eb-image-effect-timing, ease-in-out) infinite;
+}
+
+@keyframes eb_rainbow_keyframes {
+    0% {filter: hue-rotate(0deg) saturate(var(--eb-image-effect-saturation, 2)) brightness(var(--eb-image-effect-brightness, 1));}
+    100% {filter: hue-rotate(var(--eb-rainbow-deg, 360deg)) saturate(var(--eb-image-effect-saturation, 2)) brightness(var(--eb-image-effect-brightness, 1));}
+}

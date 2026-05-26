@@ -1,0 +1,18 @@
+.eb-image-effect-rotate-random-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-rotate-random-angle: 0deg;
+    --eb-image-effect-scale: 1;
+    --eb-image-effect-hover-scale: 1;
+    --eb-image-effect-hover-deg: 0deg;
+}
+
+.eb-image-effect-rotate-random {
+    transform: rotate(var(--eb-rotate-random-angle, 0deg)) scale(var(--eb-image-effect-scale, 1));
+    transition: transform var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-rotate-random:hover {
+    transform: rotate(var(--eb-image-effect-hover-deg, 0deg)) scale(var(--eb-image-effect-hover-scale, 1));
+}

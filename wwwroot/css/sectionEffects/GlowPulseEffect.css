@@ -1,0 +1,29 @@
+/* Glow Pulse */
+.eb-section-effect-glow-pulse-var {
+    --eb-glow-color: #64C8FF;
+    --eb-glow-opacity: 0.5;
+    --eb-glow-speed: 2s;
+}
+
+.eb-section-effect-glow-pulse {
+    position: relative;
+}
+
+.eb-section-effect-glow-pulse > * {
+    position: relative;
+    z-index: 2;
+}
+
+.eb-section-effect-glow-pulse::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    animation: eb_glow_pulse_keyframes var(--eb-glow-speed, 2s) ease-in-out infinite alternate;
+}
+
+@keyframes eb_glow_pulse_keyframes {
+    from { box-shadow: inset 0 0 15px color-mix(in srgb, var(--eb-glow-color, #64C8FF) calc(var(--eb-glow-opacity, 0.5) * 100%), transparent), inset 0 0 30px color-mix(in srgb, var(--eb-glow-color, #64C8FF) calc(var(--eb-glow-opacity, 0.5) * 50%), transparent); }
+    to   { box-shadow: inset 0 0 50px color-mix(in srgb, var(--eb-glow-color, #64C8FF) calc(var(--eb-glow-opacity, 0.5) * 150%), transparent), inset 0 0 100px color-mix(in srgb, var(--eb-glow-color, #64C8FF) calc(var(--eb-glow-opacity, 0.5) * 80%), transparent); }
+}

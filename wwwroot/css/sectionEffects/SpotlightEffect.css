@@ -1,0 +1,27 @@
+/* Spotlight */
+.eb-section-effect-spotlight-var {
+    --eb-spotlight-color: #ffffff;
+    --eb-spotlight-opacity: 0.2;
+    --eb-spotlight-size: 300px;
+    --eb-spotlight-x: 50%;
+    --eb-spotlight-y: 50%;
+}
+
+.eb-section-effect-spotlight {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.eb-section-effect-spotlight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle var(--eb-spotlight-size, 300px) at var(--eb-spotlight-x, 50%) var(--eb-spotlight-y, 50%),
+        color-mix(in srgb, var(--eb-spotlight-color, #ffffff) calc(var(--eb-spotlight-opacity, 0.2) * 100%), transparent) 0%,
+        transparent 80%
+    );
+    pointer-events: none;
+    z-index: 1;
+}

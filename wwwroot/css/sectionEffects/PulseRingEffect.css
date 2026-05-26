@@ -1,0 +1,31 @@
+/* Pulse Ring */
+.eb-section-effect-pulse-ring-var {
+    --eb-pulse-color: #ffffff;
+    --eb-pulse-opacity: 0.6;
+    --eb-pulse-speed: 3s;
+}
+
+.eb-section-effect-pulse-ring {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.eb-section-effect-pulse-ring > *:not(.eb-pulse-ring-el):not(.section-debug) {
+    position: relative;
+    z-index: 2;
+}
+
+.eb-pulse-ring-el {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid color-mix(in srgb, var(--eb-pulse-color, #ffffff) calc(var(--eb-pulse-opacity, 0.6) * 100%), transparent);
+    pointer-events: none;
+    z-index: 1;
+    animation: eb_pulse_expand_keyframes var(--eb-pulse-speed, 3s) ease-out infinite;
+}
+
+@keyframes eb_pulse_expand_keyframes {
+    0%   { transform: scale(0); opacity: 0.8; }
+    100% { transform: scale(3); opacity: 0; }
+}

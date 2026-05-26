@@ -1,0 +1,14 @@
+.eb-image-effect-grayscale-hover-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-image-effect-grayscale: 1;
+}
+
+.eb-image-effect-grayscale-hover  {
+    transition: filter var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-grayscale-hover:hover  {
+    filter: grayscale(var(--eb-image-effect-grayscale, 1));
+}

@@ -1,0 +1,14 @@
+.eb-image-effect-lift-hover-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+}
+
+.eb-image-effect-lift-hover {
+    transition: transform var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s), box-shadow var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-lift-hover:hover {
+    transform: translateY(calc(var(--eb-image-effect-lift-distance, 4px) * -1)) scale(var(--eb-image-effect-scale, 1.0));
+    box-shadow: 0 10px 20px rgba(0, 0, 0, var(--eb-image-effect-shadow-opacity, 0.15));
+}

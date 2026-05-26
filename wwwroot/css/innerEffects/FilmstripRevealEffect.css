@@ -1,0 +1,256 @@
+/* ── Wrapper (always visible — needed for IntersectionObserver) ── */
+.eb-fstrip-wrapper {
+    position: relative;
+    min-height: 100dvh;
+}
+
+/* ── Root ── */
+.eb-fstrip-header {
+    background-color: var(--eb-fstrip-bg, #eaeaea);
+    color: var(--eb-fstrip-fg, #1a1a1a);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+.eb-fstrip-header.is--loading.is--hidden {
+    display: none;
+}
+
+/* ── Loader ── */
+.eb-fstrip-loader {
+    display: none;
+}
+
+.eb-fstrip-header.is--loading .eb-fstrip-loader {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 1vw;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.eb-fstrip-header.is--loading .eb-fstrip-header__slider {
+    display: none;
+}
+
+.eb-fstrip-loader__wrap {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: relative;
+}
+
+.eb-fstrip-loader__groups {
+    position: relative;
+    overflow: hidden;
+}
+
+.eb-fstrip-loader__group {
+    border-radius: .5em;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: relative;
+}
+
+.eb-fstrip-loader__single {
+    padding-left: 1em;
+    padding-right: 1em;
+    position: relative;
+}
+
+.eb-fstrip-loader__media {
+    border-radius: .5em;
+    justify-content: center;
+    align-items: center;
+    width: 10em;
+    height: 10em;
+    display: flex;
+    position: relative;
+}
+
+.eb-fstrip-loader__media.is--scaling {
+    will-change: transform;
+    border-radius: 0;
+    transition-property: border-radius;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(1, 0, 0, 1);
+    display: flex;
+}
+
+.eb-fstrip-loader__media.is--scaling.is--radius {
+    border-radius: .5em;
+}
+
+.eb-fstrip-loader__cover-img {
+    object-fit: cover;
+    border-radius: inherit;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.eb-fstrip-loader__cover-img.is--scale-down {
+    will-change: transform;
+}
+
+.eb-fstrip-loader__group.is--relative {
+    position: relative;
+    left: 100%;
+}
+
+.eb-fstrip-loader__group.is--duplicate {
+    position: absolute;
+}
+
+.eb-fstrip-loader__fade {
+    pointer-events: none;
+    background-image: linear-gradient(90deg, var(--eb-fstrip-bg, #eaeaea) 20%, transparent);
+    width: 5em;
+    height: calc(100% + 2px);
+    position: absolute;
+    top: -1px;
+    left: -1px;
+}
+
+.eb-fstrip-loader__fade.is--duplicate {
+    left: auto;
+    right: -1px;
+    transform: scaleX(-1);
+}
+
+/* ── Slider ── */
+.eb-fstrip-header__slider {
+    gap: 1rem;
+    border-radius: .5em;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+}
+
+.eb-fstrip-header__slider-list {
+    grid-template-rows: 100%;
+    grid-template-columns: 100%;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    overflow: hidden;
+}
+
+.eb-fstrip-header__slider-slide {
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+    grid-area: 1 / 1 / -1 / -1;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    position: relative;
+    overflow: hidden;
+}
+
+.eb-fstrip-header__slider-slide.is--current {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.eb-fstrip-header__slider-slide-inner {
+    object-fit: cover;
+    will-change: transform;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+/* ── Content overlay ── */
+.eb-fstrip-header__content {
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100dvh;
+    padding: 2.5em;
+    display: flex;
+    position: relative;
+}
+
+.eb-fstrip-header__center {
+    width: 100%;
+    padding: 1.5em;
+    position: absolute;
+    left: 0;
+}
+
+.eb-fstrip-header__bottom {
+    gap: 2em;
+    flex-flow: column;
+    align-items: center;
+    margin-top: auto;
+    display: flex;
+}
+
+/* ── Title ── */
+.eb-fstrip-header__h1 {
+    color: var(--eb-fstrip-fg, #1a1a1a);
+    text-align: center;
+    letter-spacing: -.04em;
+    margin-top: 0;
+    margin-bottom: .125em;
+    font-size: calc(5vw + 5dvh);
+    font-weight: 400;
+    line-height: .95;
+}
+
+.eb-fstrip-header__h1 > * {
+    margin: -0.1em -0.05em;
+    padding: 0.1em 0.05em;
+}
+
+/* ── Thumbnail nav ── */
+.eb-fstrip-header__slider-nav {
+    gap: .5em;
+    padding: 1em;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+.eb-fstrip-header__slider-nav-btn {
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: .25em;
+    width: 3.5em;
+    height: 3.5em;
+    position: relative;
+    transition: border-color 0.75s cubic-bezier(0.625, 0.05, 0, 1);
+}
+
+.eb-fstrip-header__slider-nav-btn img {
+    transform: scale(1) rotate(0.001deg);
+    transition: transform 0.75s cubic-bezier(0.625, 0.05, 0, 1);
+}
+
+.eb-fstrip-header__slider-nav:has(.eb-fstrip-header__slider-nav-btn:hover) img {
+    transform: scale(0.825) rotate(0.001deg);
+}
+
+.eb-fstrip-header__slider-nav:has(.eb-fstrip-header__slider-nav-btn:hover) .eb-fstrip-header__slider-nav-btn:hover img {
+    transform: scale(1) rotate(0.001deg);
+}
+
+.eb-fstrip-header__slider-nav-btn.is--current {
+    border-color: var(--eb-fstrip-fg, #1a1a1a);
+}

@@ -1,0 +1,14 @@
+.eb-image-effect-color-invert-var {
+    --eb-image-effect-duration: 500ms;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-color-invert-amount: 100%;
+}
+
+.eb-image-effect-color-invert{
+    transition: filter var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-color-invert:hover{
+    filter: invert(var(--eb-color-invert-amount, 100%));
+}

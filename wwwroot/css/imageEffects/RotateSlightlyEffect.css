@@ -1,0 +1,14 @@
+.eb-image-effect-rotate-slightly-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+}
+
+.eb-image-effect-rotate-slightly {
+    transform: rotate(var(--eb-image-effect-deg, -2deg)) scale(var(--eb-image-effect-scale, 1));
+    transition: transform var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-rotate-slightly:hover {
+    transform: rotate(var(--eb-image-effect-hover-deg, 0deg)) scale(var(--eb-image-effect-hover-scale, 1));
+}

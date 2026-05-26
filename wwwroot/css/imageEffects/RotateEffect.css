@@ -1,0 +1,22 @@
+.eb-image-effect-rotate-var {
+    --eb-image-effect-duration: 300ms;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-rotate-deg: 360deg;
+    --eb-image-effect-scale: 1;
+    --eb-image-effect-iteration: infinite;
+}
+
+.eb-image-effect-rotate{
+    transition: transform var(--eb-image-effect-duration, 300ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s),
+                filter var(--eb-image-effect-duration, 300ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-rotate:hover{
+    animation: eb_rotate_keyframes var(--eb-image-effect-duration, 500ms) linear var(--eb-image-effect-delay, 0s) var(--eb-image-effect-iteration, infinite);
+}
+
+@keyframes eb_rotate_keyframes{
+    0% {transform: scale(var(--eb-image-effect-scale, 1)) rotate(0deg);}
+    100% {transform: scale(var(--eb-image-effect-scale, 1)) rotate(var(--eb-rotate-deg, 360deg));}
+}

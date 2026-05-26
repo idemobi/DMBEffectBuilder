@@ -1,0 +1,9 @@
+/* Wave */
+.eb-section-effect-wave-var {
+    --eb-wave-height: 80px;
+}
+
+.eb-section-effect-wave {
+    position: relative;
+    overflow: hidden;
+}

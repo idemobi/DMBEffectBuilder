@@ -1,0 +1,106 @@
+.eb-carousel {
+    position: relative;
+    --eb-ca-height: auto;
+    --eb-ca-duration: 0.5s;
+    border-radius: 0.75rem;
+}
+
+/* ── Viewport ── */
+
+.eb-ca-viewport {
+    overflow: hidden;
+    border-radius: 0.75rem;
+}
+
+/* ── Slide mode ── */
+
+.eb-carousel.slide-transition .eb-ca-track {
+    display: flex;
+    transition: transform var(--eb-ca-duration) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.eb-carousel.slide-transition .eb-ca-slide {
+    min-width: 100%;
+    height: var(--eb-ca-height);
+}
+
+/* ── Fade mode ── */
+
+.eb-carousel.fade-transition .eb-ca-track {
+    position: relative;
+    height: var(--eb-ca-height);
+}
+
+.eb-carousel.fade-transition .eb-ca-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--eb-ca-duration) ease;
+}
+
+.eb-carousel.fade-transition .eb-ca-slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ── Slide content fills its container ── */
+
+.eb-ca-slide > * {
+    width: 100%;
+    height: 100%;
+}
+
+/* ── Arrows ── */
+
+.eb-ca-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, opacity 0.2s ease;
+    font-size: 1rem;
+    backdrop-filter: blur(4px);
+}
+
+.eb-ca-arrow:hover {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.eb-ca-prev { left: 0.75rem; }
+.eb-ca-next { right: 0.75rem; }
+
+/* ── Dots ── */
+
+.eb-ca-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    padding-top: 0.875rem;
+}
+
+.eb-ca-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    border: none;
+    background: var(--bs-border-color, #dee2e6);
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.eb-ca-dot.is-active {
+    background: var(--bs-primary, #0d6efd);
+    transform: scale(1.35);
+}

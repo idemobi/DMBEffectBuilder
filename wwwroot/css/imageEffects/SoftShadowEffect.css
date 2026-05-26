@@ -1,0 +1,10 @@
+.eb-image-effect-soft-shadow-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+}
+
+.eb-image-effect-soft-shadow  {
+    box-shadow: 0 var(--eb-image-effect-offset-y, 8px) var(--eb-image-effect-blur, 30px) var(--eb-image-effect-color, rgba(0,0,0,.15));
+    transition: box-shadow var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}

@@ -1,0 +1,15 @@
+.eb-image-effect-darken-to-normal-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-image-effect-brightness: 0.55;
+}
+
+.eb-image-effect-darken-to-normal  {
+    filter: brightness(var(--eb-image-effect-brightness, 0.55));
+    transition: filter var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-darken-to-normal:hover  {
+    filter: brightness(1);
+}

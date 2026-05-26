@@ -1,0 +1,209 @@
+/* ── Animatable custom property for smooth hover scale ── */
+@property --eb-cy-hover-scale {
+    syntax: '<number>';
+    initial-value: 1;
+    inherits: false;
+}
+
+/* ── Root ── */
+.eb-cylinder {
+    --eb-cy-n: 6;
+    --eb-cy-dur: 32s;
+    --eb-cy-w: 17.5em;
+    --eb-cy-ratio: 7/10;
+}
+
+/* ── Scene: 3D viewport with lateral fade ── */
+.eb-cy-scene {
+    display: grid;
+    overflow: hidden;
+    mask: linear-gradient(90deg, #0000, red 20% 80%, #0000);
+    -webkit-mask: linear-gradient(90deg, #0000, red 20% 80%, #0000);
+}
+
+/* Concave: perspective = 4× radius → center card has the largest apparent area.
+   With a closer perspective the scale effect inverts and side cards appear taller.
+   Mask removed — same reason as convex: cards near the edges would be clipped by the fade zone. */
+.eb-cylinder.shape-concave .eb-cy-scene {
+    perspective: var(--eb-cy-persp, calc(((0.5 * var(--eb-cy-w) + 0.5em) / tan(0.5turn / var(--eb-cy-n))) * 4));
+    overflow: visible;
+    mask: none;
+    -webkit-mask: none;
+}
+
+/* Convex: perspective = 6× radius keeps card sizes reasonable (front card ≈1.2× scale).
+   Mask removed — projected positions spread wider and would be clipped by the 20/80 gradient. */
+.eb-cylinder.shape-convex .eb-cy-scene {
+    perspective: var(--eb-cy-persp, calc(((0.5 * var(--eb-cy-w) + 0.5em) / tan(0.5turn / var(--eb-cy-n))) * 6));
+    overflow: visible;
+    mask: none;
+    -webkit-mask: none;
+}
+
+/* ── Rotating 3D container ── */
+.eb-cy-a3d {
+    display: grid;
+    place-self: center;
+    transform-style: preserve-3d;
+    animation: eb-cy-spin var(--eb-cy-dur) linear infinite;
+}
+
+@keyframes eb-cy-spin {
+    to { rotate: y 1turn; }
+}
+
+/* ── Common card styles ── */
+.eb-cy-card {
+    overflow: hidden;
+    border-radius: 1.5em;
+    width: var(--eb-cy-w);
+    aspect-ratio: var(--eb-cy-ratio);
+    transition: filter 0.3s ease;
+}
+
+.eb-cy-card > * {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ── 3D card base: stacked + cylinder math ── */
+.eb-cy-a3d .eb-cy-card {
+    --ba: 1turn / var(--eb-cy-n);
+    --eb-cy-radius: calc((0.5 * var(--eb-cy-w) + 0.5em) / tan(0.5 * var(--ba)));
+    grid-area: 1 / 1;
+    backface-visibility: hidden;
+}
+
+/* Allow hovered cards to scale without being clipped by the scene's overflow.
+   padding-block creates vertical breathing room so scaled cards don't overlap adjacent content. */
+.eb-cylinder:not(.shape-flat).hover-scale .eb-cy-scene {
+    overflow: visible;
+}
+
+.eb-cylinder:not(.shape-flat).hover-scale {
+    padding-block: 2.5em;
+}
+
+/* Concave: cylinder opens toward viewer, center card largest */
+.eb-cylinder.shape-concave .eb-cy-card {
+    transform:
+        rotatey(calc(var(--i) * var(--ba)))
+        translatez(calc(-1 * var(--eb-cy-radius)));
+}
+
+.eb-cylinder.shape-concave.hover-scale .eb-cy-card {
+    transform:
+        rotatey(calc(var(--i) * var(--ba)))
+        translatez(calc(-1 * var(--eb-cy-radius)))
+        scale(var(--eb-cy-hover-scale, 1));
+}
+
+/* Convex: cylinder back faces viewer, center card protrudes toward viewer */
+.eb-cylinder.shape-convex .eb-cy-card {
+    transform:
+        rotatey(calc(var(--i) * var(--ba)))
+        translatez(var(--eb-cy-radius));
+}
+
+.eb-cylinder.shape-convex.hover-scale .eb-cy-card {
+    transform:
+        rotatey(calc(var(--i) * var(--ba)))
+        translatez(var(--eb-cy-radius))
+        scale(var(--eb-cy-hover-scale, 1));
+}
+
+/* ── Flat / marquee mode ── */
+/* clip-path instead of overflow: hidden so that vertical overflow (hover scale) can be allowed
+   independently by overriding clip-path, while horizontal clipping remains intact. */
+.eb-cylinder.shape-flat {
+    clip-path: inset(0);
+}
+
+.eb-cylinder.shape-flat.hover-scale {
+    clip-path: inset(-10% 0);
+}
+
+.eb-cylinder.shape-flat .eb-cy-flat-track {
+    display: flex;
+    gap: 0;
+    width: max-content;
+    animation: eb-cy-flat-scroll var(--eb-cy-dur) linear infinite;
+}
+
+/* margin-right acts as gap; included in each item's width so -50% lands exactly on set boundary */
+.eb-cylinder.shape-flat .eb-cy-card {
+    flex-shrink: 0;
+    margin-right: 1em;
+}
+
+@keyframes eb-cy-flat-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* ── Filters ── */
+.eb-cylinder.filter-grayscale .eb-cy-card { filter: grayscale(1); }
+.eb-cylinder.filter-sepia     .eb-cy-card { filter: sepia(1); }
+.eb-cylinder.filter-blur      .eb-cy-card { filter: blur(4px) brightness(0.75); }
+.eb-cylinder.filter-dim       .eb-cy-card { filter: brightness(0.35); }
+.eb-cylinder.filter-invert    .eb-cy-card { filter: invert(1); }
+.eb-cylinder.filter-huerotate .eb-cy-card { filter: hue-rotate(180deg); }
+.eb-cylinder.filter-saturate  .eb-cy-card { filter: saturate(3); }
+
+/* ── Pause on hover ── */
+.eb-cylinder.pause-hover:hover .eb-cy-a3d,
+.eb-cylinder.shape-flat.pause-hover:hover .eb-cy-flat-track {
+    animation-play-state: paused;
+}
+
+/* ── Hover scale: 3D modes (custom property animated in transform chain) ── */
+.eb-cylinder:not(.shape-flat).hover-scale .eb-cy-card {
+    transition: --eb-cy-hover-scale 0.3s ease, filter 0.3s ease;
+}
+
+.eb-cylinder:not(.shape-flat).hover-scale .eb-cy-card:hover {
+    --eb-cy-hover-scale: 1.12;
+}
+
+/* ── Hover scale: flat mode (regular 2D transform) ── */
+.eb-cylinder.shape-flat.hover-scale .eb-cy-card {
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.eb-cylinder.shape-flat.hover-scale .eb-cy-card:hover {
+    transform: scale(1.08);
+}
+
+/* ── Hover clear filter ── */
+.eb-cylinder.hover-clear .eb-cy-card:hover {
+    filter: none;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+    .eb-cy-a3d,
+    .eb-cylinder.shape-flat .eb-cy-flat-track {
+        animation-duration: calc(var(--eb-cy-dur) * 4);
+    }
+}
+
+/* ── Mobile: shrink cards so the cylindrical depth is preserved ── */
+@media (max-width: 767.98px) {
+    .eb-cylinder {
+        --eb-cy-w: 12em !important;
+    }
+    .eb-cylinder:not(.shape-flat).hover-scale {
+        padding-block: 1.5em;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .eb-cylinder {
+        --eb-cy-w: 9em !important;
+    }
+    .eb-cylinder:not(.shape-flat).hover-scale {
+        padding-block: 1em;
+    }
+}

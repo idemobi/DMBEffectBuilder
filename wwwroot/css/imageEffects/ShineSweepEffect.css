@@ -1,0 +1,31 @@
+.eb-image-effect-shine-sweep-var {
+    --eb-image-effect-duration: 5000ms;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+}
+
+.eb-image-effect-shine-sweep {
+    position: relative;
+    overflow: hidden;
+}
+.eb-image-effect-shine-sweep::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -35%;
+    width: var(--eb-image-effect-width, 30%);
+    height: 300%;
+    z-index: 2;
+    pointer-events: none;
+    transform: rotate(var(--eb-image-effect-angle, 18deg)) translateX(0);
+    background: linear-gradient(90deg, 
+        rgba(255,255,255,0) 0%, 
+        color-mix(in srgb, var(--eb-image-effect-color, white), transparent 84%) 45%, 
+        color-mix(in srgb, var(--eb-image-effect-color, white), transparent 55%) 50%, 
+        color-mix(in srgb, var(--eb-image-effect-color, white), transparent 84%) 55%, 
+        rgba(255,255,255,0) 100%);
+    transition: transform var(--eb-image-effect-duration, 5000ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+.eb-image-effect-shine-sweep:hover::before {
+    transform: rotate(var(--eb-image-effect-angle, 18deg)) translateX(420%);
+}

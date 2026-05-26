@@ -1,0 +1,34 @@
+/* Highlight Sweep */
+.eb-section-effect-highlight-sweep-var {
+    --eb-sweep-opacity: 0.3;
+    --eb-sweep-duration: 500ms;
+    --eb-sweep-timing: ease-in-out;
+}
+
+.eb-section-effect-highlight-sweep {
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow var(--eb-sweep-duration, 500ms) var(--eb-sweep-timing, ease-in-out);
+    isolation: isolate;
+    background-size: cover;
+    background-position: center;
+}
+
+.eb-section-effect-highlight-sweep::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,var(--eb-sweep-opacity, 0.3)) 50%, transparent 100%);
+    transition: left var(--eb-sweep-duration, 600ms) var(--eb-sweep-timing, ease-in-out);
+}
+
+.eb-section-effect-highlight-sweep:hover::before {
+    left: 150%;
+}
+
+body {
+    overflow-x: hidden;
+}

@@ -1,0 +1,227 @@
+.eb-section-inner-header {
+    padding: 0.5rem 0;
+}
+
+.eb-section-inner-title {
+    display: block;
+    max-width: 100%;
+    padding-bottom: 0.15em;
+}
+
+.eb-section-inner-title h1 {
+    color: var(--bs-body-color);
+    max-width: 100%;
+}
+
+/* Overlay mode */
+.eb-section-inner-overlay .eb-section-inner-body {
+    position: relative;
+}
+
+.eb-section-inner-header-overlay {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Typewriter */
+.eb-typewriter {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid;
+    width: 0;
+    animation: eb-typewriter-blink 0.5s step-end infinite alternate;
+}
+
+@keyframes eb-typewriter-blink {
+    50% { border-color: transparent; }
+}
+
+/* Letter Collapse */
+@keyframes eb-letter-collapse {
+    from {
+        letter-spacing: 1em;
+        opacity: 0;
+    }
+    to {
+        letter-spacing: normal;
+        opacity: 1;
+    }
+}
+
+/* Wave */
+.eb-wave-letter {
+    display: inline-block;
+    animation: eb-wave var(--wave-duration, 1s) ease-in-out infinite;
+}
+
+@keyframes eb-wave {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-12px); }
+}
+
+/* Shake */
+.eb-title-shake {
+    animation: eb-shake var(--eb-shake-speed, 4s) ease-in-out infinite;
+}
+
+@keyframes eb-shake {
+    0%, 85%, 100% { transform: translateX(0) rotate(0); }
+    86%            { transform: translateX(-4px) rotate(-1deg); }
+    88%            { transform: translateX(4px)  rotate(1deg); }
+    90%            { transform: translateX(-3px) rotate(-0.5deg); }
+    92%            { transform: translateX(3px)  rotate(0.5deg); }
+    94%            { transform: translateX(-1px); }
+    96%            { transform: translateX(0); }
+}
+
+/* Split Color */
+.eb-title-split-color {
+    position: relative;
+    color: var(--eb-split-top, var(--bs-body-color, #212529));
+}
+
+.eb-title-split-color::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--eb-split-bottom, #ff6ecf);
+    clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+    pointer-events: none;
+}
+
+/* Stamp */
+.eb-title-stamp {
+    animation: eb-stamp var(--eb-stamp-duration, 0.6s) cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes eb-stamp {
+    0%   { transform: scale(3);   opacity: 0; filter: blur(4px); }
+    60%  { transform: scale(0.9); opacity: 1; filter: blur(0); }
+    80%  { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Blur Reveal */
+.eb-title-blur-reveal {
+    animation: eb-blur-reveal var(--eb-blur-duration, 1.5s) ease-out forwards;
+}
+
+@keyframes eb-blur-reveal {
+    from { filter: blur(var(--eb-blur-start, 12px)); opacity: 0.2; }
+    to   { filter: blur(0px); opacity: 1; }
+}
+
+/* Slide Up */
+.eb-slide-letter {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    animation: eb-slide-up var(--eb-slide-duration, 0.6s) cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes eb-slide-up {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* Color Cycle */
+.eb-title-color-cycle {
+    color: var(--eb-color-cycle-base, #ff6ecf);
+    animation: eb-color-cycle var(--eb-color-cycle-speed, 4s) linear infinite;
+}
+
+@keyframes eb-color-cycle {
+    from { filter: hue-rotate(0deg); }
+    to   { filter: hue-rotate(360deg); }
+}
+
+/* Outline */
+.eb-title-outline {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: var(--eb-outline-width, 1px) var(--eb-outline-color, var(--bs-primary, #0d6efd));
+    color: transparent;
+    animation: eb-outline-glow var(--eb-outline-speed, 2s) ease-in-out infinite alternate;
+}
+
+@keyframes eb-outline-glow {
+    from { filter: drop-shadow(0 0 2px var(--eb-outline-color, var(--bs-primary, #0d6efd))); }
+    to   { filter: drop-shadow(0 0 12px var(--eb-outline-color, var(--bs-primary, #0d6efd))); }
+}
+
+/* Neon Glow */
+.eb-title-neon {
+    color: var(--eb-neon-color, #ff6ecf);
+    animation: eb-neon-pulse var(--eb-neon-speed, 2s) ease-in-out infinite alternate;
+}
+
+@keyframes eb-neon-pulse {
+    from {
+        text-shadow:
+            0 0 4px  var(--eb-neon-color, #ff6ecf),
+            0 0 12px var(--eb-neon-color, #ff6ecf),
+            0 0 24px var(--eb-neon-color, #ff6ecf);
+    }
+    to {
+        text-shadow:
+            0 0 8px  var(--eb-neon-color, #ff6ecf),
+            0 0 24px var(--eb-neon-color, #ff6ecf),
+            0 0 48px var(--eb-neon-color, #ff6ecf),
+            0 0 80px var(--eb-neon-color, #ff6ecf);
+    }
+}
+
+/* Glitch Text */
+.eb-title-glitch {
+    position: relative;
+}
+
+.eb-title-glitch::before,
+.eb-title-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.eb-title-glitch::before {
+    color: var(--eb-glitch-color1, #ff005c);
+    -webkit-text-fill-color: var(--eb-glitch-color1, #ff005c);
+    clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+    animation: eb-glitch-1 var(--eb-glitch-speed, 3s) infinite;
+    opacity: 0.85;
+}
+
+.eb-title-glitch::after {
+    color: var(--eb-glitch-color2, #00f5d4);
+    -webkit-text-fill-color: var(--eb-glitch-color2, #00f5d4);
+    clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+    animation: eb-glitch-2 var(--eb-glitch-speed, 3s) infinite;
+    opacity: 0.85;
+}
+
+@keyframes eb-glitch-1 {
+    0%, 85%, 100% { transform: none;             opacity: 0; }
+    86%            { transform: translateX(-3px); opacity: 0.85; }
+    88%            { transform: translateX(3px);  opacity: 0.85; }
+    90%            { transform: translateX(-2px); opacity: 0.85; }
+    92%            { transform: none;             opacity: 0; }
+}
+
+@keyframes eb-glitch-2 {
+    0%, 80%, 100% { transform: none;             opacity: 0; }
+    81%            { transform: translateX(3px);  opacity: 0.85; }
+    83%            { transform: translateX(-3px); opacity: 0.85; }
+    85%            { transform: translateX(2px);  opacity: 0; }
+}

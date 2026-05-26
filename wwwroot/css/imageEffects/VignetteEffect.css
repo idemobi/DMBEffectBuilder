@@ -1,0 +1,22 @@
+.eb-image-effect-vignette-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+}
+
+.eb-image-effect-vignette {
+    position: relative;
+    overflow: hidden;
+}
+.eb-image-effect-vignette::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+    background: radial-gradient(circle at center, rgba(0,0,0,0) var(--eb-image-effect-size, 55%), var(--eb-image-effect-color, rgba(0,0,0,.45)) 100%);
+}
+.eb-image-effect-vignette:hover::after {
+    opacity: var(--eb-image-effect-opacity, 1);
+}

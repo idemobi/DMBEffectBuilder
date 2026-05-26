@@ -1,0 +1,37 @@
+/* Fade In Fade Out */
+.eb-section-effect-fade-var {
+    --eb-fade-image: none;
+    --eb-fade-scale: 0;
+    --eb-fade-offset-y: 0%;
+    --eb-fade-max-darkness: 1;
+}
+
+.eb-section-effect-fade {
+    position: relative;
+    overflow: hidden;
+}
+
+.eb-section-effect-fade::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--eb-fade-image);
+    background-size: cover;
+    background-position: center var(--eb-fade-offset-y, 0%);
+    background-repeat: no-repeat;
+    transform: scale(calc(1 + var(--eb-fade-scale, 0)));
+    animation: eb_fade_in_out_keyframes 4s ease-in-out infinite;
+    z-index: 0;
+}
+
+.eb-section-effect-fade > * {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes eb_fade_in_out_keyframes {
+    0%   { opacity: 0; }
+    25%  { opacity: var(--eb-fade-max-darkness, 1); }
+    75%  { opacity: var(--eb-fade-max-darkness, 1); }
+    100% { opacity: 0; }
+}

@@ -1,0 +1,26 @@
+/* Scanline */
+.eb-section-effect-scanline-var {
+    --eb-scanline-opacity: 0.15;
+    --eb-scanline-spacing: 4px;
+}
+
+.eb-section-effect-scanline {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.eb-section-effect-scanline::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent calc(var(--eb-scanline-spacing, 4px) - 1px),
+        rgba(0, 0, 0, var(--eb-scanline-opacity, 0.15)) calc(var(--eb-scanline-spacing, 4px) - 1px),
+        rgba(0, 0, 0, var(--eb-scanline-opacity, 0.15)) var(--eb-scanline-spacing, 4px)
+    );
+}

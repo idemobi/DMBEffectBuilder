@@ -1,0 +1,14 @@
+.eb-image-effect-fade-hover-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-image-effect-opacity: 0.72;
+}
+
+.eb-image-effect-fade-hover  {
+    transition: opacity var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-fade-hover:hover  {
+    opacity: var(--eb-image-effect-opacity, 0.72);
+}

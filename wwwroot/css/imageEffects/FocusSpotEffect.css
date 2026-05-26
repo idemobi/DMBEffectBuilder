@@ -1,0 +1,35 @@
+.eb-image-effect-focus-spot-var {
+    --eb-image-effect-duration: 500ms;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-image-effect-opacity: 0.55;
+    --eb-image-effect-hover-opacity: 0.18;
+    --eb-image-effect-scale: 1.025;
+    --eb-image-effect-spot-size: 28%;
+}
+
+.eb-image-effect-focus-spot {
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s), filter var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+    filter: brightness(.95);
+}
+.eb-image-effect-focus-spot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: radial-gradient(circle at center, rgba(0,0,0,0) var(--eb-image-effect-spot-size, 28%), rgba(0,0,0,.08) calc(var(--eb-image-effect-spot-size, 28%) + 20%), rgba(0,0,0,.38) 100%);
+    opacity: var(--eb-image-effect-opacity, 0.55);
+    transition: opacity var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-focus-spot:hover::after {
+    opacity: var(--eb-image-effect-hover-opacity, 0.18);
+}
+
+.eb-image-effect-focus-spot:hover  {
+    transform: scale(var(--eb-image-effect-scale, 1.025));
+    filter: brightness(1.03);
+}

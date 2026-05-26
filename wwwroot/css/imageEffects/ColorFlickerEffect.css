@@ -1,0 +1,20 @@
+.eb-image-effect-color-flicker-var {
+    --eb-image-effect-duration: 500ms;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-color-flicker-size: 3px;
+}
+
+.eb-image-effect-color-flicker{
+    transition: filter var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-color-flicker:hover{
+    animation: eb_color_flicker_keyframes var(--eb-image-effect-duration, 500ms) infinite;
+}
+
+@keyframes eb_color_flicker_keyframes {
+    0%{ filter: drop-shadow(var(--eb-color-flicker-size, 3px) 0 0 red) drop-shadow(calc(var(--eb-color-flicker-size, 3px)*-1) 0 0 cyan);}
+    50%{ filter: drop-shadow(calc(var(--eb-color-flicker-size, 3px)*-1) 0 0 red) drop-shadow(var(--eb-color-flicker-size, 3px) 0 0 cyan);}
+    100%{ filter: drop-shadow(var(--eb-color-flicker-size, 3px) 0 0 red) drop-shadow(calc(var(--eb-color-flicker-size, 3px)*-1) 0 0 cyan);}
+}

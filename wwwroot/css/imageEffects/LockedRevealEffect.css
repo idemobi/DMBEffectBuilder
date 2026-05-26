@@ -1,0 +1,29 @@
+.eb-image-effect-locked-reveal-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+}
+
+.eb-image-effect-locked-reveal {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+.eb-image-effect-locked-reveal::before {
+    content: var(--eb-image-effect-lock, "🔒");
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--eb-image-effect-size, 2rem);
+    color: var(--eb-image-effect-color, #b8b8b8);
+    background: var(--eb-image-effect-overlay-color, rgba(0,0,0,.99));
+    transition: opacity var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+    pointer-events: none;
+}
+
+.eb-image-effect-locked-reveal:hover::before {
+    opacity: 0;
+}

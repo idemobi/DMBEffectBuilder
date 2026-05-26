@@ -1,0 +1,22 @@
+.eb-image-effect-glitch-var {
+    --eb-image-effect-duration: 500ms;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-glitch-size: 3px;
+}
+
+.eb-image-effect-glitch{
+    transition: filter var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-glitch:hover {
+    animation: eb_glitch_keyframes var(--eb-image-effect-duration, 300ms) var(--eb-image-effect-timing, ease-in-out) infinite;
+}
+
+@keyframes eb_glitch_keyframes{
+    0% {transform: translate(0); filter: hue-rotate(0 deg);}
+    25% {transform: translate(calc(var(--eb-glitch-size, 3px)*-1)), var(--eb-glitch-size, 3px); filter: hue-rotate(90 deg);}
+    50% {transform: translate(var(--eb-glitch-size, 3px), calc(var(--eb-glitch-size, 3px)*-1)); filter: hue-rotate(180 deg);}
+    75% {transform: translate(calc(var(--eb-glitch-size, 3px)*-1), calc(var(--eb-glitch-size, 3px)*-1)); filter: hue-rotate(270 deg);}
+    100% {transform: translate(0); filter: hue-rotate(360 deg);}
+}

@@ -1,0 +1,19 @@
+.eb-image-effect-ken-burns-slow {
+    overflow: hidden;
+}
+
+.eb-image-effect-ken-burns-slow-var {
+    --eb-image-effect-duration: 10000ms;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+}
+
+.eb-image-effect-ken-burns-slow  {
+    animation: eb_ken_burns_slow_keyframes var(--eb-image-effect-duration, 10000ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s) infinite alternate;
+    transform-origin: center center;
+}
+
+@keyframes eb_ken_burns_slow_keyframes {
+    0% { transform: scale(1); }
+    100% { transform: scale(var(--eb-image-effect-scale, 1.08)); }
+}

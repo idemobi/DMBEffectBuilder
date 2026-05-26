@@ -1,0 +1,116 @@
+/* ── Container ── */
+.eb-pcard {
+    font-family: "Inter", system-ui, sans-serif;
+}
+
+/* ── Tab grid ── */
+.eb-pc-tabs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+}
+
+.eb-pc-tab {
+    padding: 0.65rem 0.75rem;
+    border-radius: 0.5rem;
+    border: 1.5px solid var(--bs-border-color);
+    background: var(--bs-tertiary-bg);
+    color: var(--bs-secondary-color);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.eb-pc-tab:hover {
+    background: var(--bs-secondary-bg);
+    color: var(--bs-body-color);
+    border-color: var(--bs-border-color-translucent);
+}
+
+.eb-pc-tab.is-active {
+    background: var(--bs-primary);
+    color: white;
+    border-color: var(--bs-primary);
+}
+
+/* ── Panel area ── */
+.eb-pc-panels {
+    position: relative;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    height: var(--eb-pc-height, 320px);
+}
+
+.eb-pc-panel {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+        hsl(var(--eb-pc-hue) 65% 52%),
+        hsl(var(--eb-pc-hue2) 65% 47%));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem;
+    box-sizing: border-box;
+    color: white;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.eb-pc-panel.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    animation: eb-pc-fadein 0.3s ease;
+}
+
+@keyframes eb-pc-fadein {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0);   }
+}
+
+/* ── Content utilities ── */
+.eb-pc-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.eb-pc-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0.5rem 0 0.75rem;
+    color: white;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+}
+
+.eb-pc-desc {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Reset button color inheritance ── */
+.eb-pc-panel .btn {
+    color: var(--bs-btn-color);
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+    .eb-pc-panel           { transition: none; }
+    .eb-pc-panel.is-active { animation: none; }
+}

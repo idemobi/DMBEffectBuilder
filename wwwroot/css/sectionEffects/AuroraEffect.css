@@ -1,0 +1,63 @@
+.eb-section-effect-aurora-var {
+    --eb-aurora-color1: #64DCB4;
+    --eb-aurora-color2: #508CFF;
+    --eb-aurora-color3: #C864FF;
+    --eb-aurora-opacity1: 0.45;
+    --eb-aurora-opacity2: 0.35;
+    --eb-aurora-opacity3: 0.30;
+    --eb-aurora-speed: 8s;
+}
+
+.eb-section-effect-aurora {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.eb-section-effect-aurora::before {
+    content: '';
+    position: absolute;
+    inset: -20% -30%;
+    width: 160%;
+    height: 140%;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        color-mix(in srgb, var(--eb-aurora-color1, #64DCB4) calc(var(--eb-aurora-opacity1, 0.45) * 100%), transparent) 30%,
+        color-mix(in srgb, var(--eb-aurora-color2, #508CFF) calc(var(--eb-aurora-opacity2, 0.35) * 100%), transparent) 60%,
+        transparent 100%
+    );
+    animation: eb_aurora_sweep_keyframes var(--eb-aurora-speed, 8s) ease-in-out infinite alternate;
+    filter: blur(20px);
+}
+
+.eb-section-effect-aurora::after {
+    content: '';
+    position: absolute;
+    inset: -20% -30%;
+    width: 160%;
+    height: 140%;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 10%,
+        color-mix(in srgb, var(--eb-aurora-color3, #C864FF) calc(var(--eb-aurora-opacity3, 0.30) * 100%), transparent) 45%,
+        transparent 80%
+    );
+    animation: eb_aurora_sweep_keyframes calc(var(--eb-aurora-speed, 8s) * 1.4) ease-in-out infinite alternate-reverse;
+    filter: blur(25px);
+}
+
+.eb-section-effect-aurora > * {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes eb_aurora_sweep_keyframes {
+    0%   { transform: translateX(-25%) scaleY(0.85); opacity: 0.6; }
+    50%  { opacity: 1; }
+    100% { transform: translateX(25%)  scaleY(1.15); opacity: 0.7; }
+}

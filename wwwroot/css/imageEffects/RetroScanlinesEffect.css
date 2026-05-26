@@ -1,0 +1,31 @@
+.eb-image-effect-retro-scanlines-var {
+    --eb-image-effect-duration: 500ms;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+}
+
+.eb-image-effect-retro-scanlines {
+    position: relative;
+    overflow: hidden;
+    filter: saturate(var(--eb-image-effect-saturate, .92)) contrast(var(--eb-image-effect-contrast, 1.04));
+    transition: filter var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+.eb-image-effect-retro-scanlines::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: var(--eb-image-effect-opacity, .22);
+    background: repeating-linear-gradient(to bottom, rgba(255,255,255,.08) 0px, rgba(255,255,255,.08) 1px, rgba(0,0,0,0) 2px, rgba(0,0,0,0) var(--eb-image-effect-spacing, 4px));
+    mix-blend-mode: overlay;
+    transition: opacity var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-retro-scanlines:hover::after {
+    opacity: var(--eb-image-effect-hover-opacity, .35);
+}
+
+.eb-image-effect-retro-scanlines:hover  {
+    filter: saturate(var(--eb-image-effect-hover-saturate, 1.08)) contrast(var(--eb-image-effect-hover-contrast, 1.08));
+}

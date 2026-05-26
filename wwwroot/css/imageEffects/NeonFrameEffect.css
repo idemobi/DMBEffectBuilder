@@ -1,0 +1,27 @@
+.eb-image-effect-neon-frame-var {
+    --eb-image-effect-duration: 500ms;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-image-effect-color: #0d6efd;
+    --eb-image-effect-size: 12px;
+}
+
+.eb-image-effect-neon-frame {
+    position: relative;
+    overflow: hidden;
+}
+.eb-image-effect-neon-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border: 1px solid color-mix(in srgb, var(--eb-image-effect-color, #0d6efd), transparent 85%);
+    box-shadow: 0 0 0 transparent, 0 0 0 transparent;
+    transition: box-shadow var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s), border-color var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-neon-frame:hover::after {
+    border-color: color-mix(in srgb, var(--eb-image-effect-color, #0d6efd), transparent 50%);
+    box-shadow: 0 0 var(--eb-image-effect-size, 12px) color-mix(in srgb, var(--eb-image-effect-color, #0d6efd), transparent 72%), 
+                0 0 calc(var(--eb-image-effect-size, 12px) * 2) color-mix(in srgb, var(--eb-image-effect-color, #0d6efd), transparent 82%);
+}

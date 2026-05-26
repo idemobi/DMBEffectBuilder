@@ -1,0 +1,17 @@
+.eb-section-effect-animated-gradient-var {
+    --eb-animated-gradient-angle: 90deg;
+    --eb-animated-gradient-start: #ff0000;
+    --eb-animated-gradient-end: #0000ff;
+    --eb-animated-gradient-duration: 8s;
+    --eb-animated-gradient-curve: ease-in-out;
+}
+
+.eb-section-effect-animated-gradient {
+    position: relative;
+    animation: eb_animated_gradient_shift_keyframes var(--eb-animated-gradient-duration) var(--eb-animated-gradient-curve) infinite alternate;
+}
+
+@keyframes eb_animated_gradient_shift_keyframes {
+    0%   { background-position: 0%   50%; }
+    100% { background-position: 100% 50%; }
+}

@@ -1,0 +1,13 @@
+.eb-image-effect-zoom-hover-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+}
+
+.eb-image-effect-zoom-hover  {
+    transition: transform var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-zoom-hover:hover  {
+    transform: scale(var(--eb-image-effect-scale, 1.04));
+}

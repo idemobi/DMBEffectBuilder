@@ -1,0 +1,15 @@
+.eb-image-effect-blur-to-sharp-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-image-effect-blur: 3px;
+}
+
+.eb-image-effect-blur-to-sharp {
+    filter: blur(var(--eb-image-effect-blur, 3px));
+    transition: filter var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-blur-to-sharp:hover {
+    filter: blur(0);
+}

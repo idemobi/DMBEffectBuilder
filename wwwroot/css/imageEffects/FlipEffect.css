@@ -1,0 +1,41 @@
+.eb-image-effect-flip-var {
+    --eb-image-effect-duration: .6s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-image-flip-effect-offset: 0.5;
+}
+
+.eb-image-effect-flip {
+    perspective: 1000px;
+}
+
+.eb-image-flip-target {
+    transition: transform var(--eb-image-effect-duration, .6s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+    transform-style: preserve-3d;
+    backface-visibility: visible;
+    will-change: transform;
+}
+
+/* Default / Vertical rotation around horizontal center line - FlipAxis.Y */
+.eb-image-effect-flip-axis-y .eb-image-flip-target {
+    transform-origin: 50% calc(var(--eb-image-flip-effect-offset, 0.5) * 100%);
+}
+.eb-image-effect-flip-axis-y:hover .eb-image-flip-target {
+    transform: rotateX(180deg);
+}
+
+/* Horizontal rotation around vertical center line - FlipAxis.X */
+.eb-image-effect-flip-axis-x .eb-image-flip-target {
+    transform-origin: calc(var(--eb-image-flip-effect-offset, 0.5) * 100%) 50%;
+}
+.eb-image-effect-flip-axis-x:hover .eb-image-flip-target {
+    transform: rotateY(180deg);
+}
+
+/* Point rotation using both offsets - FlipAxis.XY */
+.eb-image-effect-flip-axis-xy .eb-image-flip-target {
+    transform-origin: calc(var(--eb-image-flip-effect-offset, 0.5) * 100%) calc(var(--eb-image-flip-effect-offset, 0.5) * 100%);
+}
+.eb-image-effect-flip-axis-xy:hover .eb-image-flip-target {
+    transform: rotateX(180deg) rotateY(180deg);
+}

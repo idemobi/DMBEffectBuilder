@@ -1,0 +1,19 @@
+/* Starfield */
+.eb-section-effect-starfield {
+    position: relative;
+    overflow: hidden;
+}
+
+.eb-section-effect-starfield canvas.eb-starfield-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.eb-section-effect-starfield > *:not(canvas):not(.section-debug) {
+    position: relative;
+    z-index: 2;
+}

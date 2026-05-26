@@ -1,0 +1,65 @@
+.eb-card-flip-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--eb-cf-cols, 3), 1fr);
+    gap: 1.5rem;
+}
+
+/* ── Card shell ── */
+
+.eb-cf-card {
+    height: var(--eb-cf-height, 240px);
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+/* ── Inner — holds both faces ── */
+
+.eb-cf-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform var(--eb-cf-duration, 0.6s) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover trigger — pure CSS */
+
+.eb-card-flip-grid.hover-trigger .eb-cf-card:hover .eb-cf-inner {
+    transform: rotateY(180deg);
+}
+
+/* Click trigger — JS adds is-flipped */
+
+.eb-card-flip-grid.click-trigger .eb-cf-card.is-flipped .eb-cf-inner {
+    transform: rotateY(180deg);
+}
+
+/* ── Faces ── */
+
+.eb-cf-front,
+.eb-cf-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.eb-cf-back {
+    transform: rotateY(180deg);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 992px) {
+    .eb-card-flip-grid {
+        grid-template-columns: repeat(min(var(--eb-cf-cols, 3), 2), 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .eb-card-flip-grid {
+        grid-template-columns: 1fr;
+    }
+}

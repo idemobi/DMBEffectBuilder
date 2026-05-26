@@ -1,0 +1,24 @@
+.eb-image-effect-shake-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-shake-intensity: 2px;
+}
+
+.eb-image-effect-shake:hover {
+    animation: eb_shake_keyframes var(--eb-image-effect-duration) var(--eb-image-effect-timing) var(--eb-image-effect-delay) infinite;
+}
+
+@keyframes eb_shake_keyframes {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(calc(-1 * var(--eb-shake-intensity)), calc(-1 * var(--eb-shake-intensity))); }
+    20% { transform: translate(var(--eb-shake-intensity), 0); }
+    30% { transform: translate(0, var(--eb-shake-intensity)); }
+    40% { transform: translate(calc(-1 * var(--eb-shake-intensity)), var(--eb-shake-intensity)); }
+    50% { transform: translate(var(--eb-shake-intensity), calc(-1 * var(--eb-shake-intensity))); }
+    60% { transform: translate(calc(-1 * var(--eb-shake-intensity)), 0); }
+    70% { transform: translate(0, calc(-1 * var(--eb-shake-intensity))); }
+    80% { transform: translate(var(--eb-shake-intensity), var(--eb-shake-intensity)); }
+    90% { transform: translate(calc(-1 * var(--eb-shake-intensity)), calc(-1 * var(--eb-shake-intensity))); }
+    100% { transform: translate(0, 0); }
+}

@@ -1,0 +1,30 @@
+.eb-image-effect-glass-reveal-var {
+    --eb-image-effect-duration: 500ms;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-image-effect-blur: 5px;
+    --eb-image-effect-opacity: 0.85;
+}
+
+.eb-image-effect-glass-reveal {
+    position: relative;
+    overflow: hidden;
+}
+.eb-image-effect-glass-reveal::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    width: 110%;
+    height: 110%;
+    opacity: var(--eb-image-effect-opacity, .85);
+    background: linear-gradient(130deg, rgba(255,255,255,.18), rgba(255,255,255,.08) 35%, rgba(255,255,255,0) 70%);
+    backdrop-filter: blur(var(--eb-image-effect-blur, 5px));
+    transform: translateX(0%);
+    transition: opacity var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s), transform var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-glass-reveal:hover::after {
+    transform: translateX(100%);
+}

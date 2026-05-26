@@ -1,0 +1,36 @@
+/* Bubble / Floating orbs */
+.eb-section-effect-bubble-var {
+    --eb-bubble-duration: 8s;
+    --eb-bubble-delay: 0s;
+    --eb-bubble-dx1: 30px;
+    --eb-bubble-dy1: -20px;
+    --eb-bubble-dx2: -20px;
+    --eb-bubble-dy2: 30px;
+    --eb-bubble-dx3: 20px;
+    --eb-bubble-dy3: 10px;
+}
+
+.eb-section-effect-bubble {
+    position: relative;
+    overflow: hidden;
+}
+
+.eb-section-effect-bubble > *:not(.eb-bubble-orb):not(.section-debug) {
+    position: relative;
+    z-index: 2;
+}
+
+.eb-bubble-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    animation: eb_bubble_float_keyframes var(--eb-bubble-duration, 8s) ease-in-out var(--eb-bubble-delay, 0s) infinite alternate;
+}
+
+@keyframes eb_bubble_float_keyframes {
+    0%   { transform: translate(0, 0) scale(1); }
+    33%  { transform: translate(var(--eb-bubble-dx1, 30px), var(--eb-bubble-dy1, -20px)) scale(1.05); }
+    66%  { transform: translate(var(--eb-bubble-dx2, -20px), var(--eb-bubble-dy2, 30px)) scale(0.95); }
+    100% { transform: translate(var(--eb-bubble-dx3, 20px), var(--eb-bubble-dy3, 10px)) scale(1.02); }
+}

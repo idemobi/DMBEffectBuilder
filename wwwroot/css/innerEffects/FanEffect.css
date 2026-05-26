@@ -1,0 +1,105 @@
+.eb-fan {
+    position: relative;
+    width: 100%;
+    height: var(--eb-fan-h, 360px);
+}
+
+.eb-fan-card {
+    position: absolute;
+    bottom: var(--eb-fan-bottom, 20px);
+    left: 50%;
+    width: var(--eb-fan-card-w, 200px);
+    height: var(--eb-fan-card-h, 280px);
+    margin-left: calc(var(--eb-fan-card-w, 200px) / -2);
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #1e2a45, #2d1b4e);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .15);
+    transform-origin: bottom center;
+    transform: translateX(var(--eb-fan-x, 0px)) rotate(var(--eb-fan-rotate, 0deg));
+    z-index: var(--eb-fan-z, 1);
+    transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 300ms ease,
+                opacity 200ms ease,
+                filter 200ms ease;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.eb-fan-card:hover {
+    transform: translateX(var(--eb-fan-x, 0px)) rotate(var(--eb-fan-rotate, 0deg)) translateY(-40px) scale(1.08);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, .6);
+    z-index: 999;
+}
+
+.eb-fan-card.eb-fan-dimmed {
+    opacity: 0.4;
+    filter: brightness(0.6);
+}
+
+.eb-fan-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.eb-fan-card-body {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1rem;
+    background: linear-gradient(transparent 40%, rgba(0, 0, 0, .75));
+    color: white;
+}
+
+.eb-fan-card-body * {
+    color: white !important;
+}
+
+/* ── Entrance animations ── */
+
+@keyframes eb-fan-enter-left {
+    from { transform: translateX(calc(var(--eb-fan-x, 0px) - 200vw)) rotate(var(--eb-fan-rotate, 0deg)); }
+    to   { transform: translateX(var(--eb-fan-x, 0px)) rotate(var(--eb-fan-rotate, 0deg)); }
+}
+
+@keyframes eb-fan-enter-right {
+    from { transform: translateX(calc(var(--eb-fan-x, 0px) + 200vw)) rotate(var(--eb-fan-rotate, 0deg)); }
+    to   { transform: translateX(var(--eb-fan-x, 0px)) rotate(var(--eb-fan-rotate, 0deg)); }
+}
+
+@keyframes eb-fan-enter-top {
+    from { transform: translateX(var(--eb-fan-x, 0px)) translateY(-200vh) rotate(var(--eb-fan-rotate, 0deg)); }
+    to   { transform: translateX(var(--eb-fan-x, 0px)) rotate(var(--eb-fan-rotate, 0deg)); }
+}
+
+.eb-fan[data-entrance="left"]  { --eb-fan-anim: eb-fan-enter-left;  }
+.eb-fan[data-entrance="right"] { --eb-fan-anim: eb-fan-enter-right; }
+.eb-fan[data-entrance="top"]   { --eb-fan-anim: eb-fan-enter-top;   }
+
+/* Cards hidden off-screen before the fan enters the viewport */
+.eb-fan[data-entrance="left"]:not(.eb-fan--visible)  .eb-fan-card { transform: translateX(calc(var(--eb-fan-x, 0px) - 200vw)) rotate(var(--eb-fan-rotate, 0deg)); }
+.eb-fan[data-entrance="right"]:not(.eb-fan--visible) .eb-fan-card { transform: translateX(calc(var(--eb-fan-x, 0px) + 200vw)) rotate(var(--eb-fan-rotate, 0deg)); }
+.eb-fan[data-entrance="top"]:not(.eb-fan--visible)   .eb-fan-card { transform: translateX(var(--eb-fan-x, 0px)) translateY(-200vh) rotate(var(--eb-fan-rotate, 0deg)); }
+
+/* Entrance animation plays once when eb-fan--visible is added */
+.eb-fan--visible:not(.eb-fan--entered) .eb-fan-card {
+    animation-name: var(--eb-fan-anim, none);
+    animation-duration: 650ms;
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation-fill-mode: both;
+    animation-delay: var(--eb-fan-delay, 0ms);
+}
+
+/* ── Mobile: scale down the whole fan to fit narrow viewports ── */
+@media (max-width: 575.98px) {
+    .eb-fan {
+        transform: scale(0.6);
+        transform-origin: top center;
+        margin-bottom: calc(var(--eb-fan-h, 360px) * -0.4);
+    }
+}

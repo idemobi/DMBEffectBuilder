@@ -1,0 +1,13 @@
+.eb-image-effect-sepia-to-color-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+}
+
+.eb-image-effect-sepia-to-color  {
+    filter: sepia(var(--eb-image-effect-sepia, 100%));
+    transition: filter var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+.eb-image-effect-sepia-to-color:hover  {
+    filter: sepia(var(--eb-image-effect-hover-sepia, 0%));
+}

@@ -1,0 +1,19 @@
+.eb-image-effect-polaroid-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-image-effect-padding: 10px;
+    --eb-image-effect-bottom-padding: 26px;
+    --eb-image-effect-bg-color: #fff;
+    --eb-image-effect-border-color: rgba(0,0,0,.08);
+    --eb-image-effect-shadow-color: rgba(0,0,0,.18);
+}
+
+.eb-image-effect-polaroid {
+    background: var(--eb-image-effect-bg-color, #fff);
+    padding: var(--eb-image-effect-padding, 10px) var(--eb-image-effect-padding, 10px) var(--eb-image-effect-bottom-padding, 26px) var(--eb-image-effect-padding, 10px);
+    box-shadow: 0 10px 24px var(--eb-image-effect-shadow-color, rgba(0,0,0,.18));
+    border: 1px solid var(--eb-image-effect-border-color, rgba(0,0,0,.08));
+    display: block;
+    transition: transform var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s), box-shadow var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}

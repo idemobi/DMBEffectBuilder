@@ -1,0 +1,17 @@
+.eb-image-effect-tilt-parallax-var {
+    --eb-image-effect-duration: 500ms;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+}
+
+.eb-image-effect-tilt-parallax {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s), box-shadow var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+    transform: translateZ(0) scale(1);
+}
+
+.eb-image-effect-tilt-parallax:hover {
+    transform: translateZ(var(--eb-image-effect-translate-z, 14px)) scale(var(--eb-image-effect-scale, 1.03)) rotateX(var(--eb-image-effect-rotate-x, 4deg)) rotateY(var(--eb-image-effect-rotate-y, -6deg)) translateY(-2px);
+    box-shadow: 0 14px 28px rgba(0,0,0,.18);
+}

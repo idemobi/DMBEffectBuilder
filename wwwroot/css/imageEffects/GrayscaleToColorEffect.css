@@ -1,0 +1,16 @@
+.eb-image-effect-grayscale-to-color-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-image-effect-grayscale: 1;
+    --eb-image-effect-hover-grayscale: 0;
+}
+
+.eb-image-effect-grayscale-to-color {
+    filter: grayscale(var(--eb-image-effect-grayscale, 1));
+    transition: filter var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-grayscale-to-color:hover {
+    filter: grayscale(var(--eb-image-effect-hover-grayscale, 0));
+}

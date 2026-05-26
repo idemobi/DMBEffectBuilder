@@ -1,0 +1,15 @@
+.eb-image-effect-glow-hover-var {
+    --eb-image-effect-duration: .5s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-image-effect-glow-color: rgba(13, 110, 253, 0.25);
+    --eb-image-effect-glow-size: 28px;
+}
+
+.eb-image-effect-glow-hover  {
+    transition: box-shadow var(--eb-image-effect-duration, .5s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-glow-hover:hover  {
+    box-shadow: 0 0 calc(var(--eb-image-effect-glow-size, 28px) * 0.64) rgba(255,255,255,.25), 0 0 var(--eb-image-effect-glow-size, 28px) var(--eb-image-effect-glow-color, rgba(13, 110, 253, 0.25));
+}

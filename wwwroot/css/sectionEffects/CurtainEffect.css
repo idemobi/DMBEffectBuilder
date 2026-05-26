@@ -1,0 +1,60 @@
+/* Curtain */
+.eb-section-effect-curtain-var {
+    --eb-curtain-color: #8B0000;
+    --eb-curtain-duration: 1.5s;
+    --eb-curtain-stop: 50%;
+}
+
+.eb-section-effect-curtain {
+    position: relative;
+    overflow: hidden;
+}
+
+.eb-section-effect-curtain > * {
+    position: relative;
+    z-index: 20;
+}
+
+.eb-section-effect-curtain::before,
+.eb-section-effect-curtain::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background-color: var(--eb-curtain-color, #8B0000);
+    background-image: repeating-linear-gradient(
+        90deg,
+        transparent        0px,
+        transparent        14px,
+        rgba(0,0,0,0.12)   14px,
+        rgba(0,0,0,0.12)   16px
+    );
+    z-index: 10;
+}
+
+.eb-section-effect-curtain::before {
+    left: 0;
+    animation: eb_curtain_left_keyframes var(--eb-curtain-duration, 1.5s) ease-in-out 0s forwards;
+}
+
+.eb-section-effect-curtain::after {
+    right: 0;
+    z-index: 9;
+    animation: eb_curtain_right_keyframes var(--eb-curtain-duration, 1.5s) ease-in-out 0s forwards;
+}
+
+@keyframes eb_curtain_left_keyframes {
+    from { width: 0; }
+    to   { width: var(--eb-curtain-stop, 50%); }
+}
+
+@keyframes eb_curtain_right_keyframes {
+    from { width: 0; }
+    to   { width: var(--eb-curtain-stop, 50%); }
+}
+
+.eb-section-effect-curtain-paused::before,
+.eb-section-effect-curtain-paused::after {
+    animation: none !important;
+}

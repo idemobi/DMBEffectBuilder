@@ -1,0 +1,20 @@
+.eb-image-effect-pulse-var {
+    --eb-image-effect-duration: 1s;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-pulse-scale: 1.05;
+}
+
+.eb-image-effect-pulse {
+    transition: transform var(--eb-image-effect-duration, 1s) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-pulse:hover {
+    animation: eb_pulse_keyframes var(--eb-image-effect-duration, 1s) var(--eb-image-effect-timing, ease-in-out) infinite;
+}
+
+@keyframes eb_pulse_keyframes {
+    0% { transform: scale(1); }
+    50% { transform: scale(var(--eb-pulse-scale, 1.05)); }
+    100% { transform: scale(1); }
+}

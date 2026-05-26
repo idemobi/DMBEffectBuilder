@@ -1,0 +1,6 @@
+.eb-section-effect-parallax {
+    background-size: cover;
+    background-repeat: no-repeat;
+    will-change: background-position;
+    overflow: hidden;
+}

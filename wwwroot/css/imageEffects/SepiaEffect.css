@@ -1,0 +1,18 @@
+.eb-image-effect-sepia-var {
+    --eb-image-effect-duration: 500ms;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-image-effect-sepia: 0%;
+    --eb-image-effect-hover-sepia: 100%;
+    --eb-image-effect-contrast: 1;
+    --eb-image-effect-hover-contrast: 1.2;
+}
+
+.eb-image-effect-sepia{
+    transition: filter var(--eb-image-effect-duration, 500ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+    filter: sepia(var(--eb-image-effect-sepia, 0%)) contrast(var(--eb-image-effect-contrast, 1));
+}
+
+.eb-image-effect-sepia:hover{
+    filter: sepia(var(--eb-image-effect-hover-sepia, 100%)) contrast(var(--eb-image-effect-hover-contrast, 1.2));
+}

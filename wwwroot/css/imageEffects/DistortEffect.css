@@ -1,0 +1,23 @@
+.eb-image-effect-distort-var {
+    --eb-image-effect-duration: 300ms;
+    --eb-image-effect-timing: ease-in-out;
+    --eb-image-effect-delay: 0s;
+    --eb-distort-size: 8deg;
+}
+
+.eb-image-effect-distort{
+    transition: filter var(--eb-image-effect-duration, 300ms) var(--eb-image-effect-timing, ease-in-out) var(--eb-image-effect-delay, 0s);
+}
+
+.eb-image-effect-distort:hover{
+    animation: eb_distort_keyframes var(--eb-image-effect-duration, 100ms) var(--eb-image-effect-timing, ease) infinite;
+}
+
+@keyframes eb_distort_keyframes {
+    0% {transform: skewX(0deg) skewY(0deg) scale(1);}
+    20% {transform: skewX(var(--eb-distort-size, 8deg)) skewY(3deg) scale(1.03);}
+    40% {transform: skewX(calc(var(--eb-distort-size, 8deg)*-1)) skewY(-4deg) scale(0.97);}
+    60% {transform: skewX(4deg) skewY(-2deg) scale(1.02);}
+    80% {transform: skewX(calc(var(--eb-distort-size, 8deg)*-1)) skewY(3deg) scale(0.98);}
+    100% {transform: skewX(0deg) skewY(0deg) scale(1);}
+}
