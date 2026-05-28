@@ -25,7 +25,7 @@ namespace DMBEffectBuilder
     /// <b>Use cases:</b> feature showcases, step-by-step explanations, product highlights.
     /// </para>
     /// <para>
-    /// <b>How it works:</b> each <see cref="AddPanel"/> call registers a content panel with its own
+    /// <b>How it works:</b> each <c>AddPanel</c> call registers a content panel with its own
     /// gradient background. Tab buttons are overlaid at the top; clicking one fades in the matching panel.
     /// </para>
     /// <para>
@@ -40,6 +40,10 @@ namespace DMBEffectBuilder
         private readonly List<PanelCardPanel> _panels = new();
         private int _heightPx = 420;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PanelCardEffectBuilder"/> class.
+        /// </summary>
+        /// <param name="html">The Razor HTML helper used to register effect assets.</param>
         public PanelCardEffectBuilder(IHtmlHelper html)
         {
             _html = html;
@@ -104,6 +108,11 @@ namespace DMBEffectBuilder
         private static readonly int[] DefaultHues  = { 260, 320, 205, 145 };
         private static readonly int[] DefaultHues2 = { 295, 355, 240, 175 };
 
+        /// <summary>
+        /// Writes the complete effect markup to the provided output writer.
+        /// </summary>
+        /// <param name="writer">The writer receiving generated HTML.</param>
+        /// <param name="encoder">The encoder used to encode generated HTML.</param>
         public void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
             PageInformation page = PageRegistry.GetOrCreatePageInformation(_html.ViewContext.HttpContext);

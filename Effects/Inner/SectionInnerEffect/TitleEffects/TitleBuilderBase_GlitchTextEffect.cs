@@ -9,6 +9,7 @@
 
 namespace DMBEffectBuilder
 {
+    /// <inheritdoc/>
     public abstract partial class TitleBuilderBase<TParent, TSelf>
         where TSelf : TitleBuilderBase<TParent, TSelf>
     {
@@ -23,6 +24,13 @@ namespace DMBEffectBuilder
 
         #region Instance methods
 
+        /// <summary>
+        /// Enables the glitch text title effect for the generated section heading.
+        /// </summary>
+        /// <param name="color1">The color1 value used by the title effect.</param>
+        /// <param name="color2">The color2 value used by the title effect.</param>
+        /// <param name="speedSeconds">The speed seconds value used by the title effect.</param>
+        /// <returns>The current title builder instance for fluent chaining.</returns>
         public TSelf SetGlitchTextEffect(string color1 = "#ff005c", string color2 = "#00f5d4", decimal speedSeconds = 3m)
         {
             _glitchText = true;

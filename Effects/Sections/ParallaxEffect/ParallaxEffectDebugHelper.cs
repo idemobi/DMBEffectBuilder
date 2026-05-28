@@ -9,5 +9,10 @@
 
 namespace DMBEffectBuilder
 {
-    public static class ParallaxEffectDebugHelper { }
+    /// <summary>
+    /// Provides debug helper hooks for the parallax section effect.
+    /// </summary>
+    public static class ParallaxEffectDebugHelper
+    {
+    }
 }

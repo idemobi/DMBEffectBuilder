@@ -36,7 +36,7 @@ namespace DMBEffectBuilder
         /// </para>
         /// <para>
         /// <b>How it works:</b> the builder emits a wrapper <c>&lt;div&gt;</c> with configurable Bootstrap
-        /// utility classes. When a header is set via <see cref="DMBEffectBuilder.SectionInnerEffectBuilder.SetHeader"/>,
+        /// utility classes. When a header is set via <see cref="DMBEffectBuilder.SectionInnerEffectBuilder.SectionInnerEffectTitle"/>,
         /// a flex row containing the title and an optional action button is prepended. In overlay mode the
         /// text colours are inverted for contrast against dark backgrounds.
         /// </para>

@@ -49,6 +49,11 @@ namespace DMBEffectBuilder
 
         #region Instance constructors and destructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SectionInnerEffectBuilder"/> class.
+        /// </summary>
+        /// <param name="writer">The writer that receives the generated section inner markup.</param>
+        /// <param name="html">The Razor HTML helper used to register effect assets.</param>
         public SectionInnerEffectBuilder(TextWriter writer, IHtmlHelper html)
             : base(writer, html)
         {
@@ -113,6 +118,10 @@ namespace DMBEffectBuilder
             return this;
         }
 
+        /// <summary>
+        /// Opens the section inner effect wrapper and writes the configured header placement.
+        /// </summary>
+        /// <returns>The current <see cref="SectionInnerEffectBuilder"/> instance for fluent chaining.</returns>
         public new SectionInnerEffectBuilder Begin()
         {
             if (_innerStarted)
@@ -140,11 +149,13 @@ namespace DMBEffectBuilder
             return this;
         }
 
+        /// <inheritdoc/>
         protected override SectionInnerEffectBuilder CreateInstance()
         {
             return new SectionInnerEffectBuilder(_textWriter, _htmlHelper);
         }
 
+        /// <inheritdoc/>
         protected override void InternalClone(SectionInnerEffectBuilder source)
         {
             base.InternalClone(source);
@@ -154,6 +165,9 @@ namespace DMBEffectBuilder
             _innerDisposed = false;
         }
 
+        /// <summary>
+        /// Closes the section inner effect body and root wrapper.
+        /// </summary>
         public new void Dispose()
         {
             if (_innerDisposed || !_innerStarted)

@@ -68,7 +68,7 @@ namespace DMBEffectBuilder
         [Documented]
         public static SectionBuilder BubbleEffect(
             this SectionBuilder section,
-            string[] colors = null,
+            string[]? colors = null,
             int count = 6,
             int minSize = 100,
             int maxSize = 300,

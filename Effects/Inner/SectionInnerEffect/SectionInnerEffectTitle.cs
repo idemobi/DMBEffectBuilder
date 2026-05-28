@@ -11,10 +11,17 @@ using System.Text;
 
 namespace DMBEffectBuilder
 {
+    /// <summary>
+    /// Builds and registers the title markup for a <see cref="SectionInnerEffectBuilder"/>.
+    /// </summary>
     public sealed class SectionInnerEffectTitle : TitleBuilderBase<SectionInnerEffectBuilder, SectionInnerEffectTitle>
     {
         #region Instance constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SectionInnerEffectTitle"/> class.
+        /// </summary>
+        /// <param name="parent">The parent section inner effect builder that receives the generated title.</param>
         public SectionInnerEffectTitle(SectionInnerEffectBuilder parent) : base(parent, parent.HtmlHelper)
         {
         }
@@ -23,6 +30,7 @@ namespace DMBEffectBuilder
 
         #region Instance methods
 
+        /// <inheritdoc/>
         public override SectionInnerEffectBuilder Build()
         {
             var sb = new StringBuilder();

@@ -9,5 +9,10 @@
 
 namespace DMBEffectBuilder
 {
-    public static class FadeEffectDebugHelper { }
+    /// <summary>
+    /// Provides debug helper hooks for the fade section effect.
+    /// </summary>
+    public static class FadeEffectDebugHelper
+    {
+    }
 }

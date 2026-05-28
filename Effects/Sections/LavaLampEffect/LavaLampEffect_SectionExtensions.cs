@@ -73,7 +73,7 @@ namespace DMBEffectBuilder
         public static SectionBuilder LavaLampEffect(
             this SectionBuilder section,
             string backgroundColor = "#0d0d0d",
-            string[] colors = null,
+            string[]? colors = null,
             int count = 5,
             int blur = 30)
         {

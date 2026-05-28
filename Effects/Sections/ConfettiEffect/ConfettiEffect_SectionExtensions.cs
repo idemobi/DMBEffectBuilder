@@ -64,7 +64,7 @@ namespace DMBEffectBuilder
         /// <seealso cref="RippleEffect_SectionExtensions"/>
         [Documented]
         public static SectionBuilder ConfettiEffect(this SectionBuilder section,
-            string[] colors = null,
+            string[]? colors = null,
             int count = 60,
             decimal speed = 1m)
         {

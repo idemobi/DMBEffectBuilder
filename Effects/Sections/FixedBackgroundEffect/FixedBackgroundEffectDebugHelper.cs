@@ -9,5 +9,10 @@
 
 namespace DMBEffectBuilder
 {
-    public static class FixedBackgroundEffectDebugHelper { }
+    /// <summary>
+    /// Provides debug helper hooks for the fixed background section effect.
+    /// </summary>
+    public static class FixedBackgroundEffectDebugHelper
+    {
+    }
 }

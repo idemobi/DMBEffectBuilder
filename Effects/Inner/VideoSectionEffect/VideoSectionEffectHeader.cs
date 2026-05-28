@@ -33,6 +33,10 @@ namespace DMBEffectBuilder
 
         #region Instance constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VideoSectionEffectHeader"/> class.
+        /// </summary>
+        /// <param name="parent">The video section builder that receives the rendered header markup.</param>
         public VideoSectionEffectHeader(VideoSectionEffectBuilder parent) : base(parent, parent.HtmlHelper)
         {
         }
@@ -76,7 +80,7 @@ namespace DMBEffectBuilder
         /// <para><b>Use cases:</b> place a prominent action link — "Learn more", "Shop now", "Watch trailer" — directly in the hero video header to drive user navigation.</para>
         /// <para><b>How it works:</b> HTML-encodes both <paramref name="text"/> and <paramref name="url"/>, then emits an <c>&lt;a&gt;</c> tag with Bootstrap button classes (<c>btn btn-*</c>) and the additional class <c>eb-video-section-btn</c> for layout styling.</para>
         /// <para><b>Combinations:</b> rendered after the subtitle (if any); the button is omitted entirely when this method is not called. Pair with <see cref="SetSubtitle"/> for a classic hero pattern: title → tagline → CTA button.</para>
-        /// <para><b>Tips:</b> <see cref="VariantStyle.Light"/> or <see cref="VariantStyle.OutlineLight"/> often reads better than solid dark buttons over a video background; always test contrast with the overlay on and off.</para>
+        /// <para><b>Tips:</b> <see cref="VariantStyle.Light"/> or an outline light button style often reads better than solid dark buttons over a video background; always test contrast with the overlay on and off.</para>
         /// <para><b>Example:</b>
         /// <code>
         /// Html.VideoSectionEffectBuilder("/video/hero.mp4")

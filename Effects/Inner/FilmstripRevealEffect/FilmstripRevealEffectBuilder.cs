@@ -52,6 +52,10 @@ namespace DMBEffectBuilder
         private string  _bgColor = "#eaeaea";
         private string  _fgColor = "#1a1a1a";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FilmstripRevealEffectBuilder"/> class.
+        /// </summary>
+        /// <param name="html">The Razor HTML helper used to register effect assets.</param>
         public FilmstripRevealEffectBuilder(IHtmlHelper html) => _html = html;
 
         /// <summary>Sets the hero title displayed after the loading animation. Default: <c>"Idémobi"</c>.</summary>
@@ -104,6 +108,11 @@ namespace DMBEffectBuilder
             return this;
         }
 
+        /// <summary>
+        /// Writes the complete effect markup to the provided output writer.
+        /// </summary>
+        /// <param name="writer">The writer receiving generated HTML.</param>
+        /// <param name="encoder">The encoder used to encode generated HTML.</param>
         public void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
             PageInformation page = PageRegistry.GetOrCreatePageInformation(_html.ViewContext.HttpContext);

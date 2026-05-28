@@ -9,5 +9,10 @@
 
 namespace DMBEffectBuilder
 {
-    public static class CurveEdgeEffectDebugHelper { }
+    /// <summary>
+    /// Provides debug helper hooks for the curve edge section effect.
+    /// </summary>
+    public static class CurveEdgeEffectDebugHelper
+    {
+    }
 }

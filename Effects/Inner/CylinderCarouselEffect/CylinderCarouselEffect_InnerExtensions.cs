@@ -42,7 +42,7 @@ namespace DMBEffectBuilder
         /// <para>
         /// <b>Combinations:</b> pair <see cref="CylinderCarouselEffectBuilder.SetFilter"/> with
         /// <see cref="CylinderCarouselEffectBuilder.SetHoverClearFilter"/> for a colour-reveal-on-hover
-        /// effect. Add <see cref="CylinderCarouselEffectBuilder.PauseOnHover"/> and
+        /// effect. Add <see cref="CylinderCarouselEffectBuilder.PauseOnHover(bool)"/> and
         /// <see cref="CylinderCarouselEffectBuilder.SetHoverScale"/> so users can inspect cards
         /// without them rotating away.
         /// </para>

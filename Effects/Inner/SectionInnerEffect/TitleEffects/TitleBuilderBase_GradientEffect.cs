@@ -9,6 +9,7 @@
 
 namespace DMBEffectBuilder
 {
+    /// <inheritdoc/>
     public abstract partial class TitleBuilderBase<TParent, TSelf>
         where TSelf : TitleBuilderBase<TParent, TSelf>
     {
@@ -23,6 +24,13 @@ namespace DMBEffectBuilder
 
         #region Instance methods
 
+        /// <summary>
+        /// Enables the gradient title effect for the generated section heading.
+        /// </summary>
+        /// <param name="colorStart">The color start value used by the title effect.</param>
+        /// <param name="colorEnd">The color end value used by the title effect.</param>
+        /// <param name="angle">The angle value used by the title effect.</param>
+        /// <returns>The current title builder instance for fluent chaining.</returns>
         public TSelf SetGradientEffect(string colorStart = "#ff6ecf", string colorEnd = "#efff5c", decimal angle = 90m)
         {
             _gradient = true;

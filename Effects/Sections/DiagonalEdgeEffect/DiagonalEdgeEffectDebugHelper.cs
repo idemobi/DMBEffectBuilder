@@ -9,5 +9,10 @@
 
 namespace DMBEffectBuilder
 {
-    public static class DiagonalEdgeEffectDebugHelper { }
+    /// <summary>
+    /// Provides debug helper hooks for the diagonal edge section effect.
+    /// </summary>
+    public static class DiagonalEdgeEffectDebugHelper
+    {
+    }
 }

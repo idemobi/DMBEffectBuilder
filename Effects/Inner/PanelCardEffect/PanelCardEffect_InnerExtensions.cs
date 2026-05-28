@@ -34,7 +34,7 @@ namespace DMBEffectBuilder
         /// visually prominent card.
         /// </para>
         /// <para>
-        /// <b>How it works:</b> each <see cref="PanelCardEffectBuilder.AddPanel"/> call registers a
+        /// <b>How it works:</b> each <c>AddPanel</c> call registers a
         /// content panel with its own gradient background derived from an HSL hue value. Tab buttons are
         /// overlaid at the top of the card with a frosted-glass style (<c>backdrop-filter: blur</c>).
         /// Clicking a tab fades in the matching panel via a CSS opacity transition; JavaScript handles

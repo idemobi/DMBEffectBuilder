@@ -40,7 +40,7 @@ namespace DMBEffectBuilder
         /// the viewport, slides the matching visual into place with a cubic-bezier transition.
         /// </para>
         /// <para>
-        /// <b>Combinations:</b> the visual slot accepts any <see cref="IHtmlContent"/> — images, gradient divs,
+        /// <b>Combinations:</b> the visual slot accepts any <c>IHtmlContent</c> value — images, gradient divs,
         /// code blocks, or rendered helpers. Use the <c>@&lt;div&gt;...&lt;/div&gt;</c> Razor template syntax
         /// for inline markup. Wrap the builder in a <c>container-lg</c> div or a full-width
         /// <c>SectionBuilder</c> for a hero-style section.

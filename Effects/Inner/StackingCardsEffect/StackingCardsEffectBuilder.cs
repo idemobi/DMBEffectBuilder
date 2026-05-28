@@ -33,7 +33,7 @@ namespace DMBEffectBuilder
     /// </para>
     /// <para>
     /// <b>Tips:</b> use 3–6 cards for the best balance. Set <see cref="SetStickyTop"/> to match your
-    /// fixed navbar height. Increase <see cref="SetScrollGap"/> for cards with longer content so the user
+    /// fixed navbar height. Increase <c>SetScrollGap</c> for cards with longer content so the user
     /// has time to read before the next card slides in.
     /// </para>
     /// <para>
@@ -51,6 +51,10 @@ namespace DMBEffectBuilder
         private int _stickyTopPx = 80;
         private int _gapPx = 48;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StackingCardsEffectBuilder"/> class.
+        /// </summary>
+        /// <param name="html">The Razor HTML helper used to register effect assets.</param>
         public StackingCardsEffectBuilder(IHtmlHelper html)
         {
             _html = html;
@@ -158,6 +162,11 @@ namespace DMBEffectBuilder
             return this;
         }
 
+        /// <summary>
+        /// Writes the complete effect markup to the provided output writer.
+        /// </summary>
+        /// <param name="writer">The writer receiving generated HTML.</param>
+        /// <param name="encoder">The encoder used to encode generated HTML.</param>
         public void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
             if (_cards.Count == 0) return;

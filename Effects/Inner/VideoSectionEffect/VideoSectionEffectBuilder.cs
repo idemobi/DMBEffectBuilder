@@ -58,6 +58,12 @@ namespace DMBEffectBuilder
 
         #region Instance constructors and destructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VideoSectionEffectBuilder"/> class.
+        /// </summary>
+        /// <param name="writer">The writer that receives the generated video section markup.</param>
+        /// <param name="html">The Razor HTML helper used to register effect assets.</param>
+        /// <param name="videoUrl">The URL of the background video to render.</param>
         public VideoSectionEffectBuilder(TextWriter writer, IHtmlHelper html, string videoUrl)
             : base(writer, html)
         {
@@ -70,11 +76,13 @@ namespace DMBEffectBuilder
 
         #region Instance methods
 
+        /// <inheritdoc/>
         protected override VideoSectionEffectBuilder CreateInstance()
         {
             return new VideoSectionEffectBuilder(_textWriter, _htmlHelper, _videoUrl);
         }
 
+        /// <inheritdoc/>
         protected override void InternalClone(VideoSectionEffectBuilder source)
         {
             base.InternalClone(source);
@@ -141,6 +149,10 @@ namespace DMBEffectBuilder
             return this;
         }
 
+        /// <summary>
+        /// Opens the video section wrapper and writes the video background layer.
+        /// </summary>
+        /// <returns>The current <see cref="VideoSectionEffectBuilder"/> instance for fluent chaining.</returns>
         public new VideoSectionEffectBuilder Begin()
         {
             if (_videoStarted)
@@ -170,6 +182,7 @@ namespace DMBEffectBuilder
             _videoStarted = false;
         }
 
+        /// <inheritdoc/>
         protected override void WriteToCore(TextWriter writer, HtmlEncoder encoder)
         {
             writer.Write($"<{GetTag()}{BuildAttributes()}>");

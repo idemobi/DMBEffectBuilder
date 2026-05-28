@@ -17,10 +17,19 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DMBEffectBuilder
 {
+    /// <summary>
+    /// Provides shared helpers used by section effect debug panels.
+    /// </summary>
     public static class SectionEffectsDebugHelper
     {
         #region Static methods
 
+        /// <summary>
+        /// Returns image URLs from the host <c>wwwroot/images/test</c> folder for debug selectors.
+        /// </summary>
+        /// <param name="html">The current Razor HTML helper used to resolve the web host environment.</param>
+        /// <returns>A sorted list of supported image URLs, or an empty list when the folder is unavailable.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="html"/> is <see langword="null"/>.</exception>
         public static IReadOnlyList<string> GetEffectsImageUrls(IHtmlHelper html)
         {
             if (html == null)

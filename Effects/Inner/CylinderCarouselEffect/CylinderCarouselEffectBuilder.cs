@@ -37,7 +37,7 @@ namespace DMBEffectBuilder
     /// </para>
     /// <para>
     /// <b>Tips:</b> use <see cref="SetFilter"/> with <see cref="SetHoverClearFilter"/> to create a
-    /// "colour reveal on hover" effect. Combine <see cref="PauseOnHover"/> with
+    /// "colour reveal on hover" effect. Combine <see cref="PauseOnHover(bool)"/> with
     /// <see cref="SetHoverScale"/> so the user can pause and inspect a card. Keep card count between
     /// 6 and 16 for best visual results — too few cards look sparse, too many overlap at the sides.
     /// </para>
@@ -62,6 +62,10 @@ namespace DMBEffectBuilder
         private int _speedSeconds = 32;
         private string? _perspectiveOverride;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CylinderCarouselEffectBuilder"/> class.
+        /// </summary>
+        /// <param name="html">The Razor HTML helper used to register effect assets.</param>
         public CylinderCarouselEffectBuilder(IHtmlHelper html)
         {
             _html = html;
@@ -207,6 +211,11 @@ namespace DMBEffectBuilder
             return this;
         }
 
+        /// <summary>
+        /// Writes the complete effect markup to the provided output writer.
+        /// </summary>
+        /// <param name="writer">The writer receiving generated HTML.</param>
+        /// <param name="encoder">The encoder used to encode generated HTML.</param>
         public void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
             if (_cards.Count == 0) return;

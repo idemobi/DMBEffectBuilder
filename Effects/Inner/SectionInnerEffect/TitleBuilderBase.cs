@@ -14,12 +14,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DMBEffectBuilder
 {
+    /// <summary>
+    /// Provides fluent title configuration shared by section inner effect title builders.
+    /// </summary>
+    /// <typeparam name="TParent">The parent builder returned by <see cref="Build"/>.</typeparam>
+    /// <typeparam name="TSelf">The concrete title builder type used for fluent chaining.</typeparam>
     public abstract partial class TitleBuilderBase<TParent, TSelf>
         where TSelf : TitleBuilderBase<TParent, TSelf>
     {
         #region Instance fields and properties
 
+        /// <summary>
+        /// Stores the parent builder that receives the generated title markup.
+        /// </summary>
         protected readonly TParent _parent;
+
+        /// <summary>
+        /// Provides the Razor HTML helper used to register static assets for the title effect.
+        /// </summary>
         protected readonly IHtmlHelper _html;
         private string _title = string.Empty;
 
@@ -27,6 +39,11 @@ namespace DMBEffectBuilder
 
         #region Instance constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TitleBuilderBase{TParent, TSelf}"/> class.
+        /// </summary>
+        /// <param name="parent">The parent builder that receives the generated title markup.</param>
+        /// <param name="html">The HTML helper used to register static assets.</param>
         protected TitleBuilderBase(TParent parent, IHtmlHelper html)
         {
             _parent = parent;
@@ -37,12 +54,22 @@ namespace DMBEffectBuilder
 
         #region Instance methods
 
+        /// <summary>
+        /// Sets the title text rendered by the title effect builder.
+        /// </summary>
+        /// <param name="title">The title text to render.</param>
+        /// <returns>The current title builder instance for fluent chaining.</returns>
         public TSelf SetTitle(string title)
         {
             _title = title;
             return (TSelf)this;
         }
 
+        /// <summary>
+        /// Builds the encoded title HTML and applies the configured title effect classes and CSS variables.
+        /// </summary>
+        /// <returns>The generated title markup.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when mutually exclusive title effects are combined.</exception>
         protected string BuildCoreTitleHtml()
         {
             if (_typewriter && _letterCollapse)
@@ -207,6 +234,10 @@ namespace DMBEffectBuilder
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Finalizes the title markup and returns the parent builder.
+        /// </summary>
+        /// <returns>The parent builder receiving the generated title markup.</returns>
         public abstract TParent Build();
 
         #endregion

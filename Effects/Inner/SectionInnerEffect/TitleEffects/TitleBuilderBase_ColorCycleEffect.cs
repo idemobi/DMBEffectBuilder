@@ -9,6 +9,7 @@
 
 namespace DMBEffectBuilder
 {
+    /// <inheritdoc/>
     public abstract partial class TitleBuilderBase<TParent, TSelf>
         where TSelf : TitleBuilderBase<TParent, TSelf>
     {
@@ -22,6 +23,12 @@ namespace DMBEffectBuilder
 
         #region Instance methods
 
+        /// <summary>
+        /// Enables the color cycle title effect for the generated section heading.
+        /// </summary>
+        /// <param name="baseColor">The base color value used by the title effect.</param>
+        /// <param name="speedSeconds">The speed seconds value used by the title effect.</param>
+        /// <returns>The current title builder instance for fluent chaining.</returns>
         public TSelf SetColorCycleEffect(string baseColor = "#ff6ecf", decimal speedSeconds = 4m)
         {
             _colorCycle = true;

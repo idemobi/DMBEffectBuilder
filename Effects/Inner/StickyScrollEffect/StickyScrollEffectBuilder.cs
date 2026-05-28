@@ -60,6 +60,10 @@ namespace DMBEffectBuilder
         private decimal _transitionDuration = 0.5m;
         private int _itemMinHeightVh = 50;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StickyScrollEffectBuilder"/> class.
+        /// </summary>
+        /// <param name="html">The Razor HTML helper used to register effect assets.</param>
         public StickyScrollEffectBuilder(IHtmlHelper html)
         {
             _html = html;
@@ -243,6 +247,11 @@ namespace DMBEffectBuilder
             return this;
         }
 
+        /// <summary>
+        /// Writes the complete effect markup to the provided output writer.
+        /// </summary>
+        /// <param name="writer">The writer receiving generated HTML.</param>
+        /// <param name="encoder">The encoder used to encode generated HTML.</param>
         public void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
             if (_steps.Count == 0) return;

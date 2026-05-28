@@ -9,6 +9,7 @@
 
 namespace DMBEffectBuilder
 {
+    /// <inheritdoc/>
     public abstract partial class TitleBuilderBase<TParent, TSelf>
         where TSelf : TitleBuilderBase<TParent, TSelf>
     {
@@ -22,6 +23,12 @@ namespace DMBEffectBuilder
 
         #region Instance methods
 
+        /// <summary>
+        /// Enables the blur reveal title effect for the generated section heading.
+        /// </summary>
+        /// <param name="startBlurPx">The start blur px value used by the title effect.</param>
+        /// <param name="durationSeconds">The duration seconds value used by the title effect.</param>
+        /// <returns>The current title builder instance for fluent chaining.</returns>
         public TSelf SetBlurRevealEffect(decimal startBlurPx = 12m, decimal durationSeconds = 1.5m)
         {
             _blurReveal = true;

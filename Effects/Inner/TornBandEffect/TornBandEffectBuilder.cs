@@ -49,6 +49,11 @@ namespace DMBEffectBuilder
 
         #region Instance constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TornBandEffectBuilder"/> class.
+        /// </summary>
+        /// <param name="writer">The writer that receives the generated torn band markup.</param>
+        /// <param name="html">The Razor HTML helper used to register effect assets.</param>
         public TornBandEffectBuilder(TextWriter writer, IHtmlHelper html)
         {
             _writer = writer;
@@ -223,6 +228,9 @@ namespace DMBEffectBuilder
             return this;
         }
 
+        /// <summary>
+        /// Closes the content wrapper and writes the top torn band.
+        /// </summary>
         public void Dispose()
         {
             if (_disposed || !_started) return;

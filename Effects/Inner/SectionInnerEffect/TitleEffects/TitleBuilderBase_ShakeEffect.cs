@@ -9,6 +9,7 @@
 
 namespace DMBEffectBuilder
 {
+    /// <inheritdoc/>
     public abstract partial class TitleBuilderBase<TParent, TSelf>
         where TSelf : TitleBuilderBase<TParent, TSelf>
     {
@@ -21,6 +22,11 @@ namespace DMBEffectBuilder
 
         #region Instance methods
 
+        /// <summary>
+        /// Enables the shake title effect for the generated section heading.
+        /// </summary>
+        /// <param name="speedSeconds">The speed seconds value used by the title effect.</param>
+        /// <returns>The current title builder instance for fluent chaining.</returns>
         public TSelf SetShakeEffect(decimal speedSeconds = 4m)
         {
             _shake = true;

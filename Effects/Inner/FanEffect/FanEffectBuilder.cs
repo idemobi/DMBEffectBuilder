@@ -35,6 +35,10 @@ namespace DMBEffectBuilder
         private int                          _entranceDelayStepMs   = 80;
         private int                          _bottomOffsetPx        = 20;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FanEffectBuilder"/> class.
+        /// </summary>
+        /// <param name="html">The Razor HTML helper used to register effect assets.</param>
         public FanEffectBuilder(IHtmlHelper html)
         {
             _html = html;
@@ -219,6 +223,11 @@ namespace DMBEffectBuilder
             return this;
         }
 
+        /// <summary>
+        /// Writes the complete effect markup to the provided output writer.
+        /// </summary>
+        /// <param name="writer">The writer receiving generated HTML.</param>
+        /// <param name="encoder">The encoder used to encode generated HTML.</param>
         public void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
             PageInformation page = PageRegistry.GetOrCreatePageInformation(_html.ViewContext.HttpContext);

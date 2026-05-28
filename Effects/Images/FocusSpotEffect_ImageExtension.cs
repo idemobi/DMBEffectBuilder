@@ -45,9 +45,9 @@ namespace DMBEffectBuilder
     /// functionality for rendering HTML elements.
     /// <see cref="CustomClassesExtensions.AddClass{TBuilder}"/>: Extends the functionality of HTML builders by
     /// allowing the addition of custom CSS classes.
-    /// <see cref="WriteTo"/>: The lifecycle method responsible for rendering the final HTML output.
-    /// <see cref="Begin"/>: Marks the beginning of the rendering process for a builder instance.
-    /// <see cref="Dispose"/>: Cleans up resources used by the builder, ensuring proper disposal of objects.
+    /// <c>WriteTo</c>: The lifecycle method responsible for rendering the final HTML output.
+    /// <c>Begin</c>: Marks the beginning of the rendering process for a builder instance.
+    /// <c>Dispose</c>: Cleans up resources used by the builder, ensuring proper disposal of objects.
     /// </remarks>
     [Documented]
     public static class FocusSpotEffect_ImageExtension

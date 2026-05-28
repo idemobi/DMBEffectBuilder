@@ -15,10 +15,18 @@ using Microsoft.AspNetCore.Html;
 
 namespace DMBEffectBuilder
 {
+    /// <summary>
+    /// Provides debug helper hooks for the highlight sweep section effect.
+    /// </summary>
     public static class HighlightSweepEffectDebugHelper
     {
         #region Static methods
 
+        /// <summary>
+        /// Renders the optional custom debug form for the highlight sweep effect.
+        /// </summary>
+        /// <param name="model">The debug model used by the form.</param>
+        /// <returns>The rendered debug form content, or an empty <see cref="HtmlString"/> when no custom form is required.</returns>
         public static IHtmlContent RenderForm(HighlightSweepEffectDebugModel model)
         {
             /*var sb = new StringBuilder();
