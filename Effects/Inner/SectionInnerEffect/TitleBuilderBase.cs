@@ -1,23 +1,25 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBEffectBuilder.csproj TitleBuilderBase.cs create at 2026/04/15
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
+
+#region
 
 using System.Text;
 using System.Text.Encodings.Web;
 using DMBPageBuilder;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+#endregion
+
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Provides fluent title configuration shared by section inner effect title builders.
+    ///     Provides fluent title configuration shared by section inner effect title builders.
     /// </summary>
-    /// <typeparam name="TParent">The parent builder returned by <see cref="Build"/>.</typeparam>
+    /// <typeparam name="TParent">The parent builder returned by <see cref="Build" />.</typeparam>
     /// <typeparam name="TSelf">The concrete title builder type used for fluent chaining.</typeparam>
     public abstract partial class TitleBuilderBase<TParent, TSelf>
         where TSelf : TitleBuilderBase<TParent, TSelf>
@@ -25,22 +27,25 @@ namespace DMBEffectBuilder
         #region Instance fields and properties
 
         /// <summary>
-        /// Stores the parent builder that receives the generated title markup.
+        ///     Provides the Razor HTML helper used to register static assets for the title effect.
+        /// </summary>
+        protected readonly IHtmlHelper _html;
+
+        /// <summary>
+        ///     Stores the parent builder that receives the generated title markup.
         /// </summary>
         protected readonly TParent _parent;
 
-        /// <summary>
-        /// Provides the Razor HTML helper used to register static assets for the title effect.
-        /// </summary>
-        protected readonly IHtmlHelper _html;
         private string _title = string.Empty;
 
         #endregion
 
+        #region Instance constructors and destructors
+
         #region Instance constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TitleBuilderBase{TParent, TSelf}"/> class.
+        ///     Initializes a new instance of the <see cref="TitleBuilderBase{TParent, TSelf}" /> class.
         /// </summary>
         /// <param name="parent">The parent builder that receives the generated title markup.</param>
         /// <param name="html">The HTML helper used to register static assets.</param>
@@ -52,48 +57,36 @@ namespace DMBEffectBuilder
 
         #endregion
 
+        #endregion
+
         #region Instance methods
 
         /// <summary>
-        /// Sets the title text rendered by the title effect builder.
+        ///     Finalizes the title markup and returns the parent builder.
         /// </summary>
-        /// <param name="title">The title text to render.</param>
-        /// <returns>The current title builder instance for fluent chaining.</returns>
-        public TSelf SetTitle(string title)
-        {
-            _title = title;
-            return (TSelf)this;
-        }
+        /// <returns>The parent builder receiving the generated title markup.</returns>
+        public abstract TParent Build();
 
         /// <summary>
-        /// Builds the encoded title HTML and applies the configured title effect classes and CSS variables.
+        ///     Builds the encoded title HTML and applies the configured title effect classes and CSS variables.
         /// </summary>
         /// <returns>The generated title markup.</returns>
         /// <exception cref="InvalidOperationException">Thrown when mutually exclusive title effects are combined.</exception>
         protected string BuildCoreTitleHtml()
         {
-            if (_typewriter && _letterCollapse)
-                throw new InvalidOperationException("SetTypewriterEffect and SetLetterCollapseEffect cannot be used together.");
-            if (_wave && _typewriter)
-                throw new InvalidOperationException("SetWaveEffect and SetTypewriterEffect cannot be used together.");
-            if (_wave && _letterCollapse)
-                throw new InvalidOperationException("SetWaveEffect and SetLetterCollapseEffect cannot be used together.");
-            if (_scramble && _typewriter)
-                throw new InvalidOperationException("SetScrambleEffect and SetTypewriterEffect cannot be used together.");
-            if (_neonGlow && _gradient)
-                throw new InvalidOperationException("SetNeonGlowEffect and SetGradientEffect cannot be used together.");
-            if (_outline && _gradient)
-                throw new InvalidOperationException("SetOutlineEffect and SetGradientEffect cannot be used together.");
-            if (_slideUp && _wave)
-                throw new InvalidOperationException("SetSlideUpEffect and SetWaveEffect cannot be used together.");
-            if (_blurReveal && _colorCycle)
-                throw new InvalidOperationException("SetBlurRevealEffect and SetColorCycleEffect cannot be used together.");
+            if (_typewriter && _letterCollapse) throw new InvalidOperationException("SetTypewriterEffect and SetLetterCollapseEffect cannot be used together.");
+            if (_wave && _typewriter) throw new InvalidOperationException("SetWaveEffect and SetTypewriterEffect cannot be used together.");
+            if (_wave && _letterCollapse) throw new InvalidOperationException("SetWaveEffect and SetLetterCollapseEffect cannot be used together.");
+            if (_scramble && _typewriter) throw new InvalidOperationException("SetScrambleEffect and SetTypewriterEffect cannot be used together.");
+            if (_neonGlow && _gradient) throw new InvalidOperationException("SetNeonGlowEffect and SetGradientEffect cannot be used together.");
+            if (_outline && _gradient) throw new InvalidOperationException("SetOutlineEffect and SetGradientEffect cannot be used together.");
+            if (_slideUp && _wave) throw new InvalidOperationException("SetSlideUpEffect and SetWaveEffect cannot be used together.");
+            if (_blurReveal && _colorCycle) throw new InvalidOperationException("SetBlurRevealEffect and SetColorCycleEffect cannot be used together.");
 
             PageInformation page = PageRegistry.GetOrCreatePageInformation(_html.ViewContext.HttpContext);
             page.SetStylesheet("/css/innerEffects/SectionInnerTitleEffects.css");
 
-            if (_typewriter || _scramble)
-                page.SetScriptFile("/js/innerEffects/SectionInnerTitleEffects.js");
+            if (_typewriter || _scramble) page.SetScriptFile("/js/innerEffects/SectionInnerTitleEffects.js");
 
             var ci = System.Globalization.CultureInfo.InvariantCulture;
             string encodedTitle = HtmlEncoder.Default.Encode(_title);
@@ -104,8 +97,7 @@ namespace DMBEffectBuilder
             var h1Style = new StringBuilder();
             var h1Classes = new StringBuilder();
 
-            if (_twisted)
-                h1Style.Append($"transform:rotate({_twistAngle.ToString(ci)}deg);");
+            if (_twisted) h1Style.Append($"transform:rotate({_twistAngle.ToString(ci)}deg);");
 
             if (_gradient)
             {
@@ -121,11 +113,9 @@ namespace DMBEffectBuilder
                 h1Classes.Append($"eb-typewriter eb-tw-{Guid.NewGuid():N}");
             }
 
-            if (_letterCollapse)
-                h1Style.Append($"animation:eb-letter-collapse {letterCollapseDuration}s ease-out forwards;");
+            if (_letterCollapse) h1Style.Append($"animation:eb-letter-collapse {letterCollapseDuration}s ease-out forwards;");
 
-            if (_scramble)
-                h1Classes.Append("eb-scramble");
+            if (_scramble) h1Classes.Append("eb-scramble");
 
             if (_neonGlow)
             {
@@ -134,8 +124,7 @@ namespace DMBEffectBuilder
                 h1Style.Append($"--eb-neon-speed:{_neonSpeed.ToString(ci)}s;");
             }
 
-            if (_glitchText)
-                h1Classes.Append(" eb-title-glitch");
+            if (_glitchText) h1Classes.Append(" eb-title-glitch");
 
             if (_blurReveal)
             {
@@ -191,6 +180,7 @@ namespace DMBEffectBuilder
                     letters.Append($"<span class=\"eb-wave-letter\" style=\"--wave-duration:{_waveDuration.ToString(ci)}s;animation-delay:{delay.ToString(ci)}s;\">{encoded}</span>");
                     delay += 0.08m;
                 }
+
                 titleContent = letters.ToString();
             }
             else if (_slideUp)
@@ -203,6 +193,7 @@ namespace DMBEffectBuilder
                     letters.Append($"<span class=\"eb-slide-letter\" style=\"--eb-slide-duration:{_slideDuration.ToString(ci)}s;animation-delay:{delay.ToString(ci)}s;\">{encoded}</span>");
                     delay += 0.05m;
                 }
+
                 titleContent = letters.ToString();
             }
             else
@@ -211,10 +202,8 @@ namespace DMBEffectBuilder
             }
 
             var extraAttrs = new StringBuilder();
-            if (_typewriter)
-                extraAttrs.Append($" data-typewriter-chars=\"{charCount}\" data-typewriter-duration=\"{typewriterDuration}\"");
-            if (_scramble)
-                extraAttrs.Append($" data-scramble-text=\"{encodedTitle}\" data-scramble-duration=\"{_scrambleDuration.ToString(ci)}\"");
+            if (_typewriter) extraAttrs.Append($" data-typewriter-chars=\"{charCount}\" data-typewriter-duration=\"{typewriterDuration}\"");
+            if (_scramble) extraAttrs.Append($" data-scramble-text=\"{encodedTitle}\" data-scramble-duration=\"{_scrambleDuration.ToString(ci)}\"");
             if (_glitchText)
             {
                 extraAttrs.Append($" data-text=\"{encodedTitle}\"");
@@ -223,8 +212,7 @@ namespace DMBEffectBuilder
                 h1Style.Append($"--eb-glitch-speed:{_glitchSpeed.ToString(ci)}s;");
             }
 
-            if (_splitColor && !_glitchText)
-                extraAttrs.Append($" data-text=\"{encodedTitle}\"");
+            if (_splitColor && !_glitchText) extraAttrs.Append($" data-text=\"{encodedTitle}\"");
 
             var sb = new StringBuilder();
             sb.Append("<div class=\"eb-section-inner-title\">");
@@ -235,10 +223,15 @@ namespace DMBEffectBuilder
         }
 
         /// <summary>
-        /// Finalizes the title markup and returns the parent builder.
+        ///     Sets the title text rendered by the title effect builder.
         /// </summary>
-        /// <returns>The parent builder receiving the generated title markup.</returns>
-        public abstract TParent Build();
+        /// <param name="title">The title text to render.</param>
+        /// <returns>The current title builder instance for fluent chaining.</returns>
+        public TSelf SetTitle(string title)
+        {
+            _title = title;
+            return (TSelf)this;
+        }
 
         #endregion
     }

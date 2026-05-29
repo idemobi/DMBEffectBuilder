@@ -1,21 +1,29 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBEffectBuilder.csproj FeatureTabEffectItem.cs create at 2026/05/06
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
+#region
+
 using Microsoft.AspNetCore.Html;
+
+#endregion
 
 namespace DMBEffectBuilder
 {
     internal class FeatureTabEffectItem
     {
-        internal IHtmlContent Visual { get; }
-        internal string Title { get; }
+        #region Instance fields and properties
+
         internal string? Description { get; }
+        internal string Title { get; }
+        internal IHtmlContent Visual { get; }
+
+        #endregion
+
+        #region Instance constructors and destructors
 
         internal FeatureTabEffectItem(IHtmlContent visual, string title, string? description)
         {
@@ -23,5 +31,7 @@ namespace DMBEffectBuilder
             Title = title;
             Description = description;
         }
+
+        #endregion
     }
 }

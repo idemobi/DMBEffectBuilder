@@ -1,69 +1,91 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBBootstrapBuilder.csproj SpotlightEffect_SectionExtensions.cs create at 2026/04/17
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
+
+#region
 
 using DMBBootstrapBuilder;
 using DMBPageBuilder;
 
+#endregion
+
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Provides extension methods to apply a spotlight cursor-tracking effect to a <see cref="SectionBuilder"/>.
+    ///     Provides extension methods to apply a spotlight cursor-tracking effect to a <see cref="SectionBuilder" />.
     /// </summary>
     public static class SpotlightEffect_SectionExtensions
     {
         #region Static methods
 
+        #if DEBUG
+        private static void InjectDebugPanel(SectionBuilder section, string color, decimal opacity, int sizePx)
+        {
+            string sectionId = section.AttributeValue("id") ?? throw new InvalidOperationException("Section id could not be resolved.");
+            section.AddDebugPanel(new SpotlightEffectDebugModel
+            {
+                SectionId = sectionId,
+                Color = color,
+                Opacity = opacity,
+                SizePx = sizePx
+            });
+        }
+        #endif
+
         /// <summary>
-        /// Applies a spotlight radial glow effect that follows the cursor (or moves automatically) over the section.
+        ///     Applies a spotlight radial glow effect that follows the cursor (or moves automatically) over the section.
         /// </summary>
         /// <param name="section">The section builder to apply the effect to.</param>
         /// <param name="color">The spotlight color in CSS hex format. Defaults to <c>#ffffff</c>.</param>
         /// <param name="opacity">Opacity of the spotlight glow (0–1). Defaults to <c>0.2</c>.</param>
         /// <param name="sizePx">Diameter of the spotlight in pixels. Must be greater than 0. Defaults to <c>300</c>.</param>
-        /// <param name="autoMove">When <c>true</c>, the spotlight moves automatically. When <c>false</c>, it follows the cursor. Defaults to <c>false</c>.</param>
-        /// <returns>The same <see cref="SectionBuilder"/> instance for chaining.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="section"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">Thrown when <paramref name="color"/> is null or empty.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="sizePx"/> is less than or equal to 0, or <paramref name="opacity"/> is not between 0 and 1.</exception>
+        /// <param name="autoMove">
+        ///     When <c>true</c>, the spotlight moves automatically. When <c>false</c>, it follows the cursor.
+        ///     Defaults to <c>false</c>.
+        /// </param>
+        /// <returns>The same <see cref="SectionBuilder" /> instance for chaining.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="section" /> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="color" /> is null or empty.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Thrown when <paramref name="sizePx" /> is less than or equal to 0, or
+        ///     <paramref name="opacity" /> is not between 0 and 1.
+        /// </exception>
         /// <remarks>
-        /// <para>
-        /// <b>Use cases:</b> dark hero sections, product showcases, interactive feature demonstrations.
-        /// In cursor-follow mode, it creates an engaging "torch in the dark" experience.
-        /// In auto mode, it provides a drifting ambient glow.
-        /// </para>
-        /// <para>
-        /// <b>How it works:</b> a radial gradient centered on the cursor position (or an animated position
-        /// in auto mode) is applied via a JavaScript mousemove listener that updates a CSS custom property.
-        /// The gradient fades from the spotlight color to transparent.
-        /// </para>
-        /// <para>
-        /// <b>Combinations:</b> chain after <c>BootstrapBackgroundEffect(Dark)</c> or a dark
-        /// <c>AnimatedGradientEffect</c>. The spotlight sits above the background but below section content.
-        /// Pairs well with <c>NoiseEffect</c> for a textured dark atmosphere.
-        /// </para>
-        /// <para>
-        /// <b>Tips:</b> a <c>sizePx</c> of 250–400 covers a natural hand-sized area. Larger values
-        /// (500+) create a broad, diffuse ambient glow. Keep <c>opacity</c> between 0.15 and 0.30
-        /// for a subtle effect — higher values can obscure content. Use a warm color (amber, gold)
-        /// for a theatrical spotlight feel, or white for a clean torch effect.
-        /// </para>
-        /// <para>
-        /// <b>Example:</b>
-        /// <code>
+        ///     <para>
+        ///         <b>Use cases:</b> dark hero sections, product showcases, interactive feature demonstrations.
+        ///         In cursor-follow mode, it creates an engaging "torch in the dark" experience.
+        ///         In auto mode, it provides a drifting ambient glow.
+        ///     </para>
+        ///     <para>
+        ///         <b>How it works:</b> a radial gradient centered on the cursor position (or an animated position
+        ///         in auto mode) is applied via a JavaScript mousemove listener that updates a CSS custom property.
+        ///         The gradient fades from the spotlight color to transparent.
+        ///     </para>
+        ///     <para>
+        ///         <b>Combinations:</b> chain after <c>BootstrapBackgroundEffect(Dark)</c> or a dark
+        ///         <c>AnimatedGradientEffect</c>. The spotlight sits above the background but below section content.
+        ///         Pairs well with <c>NoiseEffect</c> for a textured dark atmosphere.
+        ///     </para>
+        ///     <para>
+        ///         <b>Tips:</b> a <c>sizePx</c> of 250–400 covers a natural hand-sized area. Larger values
+        ///         (500+) create a broad, diffuse ambient glow. Keep <c>opacity</c> between 0.15 and 0.30
+        ///         for a subtle effect — higher values can obscure content. Use a warm color (amber, gold)
+        ///         for a theatrical spotlight feel, or white for a clean torch effect.
+        ///     </para>
+        ///     <para>
+        ///         <b>Example:</b>
+        ///         <code>
         /// Html.SectionBuilder()
         ///     .BootstrapBackgroundEffect(VariantStyle.Dark, autoTextColor: true)
         ///     .SpotlightEffect(color: "#ffc832", opacity: 0.25m, sizePx: 300, autoMove: true)
         /// </code>
-        /// </para>
+        ///     </para>
         /// </remarks>
-        /// <seealso cref="GlowPulseEffect_SectionExtensions"/>
-        /// <seealso cref="BootstrapBackgroundEffect_SectionExtensions"/>
+        /// <seealso cref="GlowPulseEffect_SectionExtensions" />
+        /// <seealso cref="BootstrapBackgroundEffect_SectionExtensions" />
         [Documented]
         public static SectionBuilder SpotlightEffect(this SectionBuilder section, string color = "#ffffff", decimal opacity = 0.2m, int sizePx = 300, bool autoMove = false)
         {
@@ -89,20 +111,6 @@ namespace DMBEffectBuilder
 
             return section;
         }
-
-        #if DEBUG
-        private static void InjectDebugPanel(SectionBuilder section, string color, decimal opacity, int sizePx)
-        {
-            string sectionId = section.AttributeValue("id") ?? throw new InvalidOperationException("Section id could not be resolved.");
-            section.AddDebugPanel(new SpotlightEffectDebugModel
-            {
-                SectionId = sectionId,
-                Color     = color,
-                Opacity   = opacity,
-                SizePx    = sizePx
-            });
-        }
-        #endif
 
         #endregion
     }

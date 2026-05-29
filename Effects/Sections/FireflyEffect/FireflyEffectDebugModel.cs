@@ -1,18 +1,20 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBBootstrapBuilder.csproj FireflyEffectDebugModel.cs create at 2026/04/21
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
+#region
+
 using DMBBootstrapBuilder;
+
+#endregion
 
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Provides debug panel values for the firefly section effect.
+    ///     Provides debug panel values for the firefly section effect.
     /// </summary>
     [DebugModel("Firefly", CodePattern = ".FireflyEffect(\"{0}\", {1}, {2}m)")]
     public sealed class FireflyEffectDebugModel
@@ -20,30 +22,31 @@ namespace DMBEffectBuilder
         #region Instance fields and properties
 
         /// <summary>
-        /// Gets or sets the primary color used by the visual effect.
+        ///     Gets or sets the primary color used by the visual effect.
         /// </summary>
         [DebugProperty(Label = "Color", HelpText = "Glow color of the fireflies.")]
         [DebugPropertyTarget(DebugTarget.DataAttribute, "data-firefly-color")]
         public string Color { get; set; } = "#aaff88";
 
         /// <summary>
-        /// Gets or sets the number of generated visual elements.
+        ///     Gets or sets the number of generated visual elements.
         /// </summary>
         [DebugProperty(Label = "Count", HelpText = "Number of fireflies.")]
         [DebugPropertyTarget(DebugTarget.DataAttribute, "data-firefly-count")]
         public int Count { get; set; } = 20;
 
         /// <summary>
-        /// Gets or sets the generated visual size used by the effect.
+        ///     Gets or sets the generated section identifier used by the debug panel.
+        /// </summary>
+        [DebugProperty(Ignore = true)]
+        public string SectionId { get; set; } = string.Empty;
+
+        /// <summary>
+        ///     Gets or sets the generated visual size used by the effect.
         /// </summary>
         [DebugProperty(Label = "Size (px)", HelpText = "Radius of each firefly in pixels.")]
         [DebugPropertyTarget(DebugTarget.DataAttribute, "data-firefly-size")]
         public decimal Size { get; set; } = 3m;
-
-        /// <summary>
-        /// Gets or sets the generated section identifier used by the debug panel.
-        /// </summary>
-        [DebugProperty(Ignore = true)] public string SectionId { get; set; } = string.Empty;
 
         #endregion
     }

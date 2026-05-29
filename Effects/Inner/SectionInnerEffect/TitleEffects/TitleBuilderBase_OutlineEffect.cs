@@ -1,15 +1,13 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBEffectBuilder.csproj TitleBuilderBase_OutlineEffect.cs create at 2026/04/15
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
 namespace DMBEffectBuilder
 {
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public abstract partial class TitleBuilderBase<TParent, TSelf>
         where TSelf : TitleBuilderBase<TParent, TSelf>
     {
@@ -17,15 +15,15 @@ namespace DMBEffectBuilder
 
         private bool _outline;
         private string _outlineColor = "var(--bs-primary, #0d6efd)";
-        private decimal _outlineWidth = 1m;
         private decimal _outlineSpeed = 2m;
+        private decimal _outlineWidth = 1m;
 
         #endregion
 
         #region Instance methods
 
         /// <summary>
-        /// Enables the outline title effect for the generated section heading.
+        ///     Enables the outline title effect for the generated section heading.
         /// </summary>
         /// <param name="color">The color value used by the title effect.</param>
         /// <param name="widthPx">The width px value used by the title effect.</param>

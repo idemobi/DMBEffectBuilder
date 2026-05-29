@@ -1,11 +1,11 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBEffectBuilder.csproj PanelCardEffectBuilder.cs create at 2026/05/07
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
+
+#region
 
 using System.Text.Encodings.Web;
 using DMBBootstrapBuilder;
@@ -13,41 +13,60 @@ using DMBPageBuilder;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+#endregion
+
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Fluent builder for the Panel Card effect: a rounded gradient card with tab navigation.
-    /// Each tab switches to a different content panel; the gradient colour is derived from a hue value
-    /// (explicit or auto-assigned from a built-in palette).
+    ///     Fluent builder for the Panel Card effect: a rounded gradient card with tab navigation.
+    ///     Each tab switches to a different content panel; the gradient colour is derived from a hue value
+    ///     (explicit or auto-assigned from a built-in palette).
     /// </summary>
     /// <remarks>
-    /// <para>
-    /// <b>Use cases:</b> feature showcases, step-by-step explanations, product highlights.
-    /// </para>
-    /// <para>
-    /// <b>How it works:</b> each <c>AddPanel</c> call registers a content panel with its own
-    /// gradient background. Tab buttons are overlaid at the top; clicking one fades in the matching panel.
-    /// </para>
-    /// <para>
-    /// <b>Tips:</b> use <c>eb-pc-badge</c>, <c>eb-pc-title</c> and <c>eb-pc-desc</c> utility classes
-    /// for consistent white typography inside panels.
-    /// </para>
+    ///     <para>
+    ///         <b>Use cases:</b> feature showcases, step-by-step explanations, product highlights.
+    ///     </para>
+    ///     <para>
+    ///         <b>How it works:</b> each <c>AddPanel</c> call registers a content panel with its own
+    ///         gradient background. Tab buttons are overlaid at the top; clicking one fades in the matching panel.
+    ///     </para>
+    ///     <para>
+    ///         <b>Tips:</b> use <c>eb-pc-badge</c>, <c>eb-pc-title</c> and <c>eb-pc-desc</c> utility classes
+    ///         for consistent white typography inside panels.
+    ///     </para>
     /// </remarks>
     [Documented]
     public sealed class PanelCardEffectBuilder : IHtmlContent
     {
+        #region Static fields and properties
+
+        private static readonly int[] DefaultHues = { 260, 320, 205, 145 };
+        private static readonly int[] DefaultHues2 = { 295, 355, 240, 175 };
+
+        #endregion
+
+        #region Instance fields and properties
+
+        private int _heightPx = 420;
         private readonly IHtmlHelper _html;
         private readonly List<PanelCardPanel> _panels = new();
-        private int _heightPx = 420;
+
+        #endregion
+
+        #region Instance constructors and destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PanelCardEffectBuilder"/> class.
+        ///     Initializes a new instance of the <see cref="PanelCardEffectBuilder" /> class.
         /// </summary>
         /// <param name="html">The Razor HTML helper used to register effect assets.</param>
         public PanelCardEffectBuilder(IHtmlHelper html)
         {
             _html = html;
         }
+
+        #endregion
+
+        #region Instance methods
 
         /// <summary>Adds a content panel. The first panel added is active by default.</summary>
         /// <param name="label">Tab button label.</param>
@@ -62,8 +81,8 @@ namespace DMBEffectBuilder
         }
 
         /// <summary>
-        /// Adds a standard panel with an icon, badge, heading, description and an optional button.
-        /// Use this overload for the common layout; use the template overload for fully custom content.
+        ///     Adds a standard panel with an icon, badge, heading, description and an optional button.
+        ///     Use this overload for the common layout; use the template overload for fully custom content.
         /// </summary>
         /// <param name="label">Tab button label.</param>
         /// <param name="icon">Bootstrap icon class, e.g. <c>"bi-search"</c>.</param>
@@ -76,20 +95,25 @@ namespace DMBEffectBuilder
         /// <returns>The current builder instance for chaining.</returns>
         [Documented]
         public PanelCardEffectBuilder AddPanel(
-            string label, string icon, string badge,
-            string heading, string description,
-            string? buttonUrl = null, string buttonLabel = "Learn more", int? hue = null)
+            string label,
+            string icon,
+            string badge,
+            string heading,
+            string description,
+            string? buttonUrl = null,
+            string buttonLabel = "Learn more",
+            int? hue = null
+        )
         {
             var enc = HtmlEncoder.Default;
-            var sb  = new System.Text.StringBuilder();
+            var sb = new System.Text.StringBuilder();
             sb.Append("""<div class="d-flex align-items-center gap-4 w-100 px-2">""");
             sb.Append($"""<i class="bi {enc.Encode(icon)} flex-shrink-0 text-white" style="font-size:3.5rem;"></i>""");
             sb.Append("<div>");
             sb.Append($"""<span class="eb-pc-badge mb-2 d-inline-block">{enc.Encode(badge)}</span>""");
             sb.Append($"""<h2 class="fw-bold text-white mb-1">{enc.Encode(heading)}</h2>""");
             sb.Append($"""<p class="fw-normal text-white-50 mb-3">{enc.Encode(description)}</p>""");
-            if (buttonUrl != null)
-                sb.Append($"""<a href="{enc.Encode(buttonUrl)}" class="btn btn-outline-light">{enc.Encode(buttonLabel)}</a>""");
+            if (buttonUrl != null) sb.Append($"""<a href="{enc.Encode(buttonUrl)}" class="btn btn-outline-light">{enc.Encode(buttonLabel)}</a>""");
             sb.Append("</div></div>");
             _panels.Add(new PanelCardPanel(label, new HtmlString(sb.ToString()), hue));
             return this;
@@ -105,11 +129,10 @@ namespace DMBEffectBuilder
             return this;
         }
 
-        private static readonly int[] DefaultHues  = { 260, 320, 205, 145 };
-        private static readonly int[] DefaultHues2 = { 295, 355, 240, 175 };
+        #region From interface IHtmlContent
 
         /// <summary>
-        /// Writes the complete effect markup to the provided output writer.
+        ///     Writes the complete effect markup to the provided output writer.
         /// </summary>
         /// <param name="writer">The writer receiving generated HTML.</param>
         /// <param name="encoder">The encoder used to encode generated HTML.</param>
@@ -129,6 +152,7 @@ namespace DMBEffectBuilder
                     var active = i == 0 ? " is-active" : string.Empty;
                     writer.Write($"<button class=\"eb-pc-tab{active}\" data-panel=\"{i}\">{HtmlEncoder.Default.Encode(_panels[i].Label)}</button>");
                 }
+
                 writer.Write("</div>");
             }
 
@@ -136,15 +160,20 @@ namespace DMBEffectBuilder
             for (int i = 0; i < _panels.Count; i++)
             {
                 var active = i == 0 ? " is-active" : string.Empty;
-                int hue    = _panels[i].Hue ?? DefaultHues[i % DefaultHues.Length];
-                int hue2   = _panels[i].Hue.HasValue ? hue + 40 : DefaultHues2[i % DefaultHues2.Length];
+                int hue = _panels[i].Hue ?? DefaultHues[i % DefaultHues.Length];
+                int hue2 = _panels[i].Hue.HasValue ? hue + 40 : DefaultHues2[i % DefaultHues2.Length];
                 writer.Write($"<div class=\"eb-pc-panel{active}\" data-panel=\"{i}\" style=\"--eb-pc-hue:{hue};--eb-pc-hue2:{hue2};\">");
                 _panels[i].Content.WriteTo(writer, encoder);
                 writer.Write("</div>");
             }
+
             writer.Write("</div>");
 
             writer.Write("</div>");
         }
+
+        #endregion
+
+        #endregion
     }
 }

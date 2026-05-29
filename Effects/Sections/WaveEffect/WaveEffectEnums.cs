@@ -1,25 +1,24 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBBootstrapBuilder.csproj WaveEffectEnums.cs create at 2026/04/17
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Defines wave edge options used by DMBEffectBuilder effects.
+    ///     Defines wave edge options used by DMBEffectBuilder effects.
     /// </summary>
     public enum WaveEdge
     {
         /// <summary>
-        /// Applies the bottom wave edge option.
+        ///     Applies the bottom wave edge option.
         /// </summary>
         Bottom,
+
         /// <summary>
-        /// Applies the top wave edge option.
+        ///     Applies the top wave edge option.
         /// </summary>
         Top
     }

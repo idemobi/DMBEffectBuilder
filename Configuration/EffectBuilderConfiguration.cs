@@ -1,9 +1,7 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBEffectBuilder.csproj EffectBuilderConfiguration.cs create at 2026/04/07 21:04:27
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
@@ -19,7 +17,7 @@ using Microsoft.Extensions.Hosting;
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Configures the embedded static assets and host integration for the effect builder package.
+    ///     Configures the embedded static assets and host integration for the effect builder package.
     /// </summary>
     [Serializable]
     public class EffectBuilderConfiguration : WebGenericConfiguration<EffectBuilderConfiguration>, IServerWebConfig
@@ -37,7 +35,7 @@ namespace DMBEffectBuilder
         #region From interface IServerWebConfig
 
         /// <summary>
-        /// Registers the static file post-configuration used to expose embedded effect assets.
+        ///     Registers the static file post-configuration used to expose embedded effect assets.
         /// </summary>
         /// <param name="appBuilder">The application builder receiving package services.</param>
         /// <param name="configBuilder">The host configuration builder.</param>
@@ -48,16 +46,16 @@ namespace DMBEffectBuilder
         }
 
         /// <summary>
-        /// Indicates whether this package contributes API description endpoints.
+        ///     Indicates whether this package contributes API description endpoints.
         /// </summary>
-        /// <returns><see langword="false"/> because this package exposes Razor visual effects rather than HTTP APIs.</returns>
+        /// <returns><see langword="false" /> because this package exposes Razor visual effects rather than HTTP APIs.</returns>
         public override bool ApiDescription()
         {
             return false;
         }
 
         /// <summary>
-        /// Runs before configuration binding; DMBEffectBuilder currently has no pre-binding work.
+        ///     Runs before configuration binding; DMBEffectBuilder currently has no pre-binding work.
         /// </summary>
         /// <param name="appBuilder">The application builder receiving configuration.</param>
         /// <param name="configBuilder">The host configuration builder.</param>
@@ -67,16 +65,16 @@ namespace DMBEffectBuilder
         }
 
         /// <summary>
-        /// Indicates whether this package requires an external configuration file or appsettings section.
+        ///     Indicates whether this package requires an external configuration file or appsettings section.
         /// </summary>
-        /// <returns><see langword="false"/> because the embedded asset defaults are sufficient.</returns>
+        /// <returns><see langword="false" /> because the embedded asset defaults are sufficient.</returns>
         public override bool NeedsConfigFileOrAppSettings()
         {
             return false;
         }
 
         /// <summary>
-        /// Populates fake configuration values for diagnostics; this package currently has no fake data to generate.
+        ///     Populates fake configuration values for diagnostics; this package currently has no fake data to generate.
         /// </summary>
         public override void RandomFake()
         {

@@ -1,36 +1,43 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBEffectBuilder.csproj SectionInnerTitle.cs create at 2026/04/14
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
+#region
+
 using System.Text;
+
+#endregion
 
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Builds and registers the title markup for a <see cref="SectionInnerEffectBuilder"/>.
+    ///     Builds and registers the title markup for a <see cref="SectionInnerEffectBuilder" />.
     /// </summary>
     public sealed class SectionInnerEffectTitle : TitleBuilderBase<SectionInnerEffectBuilder, SectionInnerEffectTitle>
     {
+        #region Instance constructors and destructors
+
         #region Instance constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SectionInnerEffectTitle"/> class.
+        ///     Initializes a new instance of the <see cref="SectionInnerEffectTitle" /> class.
         /// </summary>
         /// <param name="parent">The parent section inner effect builder that receives the generated title.</param>
-        public SectionInnerEffectTitle(SectionInnerEffectBuilder parent) : base(parent, parent.HtmlHelper)
+        public SectionInnerEffectTitle(SectionInnerEffectBuilder parent)
+            : base(parent, parent.HtmlHelper)
         {
         }
 
         #endregion
 
+        #endregion
+
         #region Instance methods
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public override SectionInnerEffectBuilder Build()
         {
             var sb = new StringBuilder();

@@ -1,26 +1,28 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBBootstrapBuilder.csproj AuroraEffect_SectionExtensions.cs create at 2026/04/21
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
+
+#region
 
 using DMBBootstrapBuilder;
 using DMBPageBuilder;
 
+#endregion
+
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Provides extension methods to apply an aurora borealis background effect to a <see cref="SectionBuilder"/>.
+    ///     Provides extension methods to apply an aurora borealis background effect to a <see cref="SectionBuilder" />.
     /// </summary>
     public static class AuroraEffect_SectionExtensions
     {
         #region Static methods
 
         /// <summary>
-        /// Applies an animated aurora borealis background effect to the section using three customizable color layers.
+        ///     Applies an animated aurora borealis background effect to the section using three customizable color layers.
         /// </summary>
         /// <param name="section">The section builder to apply the effect to.</param>
         /// <param name="color1">First aurora color in CSS hex format. Defaults to <c>#64DCB4</c>.</param>
@@ -30,46 +32,51 @@ namespace DMBEffectBuilder
         /// <param name="opacity2">Opacity of color 2 (0–1). Defaults to <c>0.35</c>.</param>
         /// <param name="opacity3">Opacity of color 3 (0–1). Defaults to <c>0.30</c>.</param>
         /// <param name="speedSeconds">Duration of one animation cycle in seconds. Must be greater than 0. Defaults to <c>8</c>.</param>
-        /// <returns>The same <see cref="SectionBuilder"/> instance for chaining.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="section"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="speedSeconds"/> is less than or equal to 0, or any opacity is not between 0 and 1.</exception>
+        /// <returns>The same <see cref="SectionBuilder" /> instance for chaining.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="section" /> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Thrown when <paramref name="speedSeconds" /> is less than or equal to 0,
+        ///     or any opacity is not between 0 and 1.
+        /// </exception>
         /// <remarks>
-        /// <para>
-        /// <b>Use cases:</b> premium hero sections, landing pages that need an organic and immersive feel,
-        /// nature or wellness themes, high-end SaaS homepages.
-        /// </para>
-        /// <para>
-        /// <b>How it works:</b> three semi-transparent color blobs are animated independently using CSS keyframes,
-        /// creating a soft flowing aurora effect. The blending relies on <c>mix-blend-mode</c> and blur filters.
-        /// </para>
-        /// <para>
-        /// <b>Combinations:</b> works well standalone. Can be layered with <c>NoiseEffect</c> to add texture,
-        /// or with <c>ScanlineEffect</c> for a retro twist.
-        /// </para>
-        /// <para>
-        /// <b>Tips:</b> choose analogous colors (e.g. teal + blue + purple) for a natural aurora feel.
-        /// Complementary colors create a more energetic result. Keep opacities below 0.5 for a subtle look.
-        /// Speed between 6 s and 12 s gives the most natural movement.
-        /// </para>
-        /// <para>
-        /// <b>Example:</b>
-        /// <code>
+        ///     <para>
+        ///         <b>Use cases:</b> premium hero sections, landing pages that need an organic and immersive feel,
+        ///         nature or wellness themes, high-end SaaS homepages.
+        ///     </para>
+        ///     <para>
+        ///         <b>How it works:</b> three semi-transparent color blobs are animated independently using CSS keyframes,
+        ///         creating a soft flowing aurora effect. The blending relies on <c>mix-blend-mode</c> and blur filters.
+        ///     </para>
+        ///     <para>
+        ///         <b>Combinations:</b> works well standalone. Can be layered with <c>NoiseEffect</c> to add texture,
+        ///         or with <c>ScanlineEffect</c> for a retro twist.
+        ///     </para>
+        ///     <para>
+        ///         <b>Tips:</b> choose analogous colors (e.g. teal + blue + purple) for a natural aurora feel.
+        ///         Complementary colors create a more energetic result. Keep opacities below 0.5 for a subtle look.
+        ///         Speed between 6 s and 12 s gives the most natural movement.
+        ///     </para>
+        ///     <para>
+        ///         <b>Example:</b>
+        ///         <code>
         /// Html.SectionBuilder()
         ///     .AuroraEffect(color1: "#a855f7", color2: "#22c55e", color3: "#3b82f6", speedSeconds: 8m)
         /// </code>
-        /// </para>
+        ///     </para>
         /// </remarks>
-        /// <seealso cref="AnimatedGradientEffect_SectionExtensions"/>
-        /// <seealso cref="NoiseEffect_SectionExtensions"/>
+        /// <seealso cref="AnimatedGradientEffect_SectionExtensions" />
+        /// <seealso cref="NoiseEffect_SectionExtensions" />
         [Documented]
-        public static SectionBuilder AuroraEffect(this SectionBuilder section,
+        public static SectionBuilder AuroraEffect(
+            this SectionBuilder section,
             string color1 = "#64DCB4",
             string color2 = "#508CFF",
             string color3 = "#C864FF",
             decimal opacity1 = 0.45m,
             decimal opacity2 = 0.35m,
             decimal opacity3 = 0.30m,
-            decimal speedSeconds = 8m)
+            decimal speedSeconds = 8m
+        )
         {
             if (section == null) throw new ArgumentNullException(nameof(section));
             if (opacity1 < 0m || opacity1 > 1m) throw new ArgumentOutOfRangeException(nameof(opacity1), "Opacity must be between 0 and 1.");
@@ -98,18 +105,27 @@ namespace DMBEffectBuilder
         }
 
         #if DEBUG
-        private static void InjectDebugPanel(SectionBuilder section, string color1, string color2, string color3, decimal opacity1, decimal opacity2, decimal opacity3, decimal speedSeconds)
+        private static void InjectDebugPanel(
+            SectionBuilder section,
+            string color1,
+            string color2,
+            string color3,
+            decimal opacity1,
+            decimal opacity2,
+            decimal opacity3,
+            decimal speedSeconds
+        )
         {
             string sectionId = section.AttributeValue("id") ?? throw new InvalidOperationException("Section id could not be resolved.");
             section.AddDebugPanel(new AuroraEffectDebugModel
             {
-                SectionId    = sectionId,
-                Color1       = color1,
-                Color2       = color2,
-                Color3       = color3,
-                Opacity1     = opacity1,
-                Opacity2     = opacity2,
-                Opacity3     = opacity3,
+                SectionId = sectionId,
+                Color1 = color1,
+                Color2 = color2,
+                Color3 = color3,
+                Opacity1 = opacity1,
+                Opacity2 = opacity2,
+                Opacity3 = opacity3,
                 SpeedSeconds = speedSeconds
             });
         }

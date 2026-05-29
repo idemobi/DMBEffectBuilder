@@ -1,9 +1,7 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBBootstrapBuilder.csproj HighlightSweepEffectDebugHelper.cs create at 2026/04/12 12:04:31
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
@@ -16,17 +14,17 @@ using Microsoft.AspNetCore.Html;
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Provides debug helper hooks for the highlight sweep section effect.
+    ///     Provides debug helper hooks for the highlight sweep section effect.
     /// </summary>
     public static class HighlightSweepEffectDebugHelper
     {
         #region Static methods
 
         /// <summary>
-        /// Renders the optional custom debug form for the highlight sweep effect.
+        ///     Renders the optional custom debug form for the highlight sweep effect.
         /// </summary>
         /// <param name="model">The debug model used by the form.</param>
-        /// <returns>The rendered debug form content, or an empty <see cref="HtmlString"/> when no custom form is required.</returns>
+        /// <returns>The rendered debug form content, or an empty <see cref="HtmlString" /> when no custom form is required.</returns>
         public static IHtmlContent RenderForm(HighlightSweepEffectDebugModel model)
         {
             /*var sb = new StringBuilder();

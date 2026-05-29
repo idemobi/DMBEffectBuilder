@@ -1,18 +1,22 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBBootstrapBuilder.csproj CurveEdgeHelper.cs create at 2026/04/22
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
+#region
+
 using System.Globalization;
+
+#endregion
 
 namespace DMBEffectBuilder
 {
     internal static class CurveEdgeHelper
     {
+        #region Static methods
+
         internal static string BuildClipPath(CurveEdge edge, Curvature curvature, decimal tilt, int pointCount = 40)
         {
             var points = new List<string>();
@@ -34,6 +38,7 @@ namespace DMBEffectBuilder
                         // Concave top: curves downward (y increases at center)
                         y = tilt * (1m - (decimal)Math.Pow((double)(2m * x - 1m), 2));
                     }
+
                     points.Add(FormatPoint(x * 100m, y));
                 }
             }
@@ -60,6 +65,7 @@ namespace DMBEffectBuilder
                         // Concave bottom: curves upward (y decreases at center)
                         y = 100m - tilt * (1m - (decimal)Math.Pow((double)(2m * x - 1m), 2));
                     }
+
                     points.Add(FormatPoint(x * 100m, y));
                 }
             }
@@ -76,5 +82,7 @@ namespace DMBEffectBuilder
         {
             return $"{x.ToString("F1", CultureInfo.InvariantCulture)}% {y.ToString("F1", CultureInfo.InvariantCulture)}%";
         }
+
+        #endregion
     }
 }

@@ -1,15 +1,13 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBEffectBuilder.csproj TitleBuilderBase_ShakeEffect.cs create at 2026/04/15
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
 namespace DMBEffectBuilder
 {
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public abstract partial class TitleBuilderBase<TParent, TSelf>
         where TSelf : TitleBuilderBase<TParent, TSelf>
     {
@@ -23,7 +21,7 @@ namespace DMBEffectBuilder
         #region Instance methods
 
         /// <summary>
-        /// Enables the shake title effect for the generated section heading.
+        ///     Enables the shake title effect for the generated section heading.
         /// </summary>
         /// <param name="speedSeconds">The speed seconds value used by the title effect.</param>
         /// <returns>The current title builder instance for fluent chaining.</returns>

@@ -1,11 +1,11 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBEffectBuilder.csproj TimelineEffectBuilder.cs create at 2026/05/06
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
+
+#region
 
 using System.Globalization;
 using System.Text.Encodings.Web;
@@ -14,45 +14,53 @@ using DMBPageBuilder;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+#endregion
+
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Fluent builder for a horizontal timeline: numbered dots connected by a progress line,
-    /// clicking a dot activates the corresponding step and fades its content into view below.
-    /// Add steps with <see cref="AddStep(string,string,string)"/>, enable auto-advance with
-    /// <see cref="SetAutoPlay"/>, and tint the accent with <see cref="SetAccentColor"/>.
+    ///     Fluent builder for a horizontal timeline: numbered dots connected by a progress line,
+    ///     clicking a dot activates the corresponding step and fades its content into view below.
+    ///     Add steps with <see cref="AddStep(string,string,string)" />, enable auto-advance with
+    ///     <see cref="SetAutoPlay" />, and tint the accent with <see cref="SetAccentColor" />.
     /// </summary>
     /// <remarks>
-    /// <para>
-    /// <b>Use cases:</b> how-it-works sections, onboarding flows, process explanations, project
-    /// roadmaps, and any sequential content where order matters.
-    /// </para>
-    /// <para>
-    /// <b>How it works:</b> renders a track of clickable dots above a panel zone. The progress line
-    /// fills to the position of the active dot. Each panel fades in via <c>opacity</c> transitions.
-    /// When auto-play is enabled, steps advance on a configurable interval and wrap back to the first.
-    /// </para>
-    /// <para>
-    /// <b>Combinations:</b> steps can include an optional visual panel (any <see cref="IHtmlContent"/>)
-    /// that displays alongside the description. Use the <c>@&lt;div&gt;...&lt;/div&gt;</c> Razor
-    /// syntax for inline visuals. Works well inside a <c>container-lg</c> or a full-width section.
-    /// </para>
-    /// <para>
-    /// <b>Tips:</b> 3–6 steps work best. Keep labels short (2–4 words) so they fit comfortably
-    /// below each dot. Set <see cref="SetAutoPlay"/> to 0 to disable auto-advance (default).
-    /// </para>
+    ///     <para>
+    ///         <b>Use cases:</b> how-it-works sections, onboarding flows, process explanations, project
+    ///         roadmaps, and any sequential content where order matters.
+    ///     </para>
+    ///     <para>
+    ///         <b>How it works:</b> renders a track of clickable dots above a panel zone. The progress line
+    ///         fills to the position of the active dot. Each panel fades in via <c>opacity</c> transitions.
+    ///         When auto-play is enabled, steps advance on a configurable interval and wrap back to the first.
+    ///     </para>
+    ///     <para>
+    ///         <b>Combinations:</b> steps can include an optional visual panel (any <see cref="IHtmlContent" />)
+    ///         that displays alongside the description. Use the <c>@&lt;div&gt;...&lt;/div&gt;</c> Razor
+    ///         syntax for inline visuals. Works well inside a <c>container-lg</c> or a full-width section.
+    ///     </para>
+    ///     <para>
+    ///         <b>Tips:</b> 3–6 steps work best. Keep labels short (2–4 words) so they fit comfortably
+    ///         below each dot. Set <see cref="SetAutoPlay" /> to 0 to disable auto-advance (default).
+    ///     </para>
     /// </remarks>
     [Documented]
     public sealed class TimelineEffectBuilder : IHtmlContent
     {
+        #region Instance fields and properties
+
+        private string _accentColor = "var(--bs-primary,#0d6efd)";
+        private int _autoPlayMs = 0;
         private readonly IHtmlHelper _html;
         private readonly List<TimelineEffectStep> _steps = new();
         private decimal _transitionDuration = 0.4m;
-        private int _autoPlayMs = 0;
-        private string _accentColor = "var(--bs-primary,#0d6efd)";
+
+        #endregion
+
+        #region Instance constructors and destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TimelineEffectBuilder"/> class.
+        ///     Initializes a new instance of the <see cref="TimelineEffectBuilder" /> class.
         /// </summary>
         /// <param name="html">The Razor HTML helper used to register effect assets.</param>
         public TimelineEffectBuilder(IHtmlHelper html)
@@ -60,10 +68,17 @@ namespace DMBEffectBuilder
             _html = html;
         }
 
+        #endregion
+
+        #region Instance methods
+
         /// <summary>Adds a step with a title and optional description — no visual panel.</summary>
         /// <param name="title">Step title shown in the dot label and the content area.</param>
         /// <param name="description">Optional body text shown below the title when the step is active.</param>
-        /// <param name="icon">Optional Bootstrap icon class (e.g. <c>bi-rocket</c>) shown inside the dot instead of the step number.</param>
+        /// <param name="icon">
+        ///     Optional Bootstrap icon class (e.g. <c>bi-rocket</c>) shown inside the dot instead of the step
+        ///     number.
+        /// </param>
         /// <returns>The current builder instance for chaining.</returns>
         [Documented]
         public TimelineEffectBuilder AddStep(string title, string? description = null, string? icon = null)
@@ -85,7 +100,7 @@ namespace DMBEffectBuilder
             return this;
         }
 
-        /// <summary>Adds a step with pre-built <see cref="IHtmlContent"/> as the visual panel.</summary>
+        /// <summary>Adds a step with pre-built <see cref="IHtmlContent" /> as the visual panel.</summary>
         /// <param name="visual">HTML content for the visual panel displayed alongside the description.</param>
         /// <param name="title">Step title shown in the dot label and the content area.</param>
         /// <param name="description">Optional body text shown below the title when the step is active.</param>
@@ -95,26 +110,6 @@ namespace DMBEffectBuilder
         public TimelineEffectBuilder AddStep(IHtmlContent visual, string title, string? description = null, string? icon = null)
         {
             _steps.Add(new TimelineEffectStep(visual, title, description, icon));
-            return this;
-        }
-
-        /// <summary>Sets the duration of the fade transition between steps in seconds (default: 0.4).</summary>
-        /// <param name="seconds">Duration in seconds for the <c>opacity</c> transition.</param>
-        /// <returns>The current builder instance for chaining.</returns>
-        [Documented]
-        public TimelineEffectBuilder SetTransitionDuration(decimal seconds)
-        {
-            _transitionDuration = seconds;
-            return this;
-        }
-
-        /// <summary>Enables auto-advance: steps cycle automatically on the given interval (default: 0 = disabled).</summary>
-        /// <param name="ms">Interval in milliseconds between auto-advances. Pass <c>0</c> to disable.</param>
-        /// <returns>The current builder instance for chaining.</returns>
-        [Documented]
-        public TimelineEffectBuilder SetAutoPlay(int ms)
-        {
-            _autoPlayMs = ms;
             return this;
         }
 
@@ -128,8 +123,30 @@ namespace DMBEffectBuilder
             return this;
         }
 
+        /// <summary>Enables auto-advance: steps cycle automatically on the given interval (default: 0 = disabled).</summary>
+        /// <param name="ms">Interval in milliseconds between auto-advances. Pass <c>0</c> to disable.</param>
+        /// <returns>The current builder instance for chaining.</returns>
+        [Documented]
+        public TimelineEffectBuilder SetAutoPlay(int ms)
+        {
+            _autoPlayMs = ms;
+            return this;
+        }
+
+        /// <summary>Sets the duration of the fade transition between steps in seconds (default: 0.4).</summary>
+        /// <param name="seconds">Duration in seconds for the <c>opacity</c> transition.</param>
+        /// <returns>The current builder instance for chaining.</returns>
+        [Documented]
+        public TimelineEffectBuilder SetTransitionDuration(decimal seconds)
+        {
+            _transitionDuration = seconds;
+            return this;
+        }
+
+        #region From interface IHtmlContent
+
         /// <summary>
-        /// Writes the complete effect markup to the provided output writer.
+        ///     Writes the complete effect markup to the provided output writer.
         /// </summary>
         /// <param name="writer">The writer receiving generated HTML.</param>
         /// <param name="encoder">The encoder used to encode generated HTML.</param>
@@ -163,6 +180,7 @@ namespace DMBEffectBuilder
                 writer.Write($"<span class=\"eb-tl-dot-label\">{HtmlEncoder.Default.Encode(step.Title)}</span>");
                 writer.Write("</button>");
             }
+
             writer.Write("</div>");
             writer.Write("</div>");
 
@@ -183,15 +201,19 @@ namespace DMBEffectBuilder
 
                 writer.Write("<div class=\"eb-tl-panel-text\">");
                 writer.Write($"<h3 class=\"eb-tl-title\">{HtmlEncoder.Default.Encode(step.Title)}</h3>");
-                if (!string.IsNullOrEmpty(step.Description))
-                    writer.Write($"<p class=\"eb-tl-desc\">{HtmlEncoder.Default.Encode(step.Description)}</p>");
+                if (!string.IsNullOrEmpty(step.Description)) writer.Write($"<p class=\"eb-tl-desc\">{HtmlEncoder.Default.Encode(step.Description)}</p>");
                 writer.Write("</div>");
 
                 writer.Write("</div>");
             }
+
             writer.Write("</div>");
 
             writer.Write("</div>");
         }
+
+        #endregion
+
+        #endregion
     }
 }

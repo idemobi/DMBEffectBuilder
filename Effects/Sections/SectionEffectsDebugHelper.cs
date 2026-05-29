@@ -1,9 +1,7 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBBootstrapBuilder.csproj SectionEffectsDebugHelper.cs create at 2026/04/07 21:04:27
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
@@ -18,32 +16,29 @@ using Microsoft.Extensions.DependencyInjection;
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Provides shared helpers used by section effect debug panels.
+    ///     Provides shared helpers used by section effect debug panels.
     /// </summary>
     public static class SectionEffectsDebugHelper
     {
         #region Static methods
 
         /// <summary>
-        /// Returns image URLs from the host <c>wwwroot/images/test</c> folder for debug selectors.
+        ///     Returns image URLs from the host <c>wwwroot/images/test</c> folder for debug selectors.
         /// </summary>
         /// <param name="html">The current Razor HTML helper used to resolve the web host environment.</param>
         /// <returns>A sorted list of supported image URLs, or an empty list when the folder is unavailable.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="html"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="html" /> is <see langword="null" />.</exception>
         public static IReadOnlyList<string> GetEffectsImageUrls(IHtmlHelper html)
         {
-            if (html == null)
-                throw new ArgumentNullException(nameof(html));
+            if (html == null) throw new ArgumentNullException(nameof(html));
 
             var env = html.ViewContext.HttpContext.RequestServices.GetService<IWebHostEnvironment>();
 
-            if (env == null || string.IsNullOrWhiteSpace(env.WebRootPath))
-                return Array.Empty<string>();
+            if (env == null || string.IsNullOrWhiteSpace(env.WebRootPath)) return Array.Empty<string>();
 
             string imagesPath = Path.Combine(env.WebRootPath, "images", "test");
 
-            if (!Directory.Exists(imagesPath))
-                return Array.Empty<string>();
+            if (!Directory.Exists(imagesPath)) return Array.Empty<string>();
 
             return Directory
                 .EnumerateFiles(imagesPath)

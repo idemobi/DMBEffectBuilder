@@ -1,18 +1,31 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBBootstrapBuilder.csproj WaveEdgeHelper.cs create at 2026/04/23
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
+#region
+
 using System.Globalization;
+
+#endregion
 
 namespace DMBEffectBuilder
 {
     internal static class WaveEdgeHelper
     {
+        #region Static methods
+
+        private static double Bezier(double t, double p0, double p1, double p2, double p3)
+        {
+            double mt = 1.0 - t;
+            return mt * mt * mt * p0
+                   + 3.0 * mt * mt * t * p1
+                   + 3.0 * mt * t * t * p2
+                   + t * t * t * p3;
+        }
+
         internal static string BuildClipPath(WaveEdge edge, int pointCount = 30)
         {
             var points = new List<string>();
@@ -27,8 +40,8 @@ namespace DMBEffectBuilder
                 for (int i = pointCount; i >= 0; i--)
                 {
                     double t = (double)i / pointCount;
-                    double x    = Bezier(t, 0, 360,  1080, 1440) / 1440.0 * 100.0;
-                    double yRaw = Bezier(t, 40,  80,     0,   40);
+                    double x = Bezier(t, 0, 360, 1080, 1440) / 1440.0 * 100.0;
+                    double yRaw = Bezier(t, 40, 80, 0, 40);
                     double complement = 1.0 - yRaw / 80.0;
                     points.Add(
                         $"{x.ToString("F2", CultureInfo.InvariantCulture)}% " +
@@ -43,8 +56,8 @@ namespace DMBEffectBuilder
                 for (int i = 0; i <= pointCount; i++)
                 {
                     double t = (double)i / pointCount;
-                    double x    = Bezier(t, 0, 360, 1080, 1440) / 1440.0 * 100.0;
-                    double yRaw = Bezier(t, 40,   0,   80,   40);
+                    double x = Bezier(t, 0, 360, 1080, 1440) / 1440.0 * 100.0;
+                    double yRaw = Bezier(t, 40, 0, 80, 40);
                     double yFrac = yRaw / 80.0;
                     points.Add(
                         $"{x.ToString("F2", CultureInfo.InvariantCulture)}% " +
@@ -59,13 +72,6 @@ namespace DMBEffectBuilder
             return $"polygon({string.Join(", ", points)})";
         }
 
-        private static double Bezier(double t, double p0, double p1, double p2, double p3)
-        {
-            double mt = 1.0 - t;
-            return mt * mt * mt * p0
-                 + 3.0 * mt * mt * t * p1
-                 + 3.0 * mt * t  * t * p2
-                 + t   * t  * t      * p3;
-        }
+        #endregion
     }
 }

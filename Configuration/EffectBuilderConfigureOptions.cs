@@ -1,9 +1,7 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBEffectBuilder.csproj EffectBuilderConfigureOptions.cs create at 2026/04/07 21:04:27
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
@@ -20,7 +18,7 @@ using Microsoft.Extensions.Options;
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Adds DMBEffectBuilder embedded static assets to ASP.NET Core static file options.
+    ///     Adds DMBEffectBuilder embedded static assets to ASP.NET Core static file options.
     /// </summary>
     public class EffectBuilderConfigureOptions : IPostConfigureOptions<StaticFileOptions>
     {
@@ -39,7 +37,7 @@ namespace DMBEffectBuilder
         #region Instance constructors and destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EffectBuilderConfigureOptions"/> class.
+        ///     Initializes a new instance of the <see cref="EffectBuilderConfigureOptions" /> class.
         /// </summary>
         /// <param name="environment">The web host environment that supplies the host web root file provider.</param>
         public EffectBuilderConfigureOptions(IWebHostEnvironment environment)
@@ -54,11 +52,14 @@ namespace DMBEffectBuilder
         #region From interface IPostConfigureOptions<StaticFileOptions>
 
         /// <summary>
-        /// Adds the package manifest embedded file provider to the configured static file provider chain.
+        ///     Adds the package manifest embedded file provider to the configured static file provider chain.
         /// </summary>
         /// <param name="name">The options name being configured.</param>
         /// <param name="options">The static file options to update.</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="name"/> or <paramref name="options"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when <paramref name="name" /> or <paramref name="options" /> is
+        ///     <see langword="null" />.
+        /// </exception>
         /// <exception cref="InvalidOperationException">Thrown when no host or existing static file provider is available.</exception>
         public void PostConfigure(string? name, StaticFileOptions options)
         {

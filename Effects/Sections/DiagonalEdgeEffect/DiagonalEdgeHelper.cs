@@ -1,18 +1,22 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBBootstrapBuilder.csproj DiagonalEdgeHelper.cs create at 2026/04/16
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
+#region
+
 using System.Globalization;
+
+#endregion
 
 namespace DMBEffectBuilder
 {
     internal static class DiagonalEdgeHelper
     {
+        #region Static methods
+
         internal static string BuildClipPath(DiagonalEdge edge, DiagonalDirection direction, decimal tilt, int pointCount)
         {
             var points = new List<string>();
@@ -66,5 +70,7 @@ namespace DMBEffectBuilder
         {
             return $"{x.ToString("F1", CultureInfo.InvariantCulture)}% {y.ToString("F1", CultureInfo.InvariantCulture)}%";
         }
+
+        #endregion
     }
 }

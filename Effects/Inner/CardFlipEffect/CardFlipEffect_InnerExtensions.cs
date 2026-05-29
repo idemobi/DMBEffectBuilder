@@ -1,38 +1,42 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBEffectBuilder.csproj CardFlipEffect_InnerExtensions.cs create at 2026/05/06
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
+
+#region
 
 using DMBBootstrapBuilder;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+#endregion
+
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Provides the entry-point extension method to create a <see cref="CardFlipEffectBuilder"/>
-    /// from an <see cref="IHtmlHelper"/>.
+    ///     Provides the entry-point extension method to create a <see cref="CardFlipEffectBuilder" />
+    ///     from an <see cref="IHtmlHelper" />.
     /// </summary>
     [Documented]
     public static class CardFlipEffect_InnerExtensions
     {
+        #region Static methods
+
         /// <summary>
-        /// Creates a <see cref="CardFlipEffectBuilder"/> — a grid of cards that flip in 3D to reveal
-        /// a back face, triggered on hover or click.
+        ///     Creates a <see cref="CardFlipEffectBuilder" /> — a grid of cards that flip in 3D to reveal
+        ///     a back face, triggered on hover or click.
         /// </summary>
-        /// <param name="html">The current Razor <see cref="IHtmlHelper"/> instance.</param>
-        /// <returns>A new <see cref="CardFlipEffectBuilder"/> ready for configuration.</returns>
+        /// <param name="html">The current Razor <see cref="IHtmlHelper" /> instance.</param>
+        /// <returns>A new <see cref="CardFlipEffectBuilder" /> ready for configuration.</returns>
         /// <remarks>
-        /// <para>
-        /// <b>Use cases:</b> team member cards (photo front / bio back), feature cards (icon front /
-        /// description back), FAQ cards (question front / answer back).
-        /// </para>
-        /// <para>
-        /// <b>Example:</b>
-        /// <code>
+        ///     <para>
+        ///         <b>Use cases:</b> team member cards (photo front / bio back), feature cards (icon front /
+        ///         description back), FAQ cards (question front / answer back).
+        ///     </para>
+        ///     <para>
+        ///         <b>Example:</b>
+        ///         <code>
         /// @(Html.CardFlipBuilder()
         ///     .SetTrigger(CardFlipTrigger.Hover)
         ///     .SetCardHeight(260)
@@ -48,11 +52,13 @@ namespace DMBEffectBuilder
         ///             &lt;p&gt;Clean, well-tested code delivered in regular sprints.&lt;/p&gt;
         ///         &lt;/div&gt;))
         /// </code>
-        /// </para>
+        ///     </para>
         /// </remarks>
-        /// <seealso cref="CardFlipEffectBuilder"/>
+        /// <seealso cref="CardFlipEffectBuilder" />
         [Documented]
         public static CardFlipEffectBuilder CardFlipBuilder(this IHtmlHelper html)
             => new CardFlipEffectBuilder(html);
+
+        #endregion
     }
 }

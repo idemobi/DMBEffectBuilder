@@ -1,16 +1,14 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBBootstrapBuilder.csproj DiagonalEdgeEffectDebugHelper.cs create at 2026/04/23
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Provides debug helper hooks for the diagonal edge section effect.
+    ///     Provides debug helper hooks for the diagonal edge section effect.
     /// </summary>
     public static class DiagonalEdgeEffectDebugHelper
     {

@@ -1,18 +1,20 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBBootstrapBuilder.csproj CurveEdgeEffectDebugModel.cs create at 2026/04/23
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
+#region
+
 using DMBBootstrapBuilder;
+
+#endregion
 
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Provides debug panel values for the curve edge section effect.
+    ///     Provides debug panel values for the curve edge section effect.
     /// </summary>
     [DebugModel("Curve Edge", CodePattern = ".CurveEdgeEffect(CurveEdge.{0}, Curvature.{1}, {2}m)")]
     public sealed class CurveEdgeEffectDebugModel
@@ -20,42 +22,43 @@ namespace DMBEffectBuilder
         #region Instance fields and properties
 
         /// <summary>
-        /// Gets or sets the edge targeted by the section shape effect.
+        ///     Gets or sets the selectable curvatures values exposed by the debug panel.
         /// </summary>
-        [DebugProperty(Label = "Edge", HelpText = "Which edge(s) to curve.")]
-        [DebugPropertyTarget(DebugTarget.DataAttribute, "data-curve-edge")]
-        public string Edge { get; set; } = "Bottom";
+        [DebugProperty(Ignore = true)]
+        public IReadOnlyList<string> AvailableCurvatures { get; set; } = new[] { "Convex", "Concave" };
 
         /// <summary>
-        /// Gets or sets the selectable edges values exposed by the debug panel.
+        ///     Gets or sets the selectable edges values exposed by the debug panel.
         /// </summary>
         [DebugProperty(Ignore = true)]
         public IReadOnlyList<string> AvailableEdges { get; set; } = new[] { "Bottom", "Top", "Both" };
 
         /// <summary>
-        /// Gets or sets the curve direction used by the section edge effect.
+        ///     Gets or sets the curve direction used by the section edge effect.
         /// </summary>
         [DebugProperty(Label = "Curvature", HelpText = "Convex curves outward, Concave curves inward.")]
         [DebugPropertyTarget(DebugTarget.DataAttribute, "data-curve-curvature")]
         public string Curvature { get; set; } = "Convex";
 
         /// <summary>
-        /// Gets or sets the selectable curvatures values exposed by the debug panel.
+        ///     Gets or sets the edge targeted by the section shape effect.
         /// </summary>
-        [DebugProperty(Ignore = true)]
-        public IReadOnlyList<string> AvailableCurvatures { get; set; } = new[] { "Convex", "Concave" };
+        [DebugProperty(Label = "Edge", HelpText = "Which edge(s) to curve.")]
+        [DebugPropertyTarget(DebugTarget.DataAttribute, "data-curve-edge")]
+        public string Edge { get; set; } = "Bottom";
 
         /// <summary>
-        /// Gets or sets the tilt amount used by the section shape effect.
+        ///     Gets or sets the generated section identifier used by the debug panel.
+        /// </summary>
+        [DebugProperty(Ignore = true)]
+        public string SectionId { get; set; } = string.Empty;
+
+        /// <summary>
+        ///     Gets or sets the tilt amount used by the section shape effect.
         /// </summary>
         [DebugProperty(Label = "Tilt (%)", HelpText = "Depth of the curve in percent (1–30).", Min = "1", Max = "30", Step = "1")]
         [DebugPropertyTarget(DebugTarget.DataAttribute, "data-curve-tilt")]
         public decimal Tilt { get; set; } = 8m;
-
-        /// <summary>
-        /// Gets or sets the generated section identifier used by the debug panel.
-        /// </summary>
-        [DebugProperty(Ignore = true)] public string SectionId { get; set; } = string.Empty;
 
         #endregion
     }

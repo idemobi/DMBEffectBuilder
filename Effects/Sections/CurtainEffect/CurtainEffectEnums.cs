@@ -1,16 +1,14 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBBootstrapBuilder.csproj CurtainEffectEnums.cs create at 2026/04/17
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Controls where the two curtain panels stop.
+    ///     Controls where the two curtain panels stop.
     /// </summary>
     public enum CurtainStop
     {

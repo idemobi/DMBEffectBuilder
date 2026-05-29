@@ -1,58 +1,62 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBEffectBuilder.csproj StickyScrollEffect_InnerExtensions.cs create at 2026/05/06
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
+
+#region
 
 using DMBBootstrapBuilder;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+#endregion
+
 namespace DMBEffectBuilder
 {
     /// <summary>
-    /// Provides the entry-point extension method to create a <see cref="StickyScrollEffectBuilder"/>
-    /// from an <see cref="IHtmlHelper"/>.
+    ///     Provides the entry-point extension method to create a <see cref="StickyScrollEffectBuilder" />
+    ///     from an <see cref="IHtmlHelper" />.
     /// </summary>
     [Documented]
     public static class StickyScrollEffect_InnerExtensions
     {
+        #region Static methods
+
         /// <summary>
-        /// Creates a <see cref="StickyScrollEffectBuilder"/> — a two-column sticky scroll layout where the
-        /// left visual panel locks in place while numbered steps scroll on the right, sliding to the matching
-        /// visual on each step change.
+        ///     Creates a <see cref="StickyScrollEffectBuilder" /> — a two-column sticky scroll layout where the
+        ///     left visual panel locks in place while numbered steps scroll on the right, sliding to the matching
+        ///     visual on each step change.
         /// </summary>
-        /// <param name="html">The current Razor <see cref="IHtmlHelper"/> instance.</param>
-        /// <returns>A new <see cref="StickyScrollEffectBuilder"/> ready for configuration.</returns>
+        /// <param name="html">The current Razor <see cref="IHtmlHelper" /> instance.</param>
+        /// <returns>A new <see cref="StickyScrollEffectBuilder" /> ready for configuration.</returns>
         /// <remarks>
-        /// <para>
-        /// <b>Use cases:</b> product feature walkthroughs, onboarding sequences, step-by-step processes, and any
-        /// context where each text step maps to a distinct visual — product tours, how-it-works sections,
-        /// interactive documentation.
-        /// </para>
-        /// <para>
-        /// <b>How it works:</b> renders a two-column CSS grid. The left column uses <c>position: sticky</c> and
-        /// <c>overflow: hidden</c> to lock the visual panel in place; all visuals are stacked with
-        /// <c>position: absolute</c> and moved off-screen via <c>transform: translateY</c>. An
-        /// <c>IntersectionObserver</c> watches each right-side step and, when it enters the central zone of
-        /// the viewport, slides the matching visual into place with a cubic-bezier transition.
-        /// </para>
-        /// <para>
-        /// <b>Combinations:</b> the visual slot accepts any <c>IHtmlContent</c> value — images, gradient divs,
-        /// code blocks, or rendered helpers. Use the <c>@&lt;div&gt;...&lt;/div&gt;</c> Razor template syntax
-        /// for inline markup. Wrap the builder in a <c>container-lg</c> div or a full-width
-        /// <c>SectionBuilder</c> for a hero-style section.
-        /// </para>
-        /// <para>
-        /// <b>Tips:</b> 3–6 steps give the best balance. Call <see cref="StickyScrollEffectBuilder.SetStickyOffset"/>
-        /// to match your fixed navbar height; call <see cref="StickyScrollEffectBuilder.SetItemMinHeight"/> to
-        /// ensure each step has enough scroll space to trigger cleanly.
-        /// </para>
-        /// <para>
-        /// <b>Example:</b>
-        /// <code>
+        ///     <para>
+        ///         <b>Use cases:</b> product feature walkthroughs, onboarding sequences, step-by-step processes, and any
+        ///         context where each text step maps to a distinct visual — product tours, how-it-works sections,
+        ///         interactive documentation.
+        ///     </para>
+        ///     <para>
+        ///         <b>How it works:</b> renders a two-column CSS grid. The left column uses <c>position: sticky</c> and
+        ///         <c>overflow: hidden</c> to lock the visual panel in place; all visuals are stacked with
+        ///         <c>position: absolute</c> and moved off-screen via <c>transform: translateY</c>. An
+        ///         <c>IntersectionObserver</c> watches each right-side step and, when it enters the central zone of
+        ///         the viewport, slides the matching visual into place with a cubic-bezier transition.
+        ///     </para>
+        ///     <para>
+        ///         <b>Combinations:</b> the visual slot accepts any <c>IHtmlContent</c> value — images, gradient divs,
+        ///         code blocks, or rendered helpers. Use the <c>@&lt;div&gt;...&lt;/div&gt;</c> Razor template syntax
+        ///         for inline markup. Wrap the builder in a <c>container-lg</c> div or a full-width
+        ///         <c>SectionBuilder</c> for a hero-style section.
+        ///     </para>
+        ///     <para>
+        ///         <b>Tips:</b> 3–6 steps give the best balance. Call <see cref="StickyScrollEffectBuilder.SetStickyOffset" />
+        ///         to match your fixed navbar height; call <see cref="StickyScrollEffectBuilder.SetItemMinHeight" /> to
+        ///         ensure each step has enough scroll space to trigger cleanly.
+        ///     </para>
+        ///     <para>
+        ///         <b>Example:</b>
+        ///         <code>
         /// @(Html.StickyScrollBuilder()
         ///     .SetVisualHeight(420)
         ///     .SetStickyOffset(80)
@@ -70,15 +74,17 @@ namespace DMBEffectBuilder
         ///         "Renames and restructures across every file that references the symbol.",
         ///         "bi-arrow-left-right"))
         /// </code>
-        /// </para>
-        /// <para>
-        /// <b>Performance:</b> powered by a single <c>IntersectionObserver</c> — no scroll-event polling.
-        /// Scales linearly with step count; keep heavy visuals (videos, canvases) to a minimum.
-        /// </para>
+        ///     </para>
+        ///     <para>
+        ///         <b>Performance:</b> powered by a single <c>IntersectionObserver</c> — no scroll-event polling.
+        ///         Scales linearly with step count; keep heavy visuals (videos, canvases) to a minimum.
+        ///     </para>
         /// </remarks>
-        /// <seealso cref="StickyScrollEffectBuilder"/>
+        /// <seealso cref="StickyScrollEffectBuilder" />
         [Documented]
         public static StickyScrollEffectBuilder StickyScrollBuilder(this IHtmlHelper html)
             => new StickyScrollEffectBuilder(html);
+
+        #endregion
     }
 }
