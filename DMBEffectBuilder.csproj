@@ -2,7 +2,7 @@
     <PropertyGroup>
         <RootNamespace>DMBEffectBuilder</RootNamespace>
         <Title>DMBEffectBuilder</Title>
-        <PackageTags>idemobi Effect Builder</PackageTags>
+        <PackageTags>idemobi DMB PageBuilder Bootstrap Effects Animations Images CSS Hover</PackageTags>
         <Description>Visual effect extension package for BootstrapBuilder images, sections, hover states, transforms, and animations.</Description>
         <PackageReleaseNotes>note</PackageReleaseNotes>
         <PackageIcon>DMBEffectBuilder.png</PackageIcon>
