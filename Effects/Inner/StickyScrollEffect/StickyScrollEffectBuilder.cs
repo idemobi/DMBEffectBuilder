@@ -21,7 +21,7 @@ namespace DMBEffectBuilder
     /// <summary>
     ///     Fluent builder for a sticky-scroll layout: the left panel stays fixed while numbered steps scroll on the right,
     ///     and the visual slides to match the active step on each change.
-    ///     Use <see cref="AddStep(Func{dynamic,IHtmlContent},string,string,string)" /> in Razor views or
+    ///     Use <see cref="AddStep(Func{TResult},string,string,string)" /> in Razor views or
     ///     <see cref="AddStep(IHtmlContent,string,string,string)" /> in code, tune sizing with
     ///     <see cref="SetVisualHeight" /> and <see cref="SetStickyOffset" />.
     /// </summary>

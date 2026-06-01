@@ -20,7 +20,7 @@ namespace DMBEffectBuilder
     /// <summary>
     ///     Fluent builder for a horizontal-scroll section: the panel sticks in place while the user
     ///     scrolls vertically, and the inner track translates horizontally in proportion to scroll progress.
-    ///     Add slides with <see cref="AddSlide(Func{dynamic,IHtmlContent})" />, set the panel height with
+    ///     Add slides with <see cref="AddSlide(Func{TResult})" />, set the panel height with
     ///     <see cref="SetHeight" /> and optionally constrain item width with <see cref="SetItemWidth" />.
     /// </summary>
     /// <remarks>

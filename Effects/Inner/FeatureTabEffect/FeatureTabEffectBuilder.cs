@@ -21,7 +21,7 @@ namespace DMBEffectBuilder
     /// <summary>
     ///     Fluent builder for a feature-tab layout: a list of clickable titles on the left, the active item
     ///     expands to reveal its description, and the right panel cross-fades to the matching visual.
-    ///     Add items with <see cref="AddItem(Func{dynamic,IHtmlContent},string,string)" />, tune sizing with
+    ///     Add items with <see cref="AddItem(Func{TResult},string,string)" />, tune sizing with
     ///     <see cref="SetPanelHeight" /> and the transition with <see cref="SetTransitionDuration" />.
     /// </summary>
     /// <remarks>

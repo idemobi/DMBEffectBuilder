@@ -21,7 +21,7 @@ namespace DMBEffectBuilder
     /// <summary>
     ///     Fluent builder for a card-flip grid: each card has a front face and a back face revealed by a
     ///     3D rotation, triggered on hover or click.
-    ///     Add cards with <see cref="AddCard(Func{dynamic,IHtmlContent},Func{dynamic,IHtmlContent})" />,
+    ///     Add cards with <see cref="AddCard(Func{TResult},Func{dynamic,IHtmlContent})" />,
     ///     set the trigger with <see cref="SetTrigger" />, and tune sizing with <see cref="SetCardHeight" />
     ///     and <see cref="SetColumns" />.
     /// </summary>

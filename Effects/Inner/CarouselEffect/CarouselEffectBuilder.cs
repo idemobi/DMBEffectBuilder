@@ -21,7 +21,7 @@ namespace DMBEffectBuilder
     /// <summary>
     ///     Fluent builder for a carousel: slides cycle automatically or on user interaction, with
     ///     optional arrow buttons and dot indicators.
-    ///     Add slides with <see cref="AddSlide(Func{dynamic,IHtmlContent})" />, enable auto-play with
+    ///     Add slides with <see cref="AddSlide(Func{TResult})" />, enable auto-play with
     ///     <see cref="SetAutoPlay" />, and choose the animation with <see cref="SetTransition" />.
     /// </summary>
     /// <remarks>

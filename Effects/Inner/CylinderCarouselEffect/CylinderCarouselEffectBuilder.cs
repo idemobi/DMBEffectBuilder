@@ -20,7 +20,7 @@ namespace DMBEffectBuilder
     /// <summary>
     ///     Fluent builder for a 3D cylinder carousel: cards are arranged on a rotating cylinder using CSS
     ///     perspective and 3D transforms. The shape, filter, and hover behaviour are all configurable.
-    ///     Add cards with <see cref="AddCard(Func{dynamic,IHtmlContent})" /> or <see cref="AddCard(IHtmlContent)" />,
+    ///     Add cards with <see cref="AddCard(Func{TResult})" /> or <see cref="AddCard(IHtmlContent)" />,
     ///     choose an orientation with <see cref="SetShape" />, and optionally apply a
     ///     <see cref="SetFilter">filter</see> or enable <see cref="SetHoverClearFilter">hover interactions</see>.
     /// </summary>

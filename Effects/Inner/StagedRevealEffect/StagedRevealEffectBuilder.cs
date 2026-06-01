@@ -23,7 +23,7 @@ namespace DMBEffectBuilder
     ///     Fluent builder that renders a staged-reveal container: one or more image/content slots
     ///     slide in from the edges of a CSS grid, framing a configurable center zone.
     ///     Attach slots with <see cref="AddSlot(StagedRevealEffectDirection, StagedRevealEffectItem[])" />,
-    ///     set the center with <see cref="SetCenterContent(Func{dynamic, IHtmlContent})" />,
+    ///     set the center with <see cref="SetCenterContent(Func{TResult})" />,
     ///     and tune timing with <see cref="SetSpeed" />.
     /// </summary>
     [Documented]
