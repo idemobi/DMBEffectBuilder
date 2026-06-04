@@ -1,0 +1,37 @@
+@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@model DMBEffectBuilderLabs.Models.CategoryCardViewModel
+
+@using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+{
+    @using (Html.BlockBuilder().AddClass("rounded-3 overflow-hidden shadow-sm position-relative").Begin())
+    {
+        @using (Html.RowBuilder().SetGap(Gap.G0).Begin())
+        {
+            @foreach (var preview in Model.Previews)
+            {
+                @using (Html.ColBuilder().SetCol(ColSize.Col4).Begin())
+                {
+                    @using (preview(Html.SectionBuilder().SetHeight(160, UnitSize.px)).Begin()) { }
+                }
+            }
+        }
+        @using (Html.BlockBuilder().AddClass("position-absolute bottom-0 start-0 end-0 d-flex justify-content-between align-items-center px-3 py-2").Begin())
+        {
+            @using (Html.PB_Span().AddClass("text-white fw-semibold small").Begin())
+            {
+                @using (Html.PB_Span().AddClass("bi @Model.Icon me-2").Begin()) { }
+                @Model.Title
+            }
+        }
+    }
+    @using (Html.BlockBuilder().AddClass("pt-2 px-1 d-flex justify-content-between align-items-end").Begin())
+    {
+        @using (Html.BlockBuilder().Begin())
+        {
+            @using (Html.PB_P().AddClass("small mb-1").Begin()) { @Model.Description }
+            @using (Html.PB_P().AddClass("small text-muted mb-0 fst-italic").Begin()) { @Model.Tagline }
+        }
+        @Html.Button(ActionItemFactory.AspRoute("SectionEffect", Model.RouteAction).SetTitle("See all").SetIcon(IconStruct.Bootstrap("bi-arrow-right")).SetVariant(VariantStyle.Primary)).Render()
+    }
+}

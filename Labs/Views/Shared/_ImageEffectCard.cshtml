@@ -1,0 +1,44 @@
+@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@model DMBEffectBuilderLabs.Models.ImageEffectCardViewModel
+
+@using (Html.ColBuilder().SetCol(ColSize.Col6).SetCol(Model.ColSize, ResponsiveBreakpoint.Md).Begin())
+{
+    @using (Html.BlockBuilder().AsCardPreview().Begin())
+    {
+        @if (Model.Centered)
+        {
+            @using (Html.BlockBuilder().AddClass("d-flex align-items-center justify-content-center bg-light").SetStyle("height", "180px").Begin())
+            {
+                @Model.ImageContent
+            }
+        }
+        else
+        {
+            @Model.ImageContent
+        }
+        @using (Html.BlockBuilder().AddClass("position-absolute bottom-0 start-0 end-0 d-flex justify-content-between align-items-center px-3 py-2").SetStyle("background", "linear-gradient(transparent,rgba(0,0,0,.72))").Begin())
+        {
+            @using (Html.PB_Span().AsCardLabel().Begin())
+            {
+                @using (Html.PB_Span().AddClass($"bi {Model.Icon} me-1").Begin()) { }
+                @Model.Title
+            }
+            @if (!string.IsNullOrEmpty(Model.DocUrl))
+            {
+                @Html.Button(ActionItemFactory.Url(string.Empty, Model.DocUrl, IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Light)).Render()
+            }
+        }
+    }
+    @using (Html.BlockBuilder().AddClass("pt-2 px-1").Begin())
+    {
+        @using (Html.PB_P().AsCardDescription().Begin())
+        {
+            @Model.Description
+        }
+        @using (Html.PB_P().AsEffectMeta().Begin())
+        {
+            @Model.Usage
+        }
+    }
+}

@@ -1,0 +1,99 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@using DMBEffectBuilderLabs.Models
+@{
+    Layout = "_Layout";
+    string DocUrl(string c) => $"/Documentation/Show?packageId=DMBEffectBuilder&groupName=NuGet&namespaceName=DMBEffectBuilder&objectName={c}";
+}
+
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Shape & Edge", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Effects that modify the geometry or borders of a section
+            }
+            @Html.Button(ActionItemFactory.Url(title: "Back to Catalog", url: "/SectionEffect/Index", icon: IconStruct.Bootstrap(value: "bi-arrow-left")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+}
+
+@using (Html.RowBuilder().SetGap(Gap.G4).SetPadding(SpacingSide.X, SpacingSize.Three).SetPadding(SpacingSide.Y, SpacingSize.Four).Begin())
+{
+    @* ── Wave ── *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Wave", Icon = "bi-water",
+        Description = "SVG wave mask applied at the top or bottom edge of the section.",
+        Usage = "Smooth transitions between sections, hero footers.",
+        EffectAction = s => s.AnimatedGradientEffect(colorStart: "#9b5de5", colorEnd: "#f15bb5", angle: 90m, durationSeconds: 5m).WaveEffect(edge: WaveEdge.Bottom, amplitude: 70),
+        DocUrl = DocUrl(nameof(WaveEffect_SectionExtensions)),
+        ColSize = ColSize.Col6,
+        HeightPx = 220u
+    })
+
+    @* ── Diagonal Edge — Bottom ── *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Diagonal Edge — Bottom", Icon = "bi-scissors",
+        Description = "Diagonal clip-path cut at the bottom edge of the section.",
+        Usage = "Dynamic section separators, landing page layouts.",
+        EffectAction = s => s.AnimatedGradientEffect(colorStart: "#f72585", colorEnd: "#7209b7", angle: 45m, durationSeconds: 4m).SetDiagonalEdge(DiagonalEdge.Bottom, DiagonalDirection.LeftToRight),
+        DocUrl = DocUrl(nameof(DiagonalEdge_SectionExtensions)),
+        ColSize = ColSize.Col6,
+        HeightPx = 220u
+    })
+
+    @* ── Diagonal Edge — Top ── *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Diagonal Edge — Top", Icon = "bi-scissors",
+        Description = "Diagonal clip-path cut at the top edge of the section.",
+        Usage = "Flowing page entrances, feature block headers.",
+        EffectAction = s => s.AnimatedGradientEffect(colorStart: "#00f5d4", colorEnd: "#00bbf9", angle: 135m, durationSeconds: 5m).SetDiagonalEdge(DiagonalEdge.Top, DiagonalDirection.RightToLeft, 8),
+        DocUrl = DocUrl(nameof(DiagonalEdge_SectionExtensions)),
+        ColSize = ColSize.Col6,
+        HeightPx = 220u
+    })
+
+    @* ── Diagonal Edge — Both ── *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Diagonal Edge — Both", Icon = "bi-scissors",
+        Description = "Diagonal clip-path cuts applied to both the top and bottom edges.",
+        Usage = "Bold mid-page sections, parallelogram-style blocks.",
+        EffectAction = s => s.AnimatedGradientEffect(colorStart: "#fee440", colorEnd: "#f15bb5", angle: 90m, durationSeconds: 6m).SetDiagonalEdge(DiagonalEdge.Both, DiagonalDirection.LeftToRight, 40m),
+        DocUrl = DocUrl(nameof(DiagonalEdge_SectionExtensions)),
+        ColSize = ColSize.Col6,
+        HeightPx = 220u
+    })
+
+    @* ── Curve Edge — Convex ── *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Curve Edge — Convex", Icon = "bi-circle-half",
+        Description = "Smooth outward curve applied to the bottom edge.",
+        Usage = "Elegant section transitions, modern container shapes.",
+        EffectAction = s => s.AnimatedGradientEffect(colorStart: "#3a86ff", colorEnd: "#8338ec", angle: 180m, durationSeconds: 5m).CurveEdgeEffect(CurveEdge.Bottom, Curvature.Convex, 15m),
+        DocUrl = DocUrl(nameof(CurveEdge_SectionExtensions)),
+        ColSize = ColSize.Col6,
+        HeightPx = 220u
+    })
+
+    @* ── Curve Edge — Concave ── *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Curve Edge — Concave", Icon = "bi-circle-half",
+        Description = "Smooth inward curve applied to the top edge.",
+        Usage = "Creative header entries, fluid layout separators.",
+        EffectAction = s => s.AnimatedGradientEffect(colorStart: "#ff006e", colorEnd: "#fb5607", angle: 90m, durationSeconds: 4m).CurveEdgeEffect(CurveEdge.Top, Curvature.Concave, 15m),
+        DocUrl = DocUrl(nameof(CurveEdge_SectionExtensions)),
+        ColSize = ColSize.Col6,
+        HeightPx = 220u
+    })
+}

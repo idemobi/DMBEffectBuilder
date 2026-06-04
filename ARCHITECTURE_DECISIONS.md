@@ -26,7 +26,7 @@ Generated CSS classes, animation names, and wrapper structures must remain predi
 
 ### Keep effect families isolated
 
-Image effects belong under `Effects/Images`. Section-level helpers belong under `Effects/Sections`.
+Image effects belong under `Source/Effects/Images`. Section-level helpers belong under `Source/Effects/Sections`.
 
 ### Respect accessibility and motion preferences
 

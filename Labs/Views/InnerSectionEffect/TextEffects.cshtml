@@ -1,0 +1,186 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@using DMBEffectBuilderLabs.Helpers
+@using DMBEffectBuilderLabs.Models
+@{
+    Layout = "_Layout";
+    string DocUrl(string c) => $"/Documentation/Show?packageId=DMBEffectBuilder&groupName=NuGet&namespaceName=DMBEffectBuilder&objectName={c}";
+}
+
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Title & Text Effects", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Effects applied directly to section titles and text elements.
+            }
+            @Html.Button(ActionItemFactory.Url(title: "Back to Catalog", url: "/InnerSectionEffect/Index", icon: IconStruct.Bootstrap(value: "bi-arrow-left")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+}
+
+@* ── Color & Style ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Color & Style", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:Static effects that alter the visual style of the text — gradient fill, rotation, outline stroke or horizontal split.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(SectionInnerEffectTitle)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsSectionContent().Begin())
+{
+    @using (Html.RowBuilder().SetGap(Gap.G4).Begin())
+    {
+        @await Html.InnerTitleEffectCardAsync(new InnerTitleEffectCardViewModel {
+            Label = "Gradient Title",
+            Usage = "Gradient",
+            Description = "Linear color gradient across the text using CSS background-clip. Configurable colors and angle.",
+            HeightPx = 200,
+            TitleConfig = t => t.SetGradientEffect(colorStart: "#ff6ecf", colorEnd: "#efff5c", angle: 90m)
+        })
+        @await Html.InnerTitleEffectCardAsync(new InnerTitleEffectCardViewModel {
+            Label = "Twisted Title",
+            Usage = "Twisted",
+            Description = "Rotates the title by a configurable angle — playful slant, combinable with other effects.",
+            HeightPx = 200,
+            TitleConfig = t => t.SetTwistedEffect(angle: -3m)
+        })
+        @await Html.InnerTitleEffectCardAsync(new InnerTitleEffectCardViewModel {
+            Label = "Outline Effect",
+            Usage = "Outline",
+            Description = "Displays only the character outlines with an optional animated stroke path.",
+            HeightPx = 200,
+            TitleConfig = t => t.SetOutlineEffect(color: "var(--bs-primary, #0d6efd)", widthPx: 1.5m, speedSeconds: 2m)
+        })
+        @await Html.InnerTitleEffectCardAsync(new InnerTitleEffectCardViewModel {
+            Label = "SPLIT",
+            Usage = "Split Color",
+            Description = "Cuts the text horizontally — top and bottom halves can carry different colors.",
+            HeightPx = 200,
+            TitleConfig = t => t.SetSplitColorEffect(bottomColor: "#f15bb5")
+        })
+    }
+}
+
+@* ── Entrance Animations ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Entrance Animations", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:One-shot animations that play when the title first appears — each reveals the text in a distinct way.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(SectionInnerEffectTitle)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsSectionContent().SetAttribute("id", "entrance-effects-grid").Begin())
+{
+    @using (Html.RowBuilder().SetGap(Gap.G4).Begin())
+    {
+        @await Html.InnerTitleEffectCardAsync(new InnerTitleEffectCardViewModel {
+            Label = "Typewriter Effect",
+            Usage = "Typewriter",
+            Description = "Characters revealed one by one with a blinking cursor. Duration is configurable.",
+            HeightPx = 200,
+            TitleConfig = t => t.SetTypewriterEffect(durationSeconds: 2m)
+        })
+        @await Html.InnerTitleEffectCardAsync(new InnerTitleEffectCardViewModel {
+            Label = "Letter Collapse",
+            Usage = "Collapse",
+            Description = "Letters start widely spaced and collapse into their final position.",
+            HeightPx = 200,
+            TitleConfig = t => t.SetLetterCollapseEffect(durationSeconds: 1m)
+        })
+        @await Html.InnerTitleEffectCardAsync(new InnerTitleEffectCardViewModel {
+            Label = "BOOM",
+            Usage = "Stamp",
+            Description = "The title slams onto the screen like a physical stamp with a scale-down impact.",
+            HeightPx = 200,
+            TitleConfig = t => t.SetStampEffect(durationSeconds: 0.6m)
+        })
+        @await Html.InnerTitleEffectCardAsync(new InnerTitleEffectCardViewModel {
+            Label = "Slide Up",
+            Usage = "Slide Up",
+            Description = "Letters slide up into position from an invisible baseline with a staggered delay.",
+            HeightPx = 200,
+            TitleConfig = t => t.SetSlideUpEffect(durationSeconds: 0.6m)
+        })
+        @await Html.InnerTitleEffectCardAsync(new InnerTitleEffectCardViewModel {
+            Label = "Coming into Focus",
+            Usage = "Blur Reveal",
+            Description = "The title starts blurred and slowly sharpens into focus. Elegant and subtle.",
+            HeightPx = 200,
+            TitleConfig = t => t.SetBlurRevealEffect(startBlurPx: 12m, durationSeconds: 1.5m)
+        })
+        @await Html.InnerTitleEffectCardAsync(new InnerTitleEffectCardViewModel {
+            Label = "Scramble Effect",
+            Usage = "Scramble",
+            Description = "Random characters decode into the final text — high-tech decoding reveal.",
+            HeightPx = 200,
+            TitleConfig = t => t.SetScrambleEffect(durationSeconds: 2m)
+        })
+    }
+}
+
+@* ── Looping Animations ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Looping Animations", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:Continuous animations that run indefinitely — draw attention and bring energy to the page.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(SectionInnerEffectTitle)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsSectionContent().Begin())
+{
+    @using (Html.RowBuilder().SetGap(Gap.G4).Begin())
+    {
+        @await Html.InnerTitleEffectCardAsync(new InnerTitleEffectCardViewModel {
+            Label = "Wave Effect",
+            Usage = "Wave",
+            Description = "Each letter bobs in a cascading wave — fluid and rhythmic.",
+            HeightPx = 200,
+            TitleConfig = t => t.SetWaveEffect(durationSeconds: 1m)
+        })
+        @await Html.InnerTitleEffectCardAsync(new InnerTitleEffectCardViewModel {
+            Label = "Neon Vibes",
+            Usage = "Neon",
+            Description = "Pulsing neon glow with configurable color and speed. Retro-cyber aesthetic.",
+            HeightPx = 200,
+            TitleConfig = t => t.SetNeonGlowEffect(color: "#ff6ecf", speedSeconds: 1.8m)
+        })
+        @await Html.InnerTitleEffectCardAsync(new InnerTitleEffectCardViewModel {
+            Label = "Glitch Effect",
+            Usage = "Glitch",
+            Description = "Digital distortion with two-tone color shifts and rapid lateral movement.",
+            HeightPx = 200,
+            TitleConfig = t => t.SetGlitchTextEffect(color1: "#ff005c", color2: "#0095ff", speedSeconds: 2.5m)
+        })
+        @await Html.InnerTitleEffectCardAsync(new InnerTitleEffectCardViewModel {
+            Label = "Don't touch me",
+            Usage = "Shake",
+            Description = "Subtle or intense shaking animation to draw immediate attention.",
+            HeightPx = 200,
+            TitleConfig = t => t.SetShakeEffect(speedSeconds: 4m)
+        })
+    }
+}

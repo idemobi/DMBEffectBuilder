@@ -1,0 +1,372 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.SectionBuilder().SetHeight(100, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Inner Section — Catalog", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Browse all available inner section effects by category
+            }
+        }
+    }
+}
+
+@using (Html.RowBuilder().SetGap(Gap.G4).SetPadding(SpacingSide.X, SpacingSize.Three).SetPadding(SpacingSide.Y, SpacingSize.Four).Begin())
+{
+    @* ── Title & Text Effects ── *@
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+    {
+        @using (Html.BlockBuilder().AsCardPreview().Begin())
+        {
+            @using (Html.RowBuilder().SetGap(Gap.G0).Begin())
+            {
+                @using (Html.ColBuilder().SetCol(ColSize.Col4).Begin())
+                {
+                    @using (Html.SectionInnerEffectBuilder().SetOverlay().SectionInnerEffectTitle().SetTitle("Gradient").SetGradientEffect("#ff6ecf", "#efff5c", 90m).Build().Begin())
+                    {
+                        @using (Html.SectionBuilder().BootstrapBackgroundEffect(VariantStyle.Dark, true).SetHeight(160, UnitSize.px).Begin()) { }
+                    }
+                }
+                @using (Html.ColBuilder().SetCol(ColSize.Col4).Begin())
+                {
+                    @using (Html.SectionInnerEffectBuilder().SetOverlay().SectionInnerEffectTitle().SetTitle("Wave").SetWaveEffect(1m).SetGradientEffect("#00f5d4", "#9b5de5", 90m).Build().Begin())
+                    {
+                        @using (Html.SectionBuilder().AnimatedGradientEffect("#1a1a2e", "#16213e", 45m, 6m).SetHeight(160, UnitSize.px).Begin()) { }
+                    }
+                }
+                @using (Html.ColBuilder().SetCol(ColSize.Col4).Begin())
+                {
+                    @using (Html.SectionInnerEffectBuilder().SetOverlay().SectionInnerEffectTitle().SetTitle("Scramble").SetScrambleEffect(2m).SetGradientEffect("#f72585", "#4cc9f0", 135m).Build().Begin())
+                    {
+                        @using (Html.SectionBuilder().AnimatedGradientEffect("#0d0d0d", "#1a1a2e", 90m, 6m).SetHeight(160, UnitSize.px).Begin()) { }
+                    }
+                }
+            }
+            @using (Html.BlockBuilder().AsCardOverlayFooter().Begin())
+            {
+                @using (Html.PB_Span().AsCardLabel().Begin())
+                {
+                    @using (Html.PB_Span().AddClass("bi bi-fonts me-2").Begin()) { }
+                    @:Title & Text Effects
+                }
+            }
+        }
+        @using (Html.BlockBuilder().AsCardFooterRow().Begin())
+        {
+            @using (Html.BlockBuilder().Begin())
+            {
+                @using (Html.PB_P().AsCardDescription().Begin())
+                {
+                    @:Animated titles applied on top of any section — gradient, typewriter, wave, scramble, glitch and more.
+                }
+                @using (Html.PB_P().AsEffectMeta().Begin())
+                {
+                    @:10 effects · Text animation
+                }
+            }
+            @Html.Button(ActionItemFactory.AspRoute("InnerSectionEffect", "TextEffects").SetTitle("See all").SetIcon(IconStruct.Bootstrap("bi-arrow-right")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+
+    @* ── Video Section ── *@
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+    {
+        @using (Html.BlockBuilder().AsCardPreview().Begin())
+        {
+            var vPrev = Html.VideoSectionBuilder("/videos/test/mushroom.mp4")
+                .SetHeight(160, UnitSize.px)
+                .SetOverlay()
+                .VideoSectionHeader()
+                    .SetTitle("VIDEO")
+                    .SetGlitchTextEffect("#ff005c", "#0095ff", 3m)
+                    .SetGradientEffect("#0f0c29", "#302b63", 135m)
+                    .Build();
+            @using (vPrev.Begin()) { }
+            @using (Html.BlockBuilder().AsCardOverlayFooter(20).Begin())
+            {
+                @using (Html.PB_Span().AsCardLabel().Begin())
+                {
+                    @using (Html.PB_Span().AddClass("bi bi-camera-video me-2").Begin()) { }
+                    @:Video Section
+                }
+            }
+        }
+        @using (Html.BlockBuilder().AsCardFooterRow().Begin())
+        {
+            @using (Html.BlockBuilder().Begin())
+            {
+                @using (Html.PB_P().AsCardDescription().Begin())
+                {
+                    @:Full-width video backgrounds with animated titles, overlays and call-to-action buttons.
+                }
+                @using (Html.PB_P().AsEffectMeta().Begin())
+                {
+                    @:1 effect · Video background
+                }
+            }
+            @Html.Button(ActionItemFactory.AspRoute("InnerSectionEffect", "Video").SetTitle("See all").SetIcon(IconStruct.Bootstrap("bi-arrow-right")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+
+    @* ── Content Navigation ── *@
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+    {
+        @using (Html.BlockBuilder().AsCardPreview().Begin())
+        {
+            @using (Html.FlexBlockBuilder().SetFlexColumn().SetStyle("height", "160px").SetStyle("background", "#0f172a").Begin())
+            {
+                @using (Html.BlockBuilder().AsMockupTabBar().Begin())
+                {
+                    @using (Html.BlockBuilder().AsActivePill().SetStyle("background", "#3b82f6").Begin())
+                    {
+                        @:Feature Tab
+                    }
+                    @using (Html.BlockBuilder().AsInactivePill().SetStyle("background", "rgba(255,255,255,.12)").SetStyle("color", "rgba(255,255,255,.5)").Begin())
+                    {
+                        @:Panel Card
+                    }
+                    @using (Html.BlockBuilder().AsInactivePill().SetStyle("background", "rgba(255,255,255,.12)").SetStyle("color", "rgba(255,255,255,.5)").Begin())
+                    {
+                        @:Timeline
+                    }
+                }
+                @using (Html.BlockBuilder().AsMockupPanel().SetStyle("background", "linear-gradient(135deg,#667eea,#764ba2)").Begin())
+                {
+                    @using (Html.BlockBuilder().AsMockupCircle().SetStyle("width", "44px").SetStyle("height", "44px").SetStyle("background", "rgba(255,255,255,.2)").Begin())
+                    {
+                        @using (Html.PB_Span().AddClass("bi bi-search text-white fs-5").Begin()) { }
+                    }
+                    @using (Html.BlockBuilder().Begin())
+                    {
+                        @using (Html.BlockBuilder().AsMockupTitle().Begin())
+                        {
+                            @:Discovery
+                        }
+                        @using (Html.BlockBuilder().AsSmallBlock().SetStyle("color", "rgba(255,255,255,.7)").Begin())
+                        {
+                            @:Goals and constraints.
+                        }
+                    }
+                }
+            }
+            @using (Html.BlockBuilder().AsCardOverlayFooter().Begin())
+            {
+                @using (Html.PB_Span().AsCardLabel().Begin())
+                {
+                    @using (Html.PB_Span().AddClass("bi bi-hand-index me-2").Begin()) { }
+                    @:Content Navigation
+                }
+            }
+        }
+        @using (Html.BlockBuilder().AsCardFooterRow().Begin())
+        {
+            @using (Html.BlockBuilder().Begin())
+            {
+                @using (Html.PB_P().AsCardDescription().Begin())
+                {
+                    @:Click-driven content switching — Feature Tab, Panel Card and Timeline.
+                }
+                @using (Html.PB_P().AsEffectMeta().Begin())
+                {
+                    @:3 effects · Interactive navigation
+                }
+            }
+            @Html.Button(ActionItemFactory.AspRoute("InnerSectionEffect", "Navigation").SetTitle("See all").SetIcon(IconStruct.Bootstrap("bi-arrow-right")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+
+    @* ── Scroll ── *@
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+    {
+        @using (Html.BlockBuilder().AsCardPreview().Begin())
+        {
+            @using (Html.BlockBuilder().AsMockupDarkStage().SetStyle("height", "160px").SetStyle("background", "#0f172a").Begin())
+            {
+                @using (Html.BlockBuilder().AsMockupLayerBack().SetStyle("top", "96px").SetStyle("left", "10%").SetStyle("right", "10%").SetStyle("height", "72px").SetStyle("background", "linear-gradient(135deg,#4facfe,#00f2fe)").Begin()) { }
+                @using (Html.BlockBuilder().AsMockupLayerMid().SetStyle("top", "56px").SetStyle("left", "5%").SetStyle("right", "5%").SetStyle("height", "72px").SetStyle("background", "linear-gradient(135deg,#f093fb,#f5576c)").Begin())
+                {
+                    @using (Html.PB_Span().AddClass("bi bi-vector-pen text-white fs-5").Begin()) { }
+                    @using (Html.PB_Span().AsWhiteLabel().Begin())
+                    {
+                        @:Design
+                    }
+                }
+                @using (Html.BlockBuilder().AsMockupLayerTop().SetStyle("top", "16px").SetStyle("height", "72px").SetStyle("background", "linear-gradient(135deg,#667eea,#764ba2)").Begin())
+                {
+                    @using (Html.PB_Span().AddClass("bi bi-search text-white fs-5").Begin()) { }
+                    @using (Html.PB_Span().AsWhiteLabel().Begin())
+                    {
+                        @:Discovery
+                    }
+                }
+            }
+            @using (Html.BlockBuilder().AsCardOverlayFooter().Begin())
+            {
+                @using (Html.PB_Span().AsCardLabel().Begin())
+                {
+                    @using (Html.PB_Span().AddClass("bi bi-mouse me-2").Begin()) { }
+                    @:Scroll
+                }
+            }
+        }
+        @using (Html.BlockBuilder().AsCardFooterRow().Begin())
+        {
+            @using (Html.BlockBuilder().Begin())
+            {
+                @using (Html.PB_P().AsCardDescription().Begin())
+                {
+                    @:Scroll-driven effects — Stacking Cards, Sticky Scroll and Horizontal Scroll.
+                }
+                @using (Html.PB_P().AsEffectMeta().Begin())
+                {
+                    @:3 effects · Scroll animation
+                }
+            }
+            @Html.Button(ActionItemFactory.AspRoute("InnerSectionEffect", "Scroll").SetTitle("See all").SetIcon(IconStruct.Bootstrap("bi-arrow-right")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+
+    @* ── Carousels ── *@
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+    {
+        @using (Html.BlockBuilder().AsCardPreview().Begin())
+        {
+            @(Html.CylinderCarouselBuilder()
+                .SetShape(CylinderShapeMode.Flat)
+                .SetSpeed(20)
+                .SetCardWidth("10em")
+                .SetAspectRatio("3/4")
+                .AddImageCard("https://picsum.photos/seed/11/300/400", "photo 1")
+                .AddImageCard("https://picsum.photos/seed/22/300/400", "photo 2")
+                .AddImageCard("https://picsum.photos/seed/33/300/400", "photo 3")
+                .AddImageCard("https://picsum.photos/seed/44/300/400", "photo 4")
+                .AddImageCard("https://picsum.photos/seed/55/300/400", "photo 5")
+                .AddImageCard("https://picsum.photos/seed/66/300/400", "photo 6"))
+            @using (Html.BlockBuilder().AsCardOverlayFooter(20).Begin())
+            {
+                @using (Html.PB_Span().AsCardLabel().Begin())
+                {
+                    @using (Html.PB_Span().AddClass("bi bi-collection me-2").Begin()) { }
+                    @:Carousels
+                }
+            }
+        }
+        @using (Html.BlockBuilder().AsCardFooterRow().Begin())
+        {
+            @using (Html.BlockBuilder().Begin())
+            {
+                @using (Html.PB_P().AsCardDescription().Begin())
+                {
+                    @:Rotating or sliding item collections — Carousel, Cylinder Carousel and Filmstrip Reveal.
+                }
+                @using (Html.PB_P().AsEffectMeta().Begin())
+                {
+                    @:3 effects · Carousel
+                }
+            }
+            @Html.Button(ActionItemFactory.AspRoute("InnerSectionEffect", "Carousels").SetTitle("See all").SetIcon(IconStruct.Bootstrap("bi-arrow-right")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+
+    @* ── Cards ── *@
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+    {
+        @using (Html.BlockBuilder().AsCardPreview().Begin())
+        {
+            @(Html.CardFlipBuilder()
+                .SetCardHeight(150)
+                .SetColumns(3)
+                .AddCard("bi-arrow-left-right",  "Card Flip", "#1c1c2e", "#6a0dad")
+                .AddCard("bi-suit-spade-fill",   "Fan",       "#9b5de5", "#f15bb5")
+                .AddCard("bi-grid-3x3-gap-fill", "Mosaic",    "#0f2027", "#203a43"))
+            @using (Html.BlockBuilder().AsCardOverlayFooter().Begin())
+            {
+                @using (Html.PB_Span().AsCardLabel().Begin())
+                {
+                    @using (Html.PB_Span().AddClass("bi bi-credit-card me-2").Begin()) { }
+                    @:Cards
+                }
+            }
+        }
+        @using (Html.BlockBuilder().AsCardFooterRow().Begin())
+        {
+            @using (Html.BlockBuilder().Begin())
+            {
+                @using (Html.PB_P().AsCardDescription().Begin())
+                {
+                    @:Card-based visual effects — Card Flip, Fan, Mosaic and Retro TV.
+                }
+                @using (Html.PB_P().AsEffectMeta().Begin())
+                {
+                    @:4 effects · Cards
+                }
+            }
+            @Html.Button(ActionItemFactory.AspRoute("InnerSectionEffect", "Cards").SetTitle("See all").SetIcon(IconStruct.Bootstrap("bi-arrow-right")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+
+    @* ── Layout & Decoration ── *@
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+    {
+        @using (Html.BlockBuilder().AsCardPreview().Begin())
+        {
+            @using (Html.RowBuilder().SetGap(Gap.G0).Begin())
+            {
+                @* TornBand *@
+                @using (Html.ColBuilder().SetCol(ColSize.Col6).Begin())
+                {
+                    @using (Html.TornBandBuilder()
+                                .SetGradient("#9b5de5", "#f15bb5", 90m, 4m)
+                                .SetBandHeight(55)
+                                .Begin())
+                    {
+                        @using (Html.SectionBuilder().SetHeight(160, UnitSize.px).AsBodyBackground().Begin()) { }
+                    }
+                }
+                @using (Html.ColBuilder().SetCol(ColSize.Col6).Begin())
+                {
+                    @using (Html.TornBandBuilder()
+                                .SetGradient("#f72585", "#fb8500", 90m, 4m)
+                                .SetBandHeight(55)
+                                .SetDirection(DiagonalDirection.RightToLeft)
+                                .Begin())
+                    {
+                        @using (Html.SectionBuilder().SetHeight(160, UnitSize.px).AsBodyBackground().Begin()) { }
+                    }
+                }
+            }
+            @using (Html.BlockBuilder().AsCardOverlayFooter().Begin())
+            {
+                @using (Html.PB_Span().AsCardLabel().Begin())
+                {
+                    @using (Html.PB_Span().AddClass("bi bi-layout-wtf me-2").Begin()) { }
+                    @:Layout & Decoration
+                }
+            }
+        }
+        @using (Html.BlockBuilder().AsCardFooterRow().Begin())
+        {
+            @using (Html.BlockBuilder().Begin())
+            {
+                @using (Html.PB_P().AsCardDescription().Begin())
+                {
+                    @:Structural and decorative elements — Torn Band and Staged Reveal.
+                }
+                @using (Html.PB_P().AsEffectMeta().Begin())
+                {
+                    @:2 effects · Layout & decoration
+                }
+            }
+            @Html.Button(ActionItemFactory.AspRoute("InnerSectionEffect", "LayoutDecoration").SetTitle("See all").SetIcon(IconStruct.Bootstrap("bi-arrow-right")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+}

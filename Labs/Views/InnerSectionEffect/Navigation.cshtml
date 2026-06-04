@@ -1,0 +1,101 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@{
+    Layout = "_Layout";
+    string DocUrl(string c) => $"/Documentation/Show?packageId=DMBEffectBuilder&groupName=NuGet&namespaceName=DMBEffectBuilder&objectName={c}";
+}
+
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Content Navigation", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Click a control to switch the displayed content panel.
+            }
+            @Html.Button(ActionItemFactory.Url(title: "Back to Catalog", url: "/InnerSectionEffect/Index", icon: IconStruct.Bootstrap(value: "bi-arrow-left")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+}
+
+@* ── Feature Tab ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Feature Tab", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:Clickable feature list on the left — the active item expands with its description, the right panel cross-fades to the matching visual.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(FeatureTabEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsSectionContent().Begin())
+{
+    @(Html.FeatureTabBuilder()
+        .SetPanelHeight(460)
+        .AddItem("/images/test/arcade.png",  "Code analysis", "#1a1a2e", "#16213e", "Code analysis and quick-fixes",    "Detects errors, code smells and style issues as you type — and offers one-click fixes to resolve them instantly.")
+        .AddItem("/images/test/mage.png",    "Debugger",       "#0f2027", "#203a43", "Integrated debugger",              "Step through code, inspect variables and evaluate expressions in real time without leaving your editor.")
+        .AddItem("/images/test/warrior.png", "Refactoring",    "#1a1a2e", "#4a0072", "Project-wide refactorings",        "Rename, move, extract methods and more across your whole project with a single shortcut — safely and instantly.")
+        .AddItem("/images/test/book.png",    "Search",         "#003d00", "#1a4a00", "Instant search and navigation",    "Jump to any file, symbol or action in milliseconds. Find usages, navigate call hierarchies, never lose your place.")
+        .AddItem("/images/test/armour.png",  "AI Assistant",   "#1a0a2e", "#3d0070", "AI Assistant",                     "Generate code, explain errors, write tests and refactor with natural language — directly integrated in your workflow.")
+        .AddItem("/images/test/chest.png",   "Asset manager",  "#7a2d00", "#c45000", "Asset management",                 "Organise, tag and search all your project assets in one place — images, fonts, icons and more."))
+}
+
+@* ── Panel Card ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Panel Card", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:A grid of tiles selects a content panel — click a tile to reveal the matching information card below.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(PanelCardEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsSectionContent().Begin())
+{
+    @(Html.PanelCardBuilder()
+        .SetHeight(300)
+        .AddPanel("Discovery", "bi-search",         "Step 01", "Discovery", "Understanding your goals, constraints and audience before writing a single line of code.", "#")
+        .AddPanel("Design",    "bi-vector-pen",      "Step 02", "Design",    "Wireframes, prototypes and a visual language aligned with your brand — every decision intentional.", "#")
+        .AddPanel("Build",     "bi-code-slash",      "Step 03", "Build",     "Clean, tested code delivered in regular sprints — you stay in the loop at every stage.", "#")
+        .AddPanel("Review",    "bi-check2-circle",   "Step 04", "Review",    "QA, accessibility checks and performance tuning before anything reaches production.", "#")
+        .AddPanel("Launch",    "bi-rocket-takeoff",  "Step 05", "Launch",    "Deployment, monitoring and full handover documentation — we stay available after go-live.", "#")
+        .AddPanel("Support",   "bi-headset",         "Step 06", "Support",   "Ongoing maintenance, feature updates and dedicated support — your product keeps evolving.")
+        .AddPanel("Pricing",   "bi-tag",             "Step 07", "Pricing",   "Transparent pricing with no hidden fees — pay only for what you use.", "/pricing", "See plans", hue: 45))
+}
+
+@* ── Timeline ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Timeline", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:Numbered dots on a progress line — click to jump to a step, or let auto-play cycle through them.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(TimelineEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsSectionContent().Begin())
+{
+    @(Html.TimelineBuilder()
+        .SetAutoPlay(3500)
+        .AddStep("Discovery", "We start by understanding your goals, constraints and audience — what success looks like and who you're building for.", "bi-search")
+        .AddStep("Design", "Wireframes, prototypes and a visual language aligned with your brand. Every decision is intentional.", "bi-pencil-square")
+        .AddStep("Development", "Clean, well-tested code delivered in regular sprints. You stay in the loop at every stage.", "bi-code-slash")
+        .AddStep("Review", "QA, accessibility checks and performance tuning before anything reaches production.", "bi-check2-circle")
+        .AddStep("Launch", "Deployment, monitoring and full handover documentation. We stay available after go-live.", "bi-rocket"))
+}

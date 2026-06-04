@@ -1,0 +1,24 @@
+@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@using DMBEffectBuilder
+@model DMBEffectBuilderLabs.Models.VideoEffectCardViewModel
+@{
+    var vb = Html.VideoSectionBuilder(Model.VideoUrl).SetHeight(Model.HeightPx, UnitSize.px);
+    if (Model.Overlay) vb.SetOverlay();
+}
+@using (Html.ColBuilder().SetCol(Model.ColSize).Begin())
+{
+    @Html.TitleBuilder().SetTitle(Model.Title, TitleLevel.Six).AsPreviewLabel().Render()
+    @using (Html.BlockBuilder().AddClass("rounded-3 overflow-hidden").Begin())
+    {
+        @if (Model.VideoHeaderConfig != null)
+        {
+            var video = Model.VideoHeaderConfig(vb.VideoSectionHeader()).Build();
+            @using (video.Begin()) { }
+        }
+        else
+        {
+            @using (vb.Begin()) { }
+        }
+    }
+}

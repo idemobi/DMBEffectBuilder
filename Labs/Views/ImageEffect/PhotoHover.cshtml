@@ -1,0 +1,157 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@using DMBEffectBuilderLabs.Models
+@{
+    Layout = "_Layout";
+    string DocUrl(string c) =>
+        $"/Documentation/Show?packageId=DMBEffectBuilder&groupName=NuGet&namespaceName=DMBEffectBuilder&objectName={c}";
+}
+
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Photo & Hover Effects", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Hover over each image to see the effect in action
+            }
+            @Html.Button(ActionItemFactory.Url(title: "Back to Catalog", url: "/ImageEffect/Index", icon: IconStruct.Bootstrap(value: "bi-arrow-left")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+}
+
+@using (Html.RowBuilder().SetGap(Gap.G4).SetPadding(SpacingSide.X, SpacingSize.Three).SetPadding(SpacingSide.Y, SpacingSize.Four).Begin())
+{
+    @* ── Simple Hover ── *@
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Fade", Icon = "bi-cursor",
+        Description = "Basic visibility effect triggered on hover. Fades the image opacity.",
+        Usage = "Subtle interactions, grid hover.",
+        DocUrl = DocUrl(nameof(FadeHoverEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/landscape.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).FadeHoverEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Grayscale", Icon = "bi-palette",
+        Description = "Turns the image to grayscale on hover for a classic interaction.",
+        Usage = "Portfolio items, team members cards.",
+        DocUrl = DocUrl(nameof(GrayscaleHoverEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/portrait.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).GrayscaleHoverEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Lift", Icon = "bi-arrow-up",
+        Description = "Moves the image slightly upwards and adds a shadow on hover.",
+        Usage = "Clickable images, card components.",
+        DocUrl = DocUrl(nameof(LiftHoverEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test1.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).LiftHoverEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Zoom", Icon = "bi-zoom-in",
+        Description = "Smoothly scales the image on hover for a dynamic focus.",
+        Usage = "Galleries, featured content.",
+        DocUrl = DocUrl(nameof(ZoomHoverEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test2.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).ZoomHoverEffect()
+    })
+
+    @* ── Color & Exposure Reveal ── *@
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Grayscale → Color", Icon = "bi-palette2",
+        Description = "Image starts grayscale and reveals its colors on hover.",
+        Usage = "Creative portfolios, artistic reveals.",
+        DocUrl = DocUrl(nameof(GrayscaleToColorEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test3.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).GrayscaleToColorEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Sepia → Color", Icon = "bi-palette2",
+        Description = "Image starts with a sepia filter and reveals true colors on hover.",
+        Usage = "Vintage to modern transitions.",
+        DocUrl = DocUrl(nameof(SepiaToColorEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test4.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).SepiaToColorEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Blur → Sharp", Icon = "bi-eye",
+        Description = "Image starts blurred and becomes sharp on hover.",
+        Usage = "Focusing effects, privacy reveals.",
+        DocUrl = DocUrl(nameof(BlurToSharpEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/large.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).BlurToSharpEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Darken → Normal", Icon = "bi-brightness-low",
+        Description = "Image starts darkened and reveals its true brightness on hover.",
+        Usage = "Ambient backgrounds, text overlays.",
+        DocUrl = DocUrl(nameof(DarkenToNormalEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/items.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).DarkenToNormalEffect()
+    })
+
+    @* ── Advanced Hover ── *@
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Glow", Icon = "bi-sun",
+        Description = "Adds a glowing box shadow on hover for a luminous effect.",
+        Usage = "Highlights, CTA images.",
+        DocUrl = DocUrl(nameof(GlowHoverEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/landscape.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).GlowHoverEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Focus spot", Icon = "bi-brightness-high",
+        Description = "Radial glow that follows the cursor on hover.",
+        Usage = "Interactive showcases, dark themes.",
+        DocUrl = DocUrl(nameof(FocusSpotEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/portrait.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).FocusSpotEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Flip 3D (Y)", Icon = "bi-arrow-repeat",
+        Description = "3D flip animation that rotates the image on the Y axis on hover.",
+        Usage = "Card flips, interactive galleries, premium cards.",
+        DocUrl = DocUrl(nameof(FlipEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test6.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).FlipEffect(FlipAxis.Y, offset: 0.5)
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Flip 3D (X)", Icon = "bi-arrow-repeat",
+        Description = "3D flip animation that rotates the image on the X axis on hover.",
+        Usage = "Card flips, interactive galleries, premium cards.",
+        DocUrl = DocUrl(nameof(FlipEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test6.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).FlipEffect(FlipAxis.X, offset: 0.1)
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Tilt parallax", Icon = "bi-layers",
+        Description = "3D tilt effect that reacts to cursor position on hover.",
+        Usage = "Modern UI, premium cards.",
+        DocUrl = DocUrl(nameof(TiltParallaxEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test1.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).TiltParallaxEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Ken Burns", Icon = "bi-zoom-in",
+        Description = "Cinematic zoom and pan animation triggered on hover.",
+        Usage = "Storytelling, hero images.",
+        DocUrl = DocUrl(nameof(KenBurnsSlowEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test7.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).KenBurnsSlowEffect()
+    })
+}

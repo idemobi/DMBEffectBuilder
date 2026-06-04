@@ -19,7 +19,7 @@ When copying this file to another PageBuilder ecosystem project, update this sec
 
 - Project name: `DMBEffectBuilder`
 - Primary API families: image effect extension methods, section effect helpers, effect enums, effect configuration, and embedded static assets.
-- Important types to reference when relevant: `FlipAxis`, `EffectBuilderConfiguration`, `EffectBuilderConfigureOptions`, `SectionEffectsDebugHelper`, and the image extension classes under `Effects/Images`.
+- Important types to reference when relevant: `FlipAxis`, `EffectBuilderConfiguration`, `EffectBuilderConfigureOptions`, `SectionEffectsDebugHelper`, and the image extension classes under `Source/Effects/Images`.
 - Publication host: `labs_idemobi_com`
 - Documentation generation strategy: DocumentationBuilder-first; AI prepares content, the developer executes generation.
 
@@ -126,7 +126,7 @@ Documentation in this module must be authored with a DocumentationBuilder-first 
 
 If public effect behavior, generated class behavior, extension behavior, static asset behavior, or accessibility behavior changes, update in the same change set:
 
-- local `README.md`,
+- local `Source/README.md`,
 - relevant XML docs,
 - impacted guidance/examples when the task includes pages.
 

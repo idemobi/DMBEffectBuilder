@@ -1,0 +1,186 @@
+@using DMBBootstrapBuilder
+@using DMBComponentBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@{
+    Layout = "_Layout";
+}
+
+@* ── Hero ── *@
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Getting Started — EffectBuilder", TitleLevel.One).Render()
+            @using (Html.PB_P().AsLead().Begin())
+            {
+                @:From zero to beautiful effects in minutes.
+            }
+        }
+    }
+}
+
+@using (Html.ContainerBuilder().SetPadding(SpacingSide.Y, SpacingSize.Five).Begin())
+{
+    @using (Html.RowBuilder().Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+        {
+            @* ── Step 1 ── *@
+            @Html.TitleBuilder().SetTitle("1. Install the NuGet Package", TitleLevel.Two).AsSectionHeading().Render()
+            @using (Html.PB_P().Begin())
+            {
+                @:To use the full range of effects (Image, Section, Inner Section), install
+                @using (Html.PB_Span().AsMonospace().Begin())
+                {
+                    @:DMBEffectBuilder
+                }
+                @: alongside
+                @using (Html.PB_Span().AsMonospace().Begin())
+                {
+                    @:DMBPageBuilder
+                }
+                @: and
+                @using (Html.PB_Span().AsMonospace().Begin())
+                {
+                    @:DMBBootstrapBuilder
+                }
+                @:.
+            }
+            @(Html.CodeBlock("dotnet add package DMBEffectBuilder", CodeLanguage.Bash)
+                .SetTitle("Install DMBEffectBuilder")
+                .SetCopyButton())
+
+            @* ── Step 2 ── *@
+            @Html.TitleBuilder().SetTitle("2. Add Namespaces", TitleLevel.Two).AsSubSectionHeading().Render()
+            @using (Html.PB_P().Begin())
+            {
+                @:In your
+                @using (Html.PB_Span().AsMonospace().Begin())
+                {
+                    @:_ViewImports.cshtml
+                }
+                @:, add the necessary namespaces to make the extension methods available in all your views.
+            }
+            @(Html.CodeBlock(@"@using DMBPageBuilder
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder", CodeLanguage.CSharp)
+                .SetTitle("_ViewImports.cshtml")
+                .SetCopyButton())
+
+            @* ── Step 3 ── *@
+            @Html.TitleBuilder().SetTitle("3. Apply Your First Effect", TitleLevel.Two).AsSubSectionHeading().Render()
+            @using (Html.PB_P().Begin())
+            {
+                @:Effects are extension methods chained directly onto their target builder.
+                @: Depending on what you are building, you have access to different effect families.
+            }
+
+            @using (Html.RowBuilder().AsEffectGrid().Begin())
+            {
+                @using (Html.ColBuilder().SetCol(ColSize.Col6, ResponsiveBreakpoint.Md).Begin())
+                {
+                    @using (Html.BlockBuilder().AsEffectTeaserCard().Begin())
+                    {
+                        @Html.TitleBuilder().SetTitle("On Images", TitleLevel.Six).AsTextPrimary().Render()
+                        @(Html.CodeBlock(@"@@Html.ImageRender(""..."").PulseEffect()", CodeLanguage.CSharp))
+                    }
+                }
+                @using (Html.ColBuilder().SetCol(ColSize.Col6, ResponsiveBreakpoint.Md).Begin())
+                {
+                    @using (Html.BlockBuilder().AsEffectTeaserCard().Begin())
+                    {
+                        @Html.TitleBuilder().SetTitle("On Sections", TitleLevel.Six).AsTextSuccess().Render()
+                        @(Html.CodeBlock(@"@@Html.SectionBuilder().GlassEffect()", CodeLanguage.CSharp))
+                    }
+                }
+            }
+
+            @* ── Step 4 ── *@
+            @Html.TitleBuilder().SetTitle("4. Customize Parameters", TitleLevel.Two).AsSubSectionHeading().Render()
+            @using (Html.PB_P().Begin())
+            {
+                @:Most effects accept parameters to fine-tune the animation or appearance.
+                @: Pass named arguments directly to the effect method.
+            }
+            @(Html.CodeBlock(@"// Customize duration and timing
+@@Html.ImageRender(""..."").BlurToSharpEffect(duration: ""1s"", timing: ""ease-out"")
+
+// Customize effect-specific values
+@@Html.ImageRender(""..."").PulseEffect(scale: 1.1)", CodeLanguage.CSharp)
+                .SetTitle("Customizing parameters")
+                .SetCopyButton())
+
+            @* ── Common Effects quick reference ── *@
+            @using (Html.BlockBuilder().AsInfoCallout().Begin())
+            {
+                @using (Html.FlexBlockBuilder().Begin())
+                {
+                    @using (Html.BlockBuilder().AsCalloutIcon().Begin())
+                    {
+                        @using (Html.PB_Span().AddClass("bi bi-collection-fill fs-2 text-info").Begin()) { }
+                    }
+                    @using (Html.BlockBuilder().Begin())
+                    {
+                        @Html.TitleBuilder().SetTitle("Common Effects", TitleLevel.Five).AsAlertHeading().Render()
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsMonospaceSmall().Begin())
+                            {
+                                @:.GrayscaleHoverEffect()
+                            }
+                        }
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsMonospaceSmall().Begin())
+                            {
+                                @:.BlurToSharpEffect()
+                            }
+                        }
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsMonospaceSmall().Begin())
+                            {
+                                @:.ZoomHoverEffect()
+                            }
+                        }
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsMonospaceSmall().Begin())
+                            {
+                                @:.PulseEffect()
+                            }
+                        }
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsMonospaceSmall().Begin())
+                            {
+                                @:.FocusSpotEffect()
+                            }
+                        }
+                        @using (Html.BlockBuilder().AsTopMargin().Begin())
+                        {
+                            @Html.Button(ActionItemFactory.AspRoute("ImageEffect", "Index").SetTitle("See Full Catalog").SetIcon(IconStruct.Bootstrap("bi-collection")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+                        }
+                    }
+                }
+            }
+
+            @* ── Next Step ── *@
+            @using (Html.BlockBuilder().AsSidebarNote().Begin())
+            {
+                @using (Html.BlockBuilder().AsTextCenter().Begin())
+                {
+                    @Html.TitleBuilder().SetTitle("Curious how it works under the hood?", TitleLevel.Four).Render()
+                    @using (Html.PB_P().AsSmallMuted().Begin())
+                    {
+                        @:Check out the architecture guide to understand how EffectBuilder manages resources and rendering.
+                    }
+                    @Html.Button(ActionItemFactory.AspRoute("EffectBuilder", "Architecture").SetTitle("Architecture").SetIcon(IconStruct.Bootstrap("bi-diagram-3")).SetVariant(VariantStyle.Primary)).Render()
+                }
+            }
+        }
+    }
+}

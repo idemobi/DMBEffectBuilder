@@ -1,0 +1,241 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@using Microsoft.AspNetCore.Html
+@using System.Text.Encodings.Web
+@{
+    Layout = "_Layout";
+    string DocUrl(string c) => $"/Documentation/Show?packageId=DMBEffectBuilder&groupName=NuGet&namespaceName=DMBEffectBuilder&objectName={c}";
+
+    IHtmlContent CaptureCenter(Action render)
+    {
+        var saved = ViewContext.Writer;
+        var sw = new System.IO.StringWriter();
+        ViewContext.Writer = sw;
+        render();
+        ViewContext.Writer = saved;
+        return new HtmlString(sw.ToString());
+    }
+}
+
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Layout & Decoration", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Structural and decorative elements to frame or divide content.
+            }
+            @Html.Button(ActionItemFactory.Url(title: "Back to Catalog", url: "/InnerSectionEffect/Index", icon: IconStruct.Bootstrap("bi-arrow-left")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+}
+
+@* ── Torn Band ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Torn Band", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:An animated gradient cuts the section with torn edges — direction, tear points, height and tilt are all configurable.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(TornBandEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsSectionContent().Begin())
+{
+    @using (Html.RowBuilder().SetGap(Gap.G4).Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Gold gradient · both edges · random tilt", TitleLevel.Six).AsPreviewLabel().Render()
+            @using (Html.BlockBuilder().AsPreviewWrapper().Begin())
+            {
+                @using (Html.TornBandBuilder().SetGradient("#FFD700", "#FF8C00", 90m, 5m).SetBandHeight(100).Begin())
+                {
+                    @using (Html.BlockBuilder().AsInnerContentBlock().Begin())
+                    {
+                        @Html.TitleBuilder().SetTitle("Chapter II — The Reckoning", TitleLevel.Three).Render()
+                        @Html.TitleBuilder().SetTitle("Two torn bands frame this section — one at the top, one at the bottom.", TitleLevel.Six).AsCaptionCompact().Render()
+                    }
+                }
+            }
+        }
+
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Neon gradient · right-to-left · fixed tilt 14°", TitleLevel.Six).AsPreviewLabel().Render()
+            @using (Html.BlockBuilder().AsPreviewWrapper().Begin())
+            {
+                @using (Html.TornBandBuilder().SetGradient("#9b5de5", "#00bbf9", 135m, 4m).SetBandHeight(120).SetDirection(DiagonalDirection.RightToLeft).SetTilt(14m).Begin())
+                {
+                    @using (Html.BlockBuilder().AsInnerContentBlock(largePadding: true).Begin())
+                    {
+                        @Html.TitleBuilder().SetTitle("The Neon District", TitleLevel.Two).Render()
+                        @Html.TitleBuilder().SetTitle("Where shadows meet light.", TitleLevel.Six).AsCaption().Render()
+                        @Html.Button(ActionItemFactory.Url(title: "Enter", url: "#", icon: IconStruct.Bootstrap("bi-arrow-right-circle")).SetVariant(VariantStyle.Primary)).Render()
+                    }
+                }
+            }
+        }
+    }
+}
+
+@* ── Staged Reveal ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Staged Reveal", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:Slots slide in from configurable edges around a fixed center zone — each slot can cycle through multiple images independently.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(StagedRevealEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsSectionContent().Begin())
+{
+    @using (Html.RowBuilder().SetGap(Gap.G4).Begin())
+    {
+        @* VS Screen *@
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+        {
+            @Html.TitleBuilder().SetTitle("VS Screen · left + right · static", TitleLevel.Six).AsPreviewLabel().Render()
+            @using (Html.BlockBuilder().AsPreviewWrapper().Begin())
+            {
+                @(Html.StagedRevealBuilder(stopPercent: 42m)
+                    .SetSpeed(transitionMs: 600, holdMs: 99999)
+                    .AddSlot(StagedRevealEffectDirection.Left,
+                        StagedRevealEffectItem.FromImage("/images/test/mage.png", "Player 1 — Mage"))
+                    .SetCenterContent(CaptureCenter(() => {
+                        using (Html.BlockBuilder().AsFlexCenterColumn(largeGap: true).Begin())
+                        {
+                            using (Html.PB_Span().AsDisplayHero().SetStyle("text-shadow", "0 0 40px #ff003c,0 0 80px #7700ff").Begin())
+                            {
+                                ViewContext.Writer.Write(HtmlEncoder.Default.Encode("VS"));
+                            }
+                            Html.TitleBuilder().SetTitle("Round 1 — Fight!", TitleLevel.Six).SetTextTransform(TextTransform.Uppercase).AsCaptionSmallCompact().Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                            Html.Button(ActionItemFactory.Url(title: "Start Battle", url: "#", icon: IconStruct.Bootstrap("bi-controller")).SetVariant(VariantStyle.Danger)).Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                        }
+                    }))
+                    .AddSlot(StagedRevealEffectDirection.Right,
+                        StagedRevealEffectItem.FromImage("/images/test/warrior.png", "Player 2 — Warrior")))
+            }
+        }
+
+        @* Open World *@
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Open World · 4 edges · static", TitleLevel.Six).AsPreviewLabel().Render()
+            @using (Html.BlockBuilder().AsPreviewWrapper().Begin())
+            {
+                @(Html.StagedRevealBuilder(stopPercent: 35m)
+                    .SetSpeed(transitionMs: 900, holdMs: 99999)
+                    .AddSlot(StagedRevealEffectDirection.Top,
+                        StagedRevealEffectItem.FromImage("/images/test/terranova2.png", "Terra Nova — top panoramic view"))
+                    .AddSlot(StagedRevealEffectDirection.Left,
+                        StagedRevealEffectItem.FromImage("/images/test/terranova.png", "Dense forest to the west"))
+                    .SetCenterContent(CaptureCenter(() => {
+                        using (Html.BlockBuilder().AsFlexCenterColumn().SetPadding(SpacingSide.X, SpacingSize.Three).Begin())
+                        {
+                            Html.TitleBuilder().SetTitle("Welcome to", TitleLevel.Four).SetTextTransform(TextTransform.Uppercase).Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                            Html.TitleBuilder().SetTitle("Terra Nova", TitleLevel.One).SetTextTransform(TextTransform.Uppercase).Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                            Html.TitleBuilder().SetTitle("An open world of 80 km² awaits you.", TitleLevel.Six).AsCaptionSmall().Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                            Html.Button(ActionItemFactory.Url(title: "Start Adventure", url: "#", icon: IconStruct.Bootstrap("bi-play-fill")).SetVariant(VariantStyle.Primary)).Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                        }
+                    }))
+                    .AddSlot(StagedRevealEffectDirection.Right,
+                        StagedRevealEffectItem.FromImage("/images/test/terranova.png", "Mountain range to the east"))
+                    .AddSlot(StagedRevealEffectDirection.Bottom,
+                        StagedRevealEffectItem.FromImage("/images/test/terranova1.png", "Terra Nova — bottom panoramic view")))
+            }
+        }
+
+        @* Arc Edge *@
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Arc Edge · portrait framing · auto-cycle", TitleLevel.Six).AsPreviewLabel().Render()
+            @using (Html.BlockBuilder().AsPreviewWrapper().Begin())
+            {
+                @(Html.StagedRevealBuilder(stopPercent: 45m)
+                    .SetSpeed(transitionMs: 700, holdMs: 2500)
+                    .SetArcEdge(radiusPx: 100)
+                    .AddSlot(StagedRevealEffectDirection.Left,
+                        StagedRevealEffectItem.FromImage("/images/test/mage.png", "Kaïros — Arcane Mage"))
+                    .SetCenterContent(CaptureCenter(() => {
+                        using (Html.BlockBuilder().AsFlexCenterColumn().SetPadding(SpacingSide.X, SpacingSize.Three).Begin())
+                        {
+                            Html.BadgeBuilder("Legendary").SetBadgeVariant(VariantStyle.Warning).SetBadgePill().Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                            Html.TitleBuilder().SetTitle("Kaïros vs Aldric", TitleLevel.Three).Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                            Html.TitleBuilder().SetTitle("The final duel begins at dawn.", TitleLevel.Six).AsCaptionSmallMargin().Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                            Html.Button(ActionItemFactory.Url(title: "Watch Duel", url: "#", icon: IconStruct.Bootstrap("bi-play-fill")).SetVariant(VariantStyle.Warning)).Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                        }
+                    }))
+                    .AddSlot(StagedRevealEffectDirection.Right,
+                        StagedRevealEffectItem.FromImage("/images/test/warrior.png", "Aldric — Iron Guardian")))
+            }
+        }
+
+        @* Diagonal Cut *@
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Md).Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Diagonal Cut · cinematic · auto-cycle", TitleLevel.Six).AsPreviewLabel().Render()
+            @using (Html.BlockBuilder().AsPreviewWrapper().Begin())
+            {
+                @(Html.StagedRevealBuilder(stopPercent: 40m)
+                    .SetSpeed(transitionMs: 800, holdMs: 2500)
+                    .SetDiagonalCut(offsetPx: 80, leftTopIn: true, rightTopIn: false)
+                    .AddSlot(StagedRevealEffectDirection.Left,
+                        StagedRevealEffectItem.FromImage("/images/test/forest1.png", "Ancient Forest — west"),
+                        StagedRevealEffectItem.FromImage("/images/test/forest3.png", "Ancient Forest — canopy"))
+                    .SetCenterContent(CaptureCenter(() => {
+                        using (Html.BlockBuilder().AsFlexCenterColumn().SetPadding(SpacingSide.X, SpacingSize.Three).Begin())
+                        {
+                            Html.TitleBuilder().SetTitle("Ancient", TitleLevel.Four).SetTextTransform(TextTransform.Uppercase).Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                            Html.TitleBuilder().SetTitle("Forest", TitleLevel.One).SetTextTransform(TextTransform.Uppercase).Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                            Html.Button(ActionItemFactory.Url(title: "Explore", url: "#", icon: IconStruct.Bootstrap("bi-compass")).SetVariant(VariantStyle.Success)).Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                        }
+                    }))
+                    .AddSlot(StagedRevealEffectDirection.Right,
+                        StagedRevealEffectItem.FromImage("/images/test/forest4.png", "Ancient Forest — river"),
+                        StagedRevealEffectItem.FromImage("/images/test/forest6.png", "Ancient Forest — sunset")))
+            }
+        }
+
+        @* Auto-cycle news feed *@
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Md).Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Auto-cycle · news feed · 1.8 s hold", TitleLevel.Six).AsPreviewLabel().Render()
+            @using (Html.BlockBuilder().AsPreviewWrapper().Begin())
+            {
+                @(Html.StagedRevealBuilder(stopPercent: 38m)
+                    .SetSpeed(transitionMs: 600, holdMs: 1800)
+                    .AddSlot(StagedRevealEffectDirection.Left,
+                        StagedRevealEffectItem.FromImage("/images/test/forest1.png", "Reportage 1"),
+                        StagedRevealEffectItem.FromImage("/images/test/terranova.png", "Reportage 2"),
+                        StagedRevealEffectItem.FromImage("/images/test/forest3.png", "Reportage 3"))
+                    .SetCenterContent(CaptureCenter(() => {
+                        using (Html.BlockBuilder().AsFlexCenterColumn().SetPadding(SpacingSide.X, SpacingSize.Two).Begin())
+                        {
+                            Html.BadgeBuilder("LIVE").SetBadgeVariant(VariantStyle.Danger).SetBadgePill().Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                            Html.TitleBuilder().SetTitle("World News", TitleLevel.Four).Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                            Html.TitleBuilder().SetTitle("Images cycle automatically every 1.8 s — holdMs: 1800.", TitleLevel.Six).AsCaptionSmallMargin().Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                            Html.Button(ActionItemFactory.Url(title: "Read More", url: "#", icon: IconStruct.Bootstrap("bi-newspaper")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render().WriteTo(ViewContext.Writer, HtmlEncoder.Default);
+                        }
+                    }))
+                    .AddSlot(StagedRevealEffectDirection.Right,
+                        StagedRevealEffectItem.FromImage("/images/test/terranova2.png", "Flash 1"),
+                        StagedRevealEffectItem.FromImage("/images/test/forest6.png", "Flash 2"),
+                        StagedRevealEffectItem.FromImage("/images/test/terranova1.png", "Flash 3")))
+            }
+        }
+    }
+}

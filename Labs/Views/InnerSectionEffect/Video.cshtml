@@ -1,0 +1,90 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@using DMBEffectBuilderLabs.Models
+@{
+    Layout = "_Layout";
+    string DocUrl(string c) => $"/Documentation/Show?packageId=DMBEffectBuilder&groupName=NuGet&namespaceName=DMBEffectBuilder&objectName={c}";
+}
+
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Video", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Full-screen video backgrounds with overlay, title effects and call-to-action.
+            }
+            @Html.Button(ActionItemFactory.Url(title: "Back to Catalog", url: "/InnerSectionEffect/Index", icon: IconStruct.Bootstrap(value: "bi-arrow-left")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+}
+
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Video Section Effect", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:Full-screen or contained video background — configurable overlay, combined title text effects and optional call-to-action.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(VideoSectionEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsSectionContent().Begin())
+{
+@using (Html.RowBuilder().SetGap(Gap.G4).Begin())
+{
+    @await Html.PartialAsync("_VideoEffectCard", new VideoEffectCardViewModel
+    {
+        Title = "No Header · No Overlay", Icon = "bi-film",
+        VideoUrl = "/videos/test/mushroom.mp4",
+        Overlay = false
+    })
+
+    @await Html.PartialAsync("_VideoEffectCard", new VideoEffectCardViewModel
+    {
+        Title = "Glitch + Gradient", Icon = "bi-reception-4",
+        VideoUrl = "/videos/test/large_video.mp4",
+        VideoHeaderConfig = t => t.SetTitle("SIGNAL LOST").SetGlitchTextEffect(color1: "#ff005c", color2: "#0095ff", speedSeconds: 2m).SetGradientEffect("#0f0c29", "#302b63", 135m)
+                                 .SetSubtitle("Digital corruption — lateral jitter and two-tone colour shifts.").SetButton("Reconnect", "#", VariantStyle.Danger)
+    })
+
+    @await Html.PartialAsync("_VideoEffectCard", new VideoEffectCardViewModel
+    {
+        Title = "Stamp + Gradient", Icon = "bi-patch-check",
+        VideoUrl = "/videos/test/square_video.mp4",
+        VideoHeaderConfig = t => t.SetTitle("APPROVED").SetStampEffect(durationSeconds: 0.5m).SetGradientEffect("#1a1a2e", "#e63946", 135m)
+                                 .SetSubtitle("Slams onto screen like a physical ink stamp.").SetButton("Proceed", "#", VariantStyle.Light)
+    })
+
+    @await Html.PartialAsync("_VideoEffectCard", new VideoEffectCardViewModel
+    {
+        Title = "Blur Reveal + Gradient", Icon = "bi-eye",
+        VideoUrl = "/videos/test/tall_video.mp4",
+        VideoHeaderConfig = t => t.SetTitle("Coming Into Focus").SetBlurRevealEffect(startBlurPx: 14m, durationSeconds: 1.5m).SetGradientEffect("#0d1b2a", "#415a77", 135m)
+                                 .SetSubtitle("Sharpens from blur into clarity — cinematic and elegant.")
+    })
+
+    @await Html.PartialAsync("_VideoEffectCard", new VideoEffectCardViewModel
+    {
+        Title = "Slide Up + Gradient", Icon = "bi-arrow-up-circle",
+        VideoUrl = "/videos/test/mushroom.mp4",
+        VideoHeaderConfig = t => t.SetTitle("Rise Up").SetSlideUpEffect(durationSeconds: 0.7m).SetGradientEffect("#f72585", "#4cc9f0", 135m)
+                                 .SetSubtitle("Letters slide up from below with a staggered delay.").SetButton("Discover", "#", VariantStyle.Primary)
+    })
+
+    @await Html.PartialAsync("_VideoEffectCard", new VideoEffectCardViewModel
+    {
+        Title = "Outline", Icon = "bi-fonts",
+        VideoUrl = "/videos/test/large_video.mp4",
+        VideoHeaderConfig = t => t.SetTitle("WIREFRAME").SetOutlineEffect(color: "white", widthPx: 1.5m, speedSeconds: 2.5m)
+                                 .SetSubtitle("Animated stroke path — letters drawn in real time over the footage.")
+    })
+}
+}

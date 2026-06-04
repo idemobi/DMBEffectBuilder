@@ -1,0 +1,24 @@
+@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@using DMBEffectBuilder
+@model DMBEffectBuilderLabs.Models.InnerTitleEffectCardViewModel
+@{
+    var effectBuilder = Html.SectionInnerEffectBuilder().SetOverlay();
+    var titleBuilder = effectBuilder.SectionInnerEffectTitle().SetTitle(Model.Label);
+    Model.TitleConfig(titleBuilder);
+}
+@using (Html.ColBuilder().SetCol(ColSize.Col6).SetCol(Model.ColSize, ResponsiveBreakpoint.Md).Begin())
+{
+    @Html.TitleBuilder().SetTitle(Model.Label, TitleLevel.Six).AsPreviewLabel().Render()
+    @using (Html.BlockBuilder().AddClass("rounded-3 overflow-hidden").Begin())
+    {
+        @using (titleBuilder.Build().Begin())
+        {
+            using (Html.SectionBuilder()
+                .BootstrapBackgroundEffect(Model.BackgroundVariant, true)
+                .SetHeight(Model.HeightPx, UnitSize.px)
+                .Begin())
+            { }
+        }
+    }
+}

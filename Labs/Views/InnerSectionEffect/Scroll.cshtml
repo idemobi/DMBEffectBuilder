@@ -1,0 +1,97 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@{
+    Layout = "_Layout";
+    string DocUrl(string c) => $"/Documentation/Show?packageId=DMBEffectBuilder&groupName=NuGet&namespaceName=DMBEffectBuilder&objectName={c}";
+}
+
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Scroll", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Content that reacts to or is driven by the page scroll position.
+            }
+            @Html.Button(ActionItemFactory.Url(title: "Back to Catalog", url: "/InnerSectionEffect/Index", icon: IconStruct.Bootstrap(value: "bi-arrow-left")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+}
+
+@* ── Stacking Cards ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Stacking Cards", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:Cards stack on scroll — each card locks in place while the next one slides over it, with previous cards remaining visible as a coloured strip at the top.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(StackingCardsEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsSectionContentTop().Begin())
+{
+    @(Html.StackingCardsBuilder()
+        .SetCardHeight(400)
+        .SetGap(48)
+        .SetStickyTop(130)
+        .AddCard("bi-search",        "01 — Discovery", "Understanding your goals, constraints and audience before writing a single line of code.", "#667eea", "#764ba2", "#")
+        .AddCard("bi-vector-pen",    "02 — Design",    "Wireframes, prototypes and a visual language aligned with your brand — every decision intentional.",  "#f093fb", "#f5576c", "#")
+        .AddCard("bi-code-slash",    "03 — Build",     "Clean, tested code delivered in regular sprints — you stay in the loop at every stage.",              "#4facfe", "#00f2fe", "#")
+        .AddCard("bi-rocket-takeoff","04 — Launch",    "Deployment, monitoring and full handover documentation — we stay available after go-live.",           "#43e97b", "#38f9d7", "#"))
+}
+
+@* ── Horizontal Scroll ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Horizontal Scroll", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:Vertical scroll drives a horizontal journey — each slide occupies the full viewport width and transitions smoothly as you scroll down.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(HorizontalScrollEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@(Html.HorizontalScrollBuilder()
+    .SetHeight(500)
+    .SetStickyTop(80)
+    .AddSlide("bi-geo-alt",        "Tokyo",    "Lost in the neon maze of a city that never sleeps.",       "#f72585", "#7209b7")
+    .AddSlide("bi-sun",            "Sahara",   "Endless dunes stretching beyond the edge of the horizon.", "#fb8500", "#ffb703")
+    .AddSlide("bi-water",          "Maldives", "Crystal lagoons suspended between sky and ocean floor.",   "#0077b6", "#00b4d8")
+    .AddSlide("bi-snow2",          "Iceland",  "Fire, ice and silence — Earth at its most extreme.",       "#023e8a", "#48cae4")
+    .AddSlide("bi-tree",           "Amazon",   "Breathing lungs of the planet — alive at every scale.",   "#1b4332", "#40916c"))
+
+@* ── Sticky Scroll ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Sticky Scroll", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:The left panel stays fixed while step descriptions scroll alongside it — the visual slides on each step change.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(StickyScrollEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsSectionContent().Begin())
+{
+    @(Html.StickyScrollBuilder()
+        .SetVisualHeight(420)
+        .SetStickyOffset(80)
+        .AddStep("bi-lightning-charge",  "Autocompletion",  "Intelligent autocompletion",   "Understands the full context of your project — file structure, dependencies, naming conventions — to suggest completions that actually fit your codebase.", "#667eea", "#764ba2")
+        .AddStep("bi-arrow-left-right",  "Refactoring",     "Smart refactoring",             "Renames, extracts, restructures across every file that references the symbol. Proposes the safest transformation and shows you a diff before applying.",    "#f093fb", "#f5576c")
+        .AddStep("bi-check2-circle",     "Test generation", "Automatic test generation",     "Reads your implementation and generates unit tests covering happy paths, edge cases and error conditions — ready to run, ready to extend.",                 "#4facfe", "#00f2fe")
+        .AddStep("bi-file-earmark-text", "Documentation",   "Documentation on demand",       "Generates summaries, param descriptions and usage examples directly from your code. Keeps docs in sync when you refactor.",                                "#43e97b", "#38f9d7"))
+}

@@ -1,0 +1,162 @@
+@using DMBBootstrapBuilder
+@using DMBComponentBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@{
+    Layout = "_Layout";
+}
+
+@* ── Hero ── *@
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Architecture — EffectBuilder", TitleLevel.One).Render()
+            @using (Html.PB_P().AsLead().Begin())
+            {
+                @:Understanding how EffectBuilder manages resources and rendering.
+            }
+        }
+    }
+}
+
+@using (Html.ContainerBuilder().SetPadding(SpacingSide.Y, SpacingSize.Five).Begin())
+{
+    @using (Html.RowBuilder().Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+        {
+            @* ── 1. Component Separation ── *@
+            @Html.TitleBuilder().SetTitle("1. Component Separation", TitleLevel.Two).AsSectionHeading().Render()
+            @using (Html.PB_P().Begin())
+            {
+                @:EffectBuilder follows a strictly modular architecture. Each effect is composed of two distinct parts:
+                @: the
+                @using (Html.PB_Span().AsBold().Begin())
+                {
+                    @:extension method
+                }
+                @: (C#) which handles the Fluent API, parameter validation and class
+                @: registration, and the
+                @using (Html.PB_Span().AsBold().Begin())
+                {
+                    @:style resource
+                }
+                @: (CSS) which contains the actual visual logic, transitions and keyframes.
+            }
+            @(Html.CodeBlock(@"Effects/
+  Images/        → Pulse, Blur, Glow …
+  Sections/      → Glass, Shape, Edge …
+  InnerSections/ → Lift, Reveal, Hover …
+wwwroot/css/     → Associated stylesheets", CodeLanguage.Bash)
+                .SetTitle("Project structure")
+                .SetCopyButton())
+
+            @* ── 2. Smart Resource Injection ── *@
+            @Html.TitleBuilder().SetTitle("2. Smart Resource Injection", TitleLevel.Two).AsSubSectionHeading().Render()
+            @using (Html.PB_P().Begin())
+            {
+                @:When you call an effect method in your Razor view, the system registers that specific effect's CSS file
+                @: with the
+                @using (Html.PB_Span().AsMonospace().Begin())
+                {
+                    @:PageRegistry
+                }
+                @:. Only the CSS files for effects actually used on the page are injected —
+                @: if you use 3 effects, only 3 tiny CSS files are loaded.
+            }
+            @(Html.CodeBlock(@"// Registered automatically when the effect is called
+page.SetStylesheet(""/css/imageEffect/BlurToSharpEffect.css"");
+page.SetStylesheet(""/css/sectionEffect/GlassEffect.css"");", CodeLanguage.CSharp)
+                .SetTitle("PageRegistry injection")
+                .SetCopyButton())
+
+            @* ── 3. CSS Variable Strategy ── *@
+            @Html.TitleBuilder().SetTitle("3. CSS Variable Strategy", TitleLevel.Two).AsSubSectionHeading().Render()
+            @using (Html.PB_P().Begin())
+            {
+                @:Each effect exposes a variables class (e.g.
+                @using (Html.PB_Span().AsMonospace().Begin())
+                {
+                    @:.eb-image-effect-pulse-var
+                }
+                @:) which defines the default values. When you pass parameters to the C# method, they are injected
+                @: as inline CSS variable overrides — no custom stylesheet required.
+            }
+            @(Html.CodeBlock(@"/* CSS definition */
+.eb-image-effect-pulse-var {
+    --eb-pulse-scale: 1.05;
+    --eb-image-effect-duration: .3s;
+}
+.eb-image-effect-pulse:hover {
+    transform: scale(var(--eb-pulse-scale));
+}", CodeLanguage.Css)
+                .SetTitle("CSS variable pattern")
+                .SetCopyButton())
+
+            @* ── Tech Stack ── *@
+            @using (Html.BlockBuilder().AsInfoCallout().Begin())
+            {
+                @using (Html.FlexBlockBuilder().Begin())
+                {
+                    @using (Html.BlockBuilder().AsCalloutIcon().Begin())
+                    {
+                        @using (Html.PB_Span().AddClass("bi bi-gear-fill fs-2 text-info").Begin()) { }
+                    }
+                    @using (Html.BlockBuilder().Begin())
+                    {
+                        @Html.TitleBuilder().SetTitle("Tech Stack", TitleLevel.Five).AsAlertHeading().Render()
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsBold().Begin())
+                            {
+                                @:Backend:
+                            }
+                            @: .NET 10 / ASP.NET Core
+                        }
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsBold().Begin())
+                            {
+                                @:Frontend:
+                            }
+                            @: Modern CSS3 (Variables & Animations)
+                        }
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsBold().Begin())
+                            {
+                                @:Architecture:
+                            }
+                            @: Fluent API / Extension Methods
+                        }
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsBold().Begin())
+                            {
+                                @:Optimization:
+                            }
+                            @: Dynamic CSS Injection
+                        }
+                    }
+                }
+            }
+
+            @* ── Next Step ── *@
+            @using (Html.BlockBuilder().AsSidebarNote().Begin())
+            {
+                @using (Html.BlockBuilder().AsTextCenter().Begin())
+                {
+                    @Html.TitleBuilder().SetTitle("See it in action", TitleLevel.Four).Render()
+                    @using (Html.PB_P().AsSmallMuted().Begin())
+                    {
+                        @:Learn how the code goes from your Razor view to the final rendered HTML.
+                    }
+                    @Html.Button(ActionItemFactory.AspRoute("EffectBuilder", "RenderingPipeline").SetTitle("Rendering Pipeline").SetIcon(IconStruct.Bootstrap("bi-bezier2")).SetVariant(VariantStyle.Primary)).Render()
+                }
+            }
+        }
+    }
+}

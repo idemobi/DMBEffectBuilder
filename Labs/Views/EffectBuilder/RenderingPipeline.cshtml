@@ -1,0 +1,184 @@
+@using DMBBootstrapBuilder
+@using DMBComponentBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@{
+    Layout = "_Layout";
+}
+
+@* ── Hero ── *@
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Rendering Pipeline — EffectBuilder", TitleLevel.One).Render()
+            @using (Html.PB_P().AsLead().Begin())
+            {
+                @:From Fluent C# to optimized HTML & CSS.
+            }
+        }
+    }
+}
+
+@using (Html.ContainerBuilder().SetPadding(SpacingSide.Y, SpacingSize.Five).Begin())
+{
+    @using (Html.RowBuilder().Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+        {
+            @* ── Step 1 ── *@
+            @using (Html.BlockBuilder().AsTimelineStep().Begin())
+            {
+                @using (Html.BlockBuilder().AsTimelineStepBadge().Begin())
+                {
+                    @:1
+                }
+                @Html.TitleBuilder().SetTitle("Fluent API Call", TitleLevel.Three).AsH4().Render()
+                @using (Html.PB_P().Begin())
+                {
+                    @:It all starts in your Razor view with a simple method call. Each effect is an extension method on builders like
+                    @using (Html.PB_Span().AsMonospace().Begin())
+                    {
+                        @:ImageRenderBuilder
+                    }
+                    @:,
+                    @using (Html.PB_Span().AsMonospace().Begin())
+                    {
+                        @:SectionBuilder
+                    }
+                    @:, or
+                    @using (Html.PB_Span().AsMonospace().Begin())
+                    {
+                        @:InnerSectionBuilder
+                    }
+                    @:.
+                }
+                @(Html.CodeBlock(@"@@Html.ImageRender(""/img.png"").BlurToSharpEffect()
+@@Html.SectionBuilder().GlassEffect()", CodeLanguage.CSharp))
+            }
+
+            @* ── Step 2 ── *@
+            @using (Html.BlockBuilder().AsTimelineStep().Begin())
+            {
+                @using (Html.BlockBuilder().AsTimelineStepBadge().Begin())
+                {
+                    @:2
+                }
+                @Html.TitleBuilder().SetTitle("CSS Registration", TitleLevel.Three).AsH4().Render()
+                @using (Html.PB_P().Begin())
+                {
+                    @:Inside the extension method, the system checks whether the effect's CSS file is already registered for the current request. If not, it adds it to
+                    @using (Html.PB_Span().AsMonospace().Begin())
+                    {
+                        @:PageInformation
+                    }
+                    @: via
+                    @using (Html.PB_Span().AsMonospace().Begin())
+                    {
+                        @:PageRegistry
+                    }
+                    @:.
+                }
+                @(Html.CodeBlock(@"page.SetStylesheet(""/css/imageEffect/BlurToSharpEffect.css"");
+page.SetStylesheet(""/css/sectionEffect/GlassEffect.css"");", CodeLanguage.CSharp))
+            }
+
+            @* ── Step 3 ── *@
+            @using (Html.BlockBuilder().AsTimelineStep().Begin())
+            {
+                @using (Html.BlockBuilder().AsTimelineStepBadge().Begin())
+                {
+                    @:3
+                }
+                @Html.TitleBuilder().SetTitle("Class & Style Attribution", TitleLevel.Three).AsH4().Render()
+                @using (Html.PB_P().Begin())
+                {
+                    @:The builder adds the specific CSS classes to the component. If custom parameters are provided, they are injected as CSS variable overrides in a
+                    @using (Html.PB_Span().AsMonospace().Begin())
+                    {
+                        @:style
+                    }
+                    @: attribute.
+                }
+                @(Html.CodeBlock(@"builder.AddClass(""eb-image-effect-blur-to-sharp eb-image-effect-blur-to-sharp-var"");
+builder.SetStyle(""--eb-image-effect-duration"", ""0.8s"");", CodeLanguage.CSharp))
+            }
+
+            @* ── Step 4 (final) ── *@
+            @using (Html.BlockBuilder().AsTimelineStep().Begin())
+            {
+                @using (Html.BlockBuilder().AsTimelineStepBadge("bg-success").Begin())
+                {
+                    @using (Html.PB_Span().AddClass("bi bi-check").Begin()) { }
+                }
+                @Html.TitleBuilder().SetTitle("Final HTML Output", TitleLevel.Three).AsH4().Render()
+                @using (Html.PB_P().Begin())
+                {
+                    @:When
+                    @using (Html.PB_Span().AsMonospace().Begin())
+                    {
+                        @:.Render()
+                    }
+                    @: is called (or implicitly at the end of a
+                    @using (Html.PB_Span().AsMonospace().Begin())
+                    {
+                        @:using
+                    }
+                    @: block), the final HTML is generated with all registered classes and style variables.
+                }
+                @(Html.CodeBlock(@"<img src=""/img.png""
+     class=""eb-image-effect-blur-to-sharp eb-image-effect-blur-to-sharp-var""
+     style=""--eb-image-effect-duration:0.8s"" />", CodeLanguage.CSharp))
+            }
+
+            @* ── Chaining ── *@
+            @Html.TitleBuilder().SetTitle("Chaining Multiple Effects", TitleLevel.Two).AsSubSectionHeading().Render()
+            @using (Html.PB_P().Begin())
+            {
+                @:When multiple effects are chained, the pipeline repeats steps 2 and 3 for each effect. Classes are appended and styles are merged — no collision between effects.
+            }
+            @(Html.CodeBlock(@"@@Html.ImageRender(""/img.png"")
+    .BlurToSharpEffect(duration: ""0.8s"")
+    .PulseEffect(scale: 1.05)
+    .Render()", CodeLanguage.CSharp)
+                .SetTitle("Chained effects")
+                .SetCopyButton())
+
+            @* ── Performance highlight ── *@
+            @using (Html.BlockBuilder().AsInfoCallout().Begin())
+            {
+                @using (Html.FlexBlockBuilder().Begin())
+                {
+                    @using (Html.BlockBuilder().AsCalloutIcon().Begin())
+                    {
+                        @using (Html.PB_Span().AddClass("bi bi-lightning-charge-fill fs-2 text-warning").Begin()) { }
+                    }
+                    @using (Html.BlockBuilder().Begin())
+                    {
+                        @Html.TitleBuilder().SetTitle("Optimized for Speed", TitleLevel.Five).AsAlertHeading().Render()
+                        @using (Html.PB_P().AsNoMargin().Begin())
+                        {
+                            @:Only used CSS files are loaded and all customization relies on native CSS variables — performance impact is nearly zero.
+                        }
+                    }
+                }
+            }
+
+            @* ── Next Step ── *@
+            @using (Html.BlockBuilder().AsSidebarNote().Begin())
+            {
+                @using (Html.BlockBuilder().AsTextCenter().Begin())
+                {
+                    @Html.TitleBuilder().SetTitle("Explore the Catalog", TitleLevel.Four).Render()
+                    @using (Html.PB_P().AsSmallMuted().Begin())
+                    {
+                        @:Now that you know how it works, explore all available effects.
+                    }
+                    @Html.Button(ActionItemFactory.AspRoute("ImageEffect", "Index").SetTitle("Image Effects").SetIcon(IconStruct.Bootstrap("bi-grid-3x3-gap-fill")).SetVariant(VariantStyle.Primary)).Render()
+                }
+            }
+        }
+    }
+}

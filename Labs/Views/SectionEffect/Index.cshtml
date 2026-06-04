@@ -1,0 +1,70 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@using DMBEffectBuilderLabs.Models
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.SectionBuilder().SetHeight(100, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Section Effects — Catalog", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Browse all available section effects by category
+            }
+        }
+    }
+}
+
+@using (Html.RowBuilder().SetGap(Gap.G4).SetPadding(SpacingSide.X, SpacingSize.Three).SetPadding(SpacingSide.Y, SpacingSize.Four).Begin())
+{
+    @* ── Background ── *@
+    @await Html.PartialAsync("_CategoryCard", new CategoryCardViewModel
+    {
+        Title = "Background", Icon = "bi-image",
+        Description = "Bootstrap colors, animated gradients, fixed images, parallax, aurora and zoom-pan effects.",
+        Tagline = "7 effects · Background replacement",
+        RouteAction = "Background",
+        Previews = new Func<SectionBuilder, SectionBuilder>[]
+        {
+            s => s.BootstrapBackgroundEffect(VariantStyle.Primary, true),
+            s => s.AnimatedGradientEffect(colorStart: "#9b5de5", colorEnd: "#f15bb5", angle: 90m, durationSeconds: 4m),
+            s => s.AuroraEffect(color1: "#a855f7", color2: "#22c55e", color3: "#3b82f6", speedSeconds: 8m)
+        }
+    })
+
+    @* ── FX & Ambiance ── *@
+    @await Html.PartialAsync("_CategoryCard", new CategoryCardViewModel
+    {
+        Title = "FX & Ambiance", Icon = "bi-stars",
+        Description = "Overlays, particles and animated layers composited on top of any background.",
+        Tagline = "15 effects · Overlay & particles",
+        RouteAction = "FxAmbiance",
+        Previews = new Func<SectionBuilder, SectionBuilder>[]
+        {
+            s => s.BootstrapBackgroundEffect(VariantStyle.Dark, true).SpotlightEffect(color: "#ffc832", opacity: 0.25m, sizePx: 260, autoMove: true),
+            s => s.AnimatedGradientEffect(colorStart: "#001a0a", colorEnd: "#003318", angle: 135m, durationSeconds: 15m).FireflyEffect(color: "#aaff88", count: 22, size: 3m),
+            s => s.AnimatedGradientEffect(colorStart: "#000000", colorEnd: "#001100", angle: 180m, durationSeconds: 20m).MatrixEffect(color: "#00ff41", fontSize: 14, speed: 1m)
+        }
+    })
+
+    @* ── Shape & Edge ── *@
+    @await Html.PartialAsync("_CategoryCard", new CategoryCardViewModel
+    {
+        Title = "Shape & Edge", Icon = "bi-pentagon",
+        Description = "SVG wave masks and diagonal clip-path cuts applied to section edges.",
+        Tagline = "6 effects · Geometry & borders",
+        RouteAction = "ShapeEdge",
+        Previews = new Func<SectionBuilder, SectionBuilder>[]
+        {
+            s => s.AnimatedGradientEffect(colorStart: "#f72585", colorEnd: "#7209b7", angle: 45m, durationSeconds: 4m).SetDiagonalEdge(DiagonalEdge.Bottom, DiagonalDirection.LeftToRight),
+            s => s.AnimatedGradientEffect(colorStart: "#9b5de5", colorEnd: "#f15bb5", angle: 90m, durationSeconds: 5m).WaveEffect(edge: WaveEdge.Bottom, amplitude: 60),
+            s => s.AnimatedGradientEffect(colorStart: "#fee440", colorEnd: "#f15bb5", angle: 90m, durationSeconds: 6m).SetDiagonalEdge(DiagonalEdge.Both, DiagonalDirection.LeftToRight, 30m)
+        }
+    })
+}

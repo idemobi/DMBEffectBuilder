@@ -1,0 +1,37 @@
+@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@model DMBEffectBuilderLabs.Models.EffectCardViewModel
+@{
+    var section = Model.EffectAction(Html.SectionBuilder().SetHeight(Model.HeightPx, UnitSize.px));
+    section.AddClass("rounded-3 shadow-sm overflow-hidden position-relative");
+}
+@using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(Model.ColSize, ResponsiveBreakpoint.Md).Begin())
+{
+    @using (Html.BlockBuilder().AddClass("rounded-3 overflow-hidden shadow-sm position-relative").Begin())
+    {
+        @using (section.Begin()) { }
+        @using (Html.BlockBuilder().AddClass("position-absolute bottom-0 start-0 end-0 d-flex justify-content-between align-items-center px-3 py-2").Begin())
+        {
+            @using (Html.PB_Span().AddClass("text-white fw-semibold small").Begin())
+            {
+                @using (Html.PB_Span().AddClass("bi @Model.Icon me-1").Begin()) { }
+                @Model.Title
+            }
+            @if (!string.IsNullOrEmpty(Model.DocUrl))
+            {
+                @Html.Button(ActionItemFactory.Url("", Model.DocUrl).SetIcon(IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Light).SetOutlined().SetSize(BoostrapButtonSize.Small)).Render()
+            }
+        }
+    }
+    @using (Html.BlockBuilder().AddClass("pt-2 px-1").Begin())
+    {
+        @using (Html.PB_P().AddClass("small mb-1").Begin())
+        {
+            @Model.Description
+        }
+        @using (Html.PB_P().AddClass("small text-muted mb-0 fst-italic").Begin())
+        {
+            @Model.Usage
+        }
+    }
+}

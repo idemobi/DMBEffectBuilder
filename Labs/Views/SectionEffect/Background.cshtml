@@ -1,0 +1,97 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@using DMBEffectBuilderLabs.Models
+@{
+    Layout = "_Layout";
+    string DocUrl(string c) => $"/Documentation/Show?packageId=DMBEffectBuilder&groupName=NuGet&namespaceName=DMBEffectBuilder&objectName={c}";
+}
+
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Background Effects", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Effects that replace or style the background of a section
+            }
+            @Html.Button(ActionItemFactory.Url(title: "Back to Catalog", url: "/SectionEffect/Index", icon: IconStruct.Bootstrap(value: "bi-arrow-left")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+}
+
+@using (Html.RowBuilder().SetGap(Gap.G4).SetPadding(SpacingSide.X, SpacingSize.Three).SetPadding(SpacingSide.Y, SpacingSize.Four).Begin())
+{
+    @* ── Bootstrap Background ── *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Bootstrap Background", Icon = "bi-columns-gap",
+        Description = "Applies a Bootstrap theme color as the section background.",
+        Usage = "Any section needing a solid theme-aware background.",
+        EffectAction = s => s.BootstrapBackgroundEffect(VariantStyle.Primary, true),
+        DocUrl = DocUrl(nameof(BootstrapBackgroundEffect_SectionExtensions))
+    })
+
+    @* ── Animated Gradient ── *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Animated Gradient", Icon = "bi-palette",
+        Description = "Smooth animated color gradient cycling between two hues.",
+        Usage = "Hero sections, colorful CTAs, onboarding pages.",
+        EffectAction = s => s.AnimatedGradientEffect(colorStart: "#9b5de5", colorEnd: "#f15bb5", angle: 90m, durationSeconds: 4m),
+        DocUrl = DocUrl(nameof(AnimatedGradientEffect_SectionExtensions))
+    })
+
+    @* ── Aurora ── *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Aurora", Icon = "bi-stars",
+        Description = "Three blended color layers sweeping across the background in a CSS animation.",
+        Usage = "Northern lights feel, premium hero sections.",
+        EffectAction = s => s.AuroraEffect(color1: "#a855f7", color2: "#22c55e", color3: "#3b82f6", speedSeconds: 8m),
+        DocUrl = DocUrl(nameof(AuroraEffect_SectionExtensions))
+    })
+
+    @* ── Fade In / Fade Out ── *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Fade In / Fade Out", Icon = "bi-stars",
+        Description = "Smoothly pulses a background image opacity in and out.",
+        Usage = "Atmospheric, cinematic or storytelling sections.",
+        EffectAction = s => s.FadeInFadeOutEffect(imageUrl: "/images/test/test7.png", 0.7m, 0m, 0m),
+        DocUrl = DocUrl(nameof(FadeEffect_SectionExtensions))
+    })
+
+    @* ── Fixed Background ── *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Fixed Background", Icon = "bi-image",
+        Description = "Background image stays fixed while the page content scrolls over it.",
+        Usage = "Depth and layering effects, portfolio sections.",
+        EffectAction = s => s.FixedBackgroundEffect(imageUrl: "/images/test/landscape.png"),
+        DocUrl = DocUrl(nameof(FixedBackgroundEffect_SectionExtensions))
+    })
+
+    @* ── Parallax ── *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Parallax", Icon = "bi-layers",
+        Description = "Background image moves slower than the page scroll, adding depth.",
+        Usage = "Immersive hero sections, travel or landscape pages.",
+        EffectAction = s => s.ParallaxBackground("/images/test/portrait.png", speed: 0.4m),
+        DocUrl = DocUrl(nameof(ParallaxEffect_SectionExtensions))
+    })
+
+    @* ── Zoom Pan ── *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Zoom Pan", Icon = "bi-zoom-in",
+        Description = "Ken Burns-style zoom and pan animation on a static background image.",
+        Usage = "Cinematic headers, event or film-inspired pages.",
+        EffectAction = s => s.ZoomPanEffect(imageUrl: "/images/test/test7.png", speedSeconds: 20m),
+        DocUrl = DocUrl(nameof(ZoomPanEffect_SectionExtensions))
+    })
+}

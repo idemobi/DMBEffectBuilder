@@ -1,0 +1,162 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.SectionBuilder().SetHeight(100, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Image Effects — Catalog", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Browse all available image effects by category
+            }
+        }
+    }
+}
+
+@using (Html.RowBuilder().SetGap(Gap.G4).SetPadding(SpacingSide.X, SpacingSize.Three).SetPadding(SpacingSide.Y, SpacingSize.Four).Begin())
+{
+    @* ── Photo & Hover ── *@
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+    {
+        @using (Html.BlockBuilder().AsCardPreview().Begin())
+        {
+            @using (Html.RowBuilder().SetGap(Gap.G0).Begin())
+            {
+                @using (Html.ColBuilder().SetCol(ColSize.Col4).Begin())
+                {
+                    @Html.ImageRender("/images/test/portrait.png").SetWidth(100, UnitSize.percent).SetHeight(160, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).GrayscaleHoverEffect()
+                }
+                @using (Html.ColBuilder().SetCol(ColSize.Col4).Begin())
+                {
+                    @Html.ImageRender("/images/test/large.png").SetWidth(100, UnitSize.percent).SetHeight(160, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).BlurToSharpEffect()
+                }
+                @using (Html.ColBuilder().SetCol(ColSize.Col4).Begin())
+                {
+                    @Html.ImageRender("/images/test/test6.png").SetWidth(100, UnitSize.percent).SetHeight(160, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).FocusSpotEffect()
+                }
+            }
+            @using (Html.BlockBuilder().AsCardOverlayFooter().Begin())
+            {
+                @using (Html.PB_Span().AsCardLabel().Begin())
+                {
+                    @using (Html.PB_Span().AddClass("bi bi-image me-2").Begin()) { }
+                    @:Photo & Hover
+                }
+            }
+        }
+        @using (Html.BlockBuilder().AsCardFooterRow().Begin())
+        {
+            @using (Html.BlockBuilder().Begin())
+            {
+                @using (Html.PB_P().AsCardDescription().Begin())
+                {
+                    @:Effects that style the image — Simple Hover, Color & Exposure Reveal and Advanced Hover.
+                }
+                @using (Html.PB_P().AsEffectMeta().Begin())
+                {
+                    @:13 effects · Interaction & filters
+                }
+            }
+            @Html.Button(ActionItemFactory.AspRoute("ImageEffect", "PhotoHover").SetTitle("See all").SetIcon(IconStruct.Bootstrap("bi-arrow-right")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+
+    @* ── Stylise ── *@
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+    {
+        @using (Html.BlockBuilder().AsCardPreview().Begin())
+        {
+            @using (Html.RowBuilder().SetGap(Gap.G0).Begin())
+            {
+                @using (Html.ColBuilder().SetCol(ColSize.Col4).Begin())
+                {
+                    @Html.ImageRender("/images/test/test2.png").SetWidth(100, UnitSize.percent).SetHeight(160, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).RotateSlightlyEffect()
+                }
+                @using (Html.ColBuilder().SetCol(ColSize.Col4).Begin())
+                {
+                    @Html.ImageRender("/images/test/test1.png").SetWidth(100, UnitSize.percent).SetHeight(160, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).GlassRevealEffect()
+                }
+                @using (Html.ColBuilder().SetCol(ColSize.Col4).Begin())
+                {
+                    @Html.ImageRender("/images/test/test7.png").SetWidth(100, UnitSize.percent).SetHeight(160, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).RainbowEffect()
+                }
+            }
+            @using (Html.BlockBuilder().AsCardOverlayFooter().Begin())
+            {
+                @using (Html.PB_Span().AsCardLabel().Begin())
+                {
+                    @using (Html.PB_Span().AddClass("bi bi-stars me-2").Begin()) { }
+                    @:Stylise
+                }
+            }
+        }
+        @using (Html.BlockBuilder().AsCardFooterRow().Begin())
+        {
+            @using (Html.BlockBuilder().Begin())
+            {
+                @using (Html.PB_P().AsCardDescription().Begin())
+                {
+                    @:Decorative treatments — Frame, Rotation & Shadow, Overlay & Reveal and Colour, FX & Animation.
+                }
+                @using (Html.PB_P().AsEffectMeta().Begin())
+                {
+                    @:18 effects · Art & FX
+                }
+            }
+            @Html.Button(ActionItemFactory.AspRoute("ImageEffect", "Stylise").SetTitle("See all").SetIcon(IconStruct.Bootstrap("bi-arrow-right")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+
+    @* ── Concatenation ── *@
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+    {
+        @using (Html.BlockBuilder().AsCardPreview().Begin())
+        {
+            @using (Html.RowBuilder().SetGap(Gap.G0).Begin())
+            {
+                @using (Html.ColBuilder().SetCol(ColSize.Col4).Begin())
+                {
+                    @Html.ImageRender("/images/test/test1.png").SetWidth(100, UnitSize.percent).SetHeight(160, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).GrayscaleHoverEffect().ZoomHoverEffect()
+                }
+                @using (Html.ColBuilder().SetCol(ColSize.Col4).Begin())
+                {
+                    @Html.ImageRender("/images/test/test3.png").SetWidth(100, UnitSize.percent).SetHeight(160, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).PulseEffect().GlowHoverEffect()
+                }
+                @using (Html.ColBuilder().SetCol(ColSize.Col4).Begin())
+                {
+                    @Html.ImageRender("/images/test/test6.png").SetWidth(100, UnitSize.percent).SetHeight(160, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).GlitchEffect().ColorInvertEffect()
+                }
+            }
+            @using (Html.BlockBuilder().AsCardOverlayFooter().Begin())
+            {
+                @using (Html.PB_Span().AsCardLabel().Begin())
+                {
+                    @using (Html.PB_Span().AddClass("bi bi-plus-circle me-2").Begin()) { }
+                    @:Concatenation
+                }
+            }
+        }
+        @using (Html.BlockBuilder().AsCardFooterRow().Begin())
+        {
+            @using (Html.BlockBuilder().Begin())
+            {
+                @using (Html.PB_P().AsCardDescription().Begin())
+                {
+                    @:Combine multiple effects to create complex and unique visual styles.
+                }
+                @using (Html.PB_P().AsEffectMeta().Begin())
+                {
+                    @:Advanced compositions · Custom UX
+                }
+            }
+            @Html.Button(ActionItemFactory.AspRoute("ImageEffect", "Concatenation").SetTitle("See all").SetIcon(IconStruct.Bootstrap("bi-arrow-right")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+}

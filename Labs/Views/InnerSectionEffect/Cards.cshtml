@@ -1,0 +1,176 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@{
+    Layout = "_Layout";
+    string DocUrl(string c) => $"/Documentation/Show?packageId=DMBEffectBuilder&groupName=NuGet&namespaceName=DMBEffectBuilder&objectName={c}";
+}
+
+
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Cards", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Card-based visual effects and interactions.
+            }
+            @Html.Button(ActionItemFactory.Url(title: "Back to Catalog", url: "/InnerSectionEffect/Index", icon: IconStruct.Bootstrap(value: "bi-arrow-left")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+}
+
+@* ── Card Flip ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Card Flip", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:Each card flips in 3D to reveal a back face — hover or click trigger, configurable columns and height.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(CardFlipEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsSectionContent().Begin())
+{
+    @(Html.CardFlipBuilder()
+        .SetCardHeight(260)
+        .SetColumns(3)
+        .SetTrigger(CardFlipTrigger.Hover)
+        .AddCard("bi-search",        "Discovery",   "#667eea", "#764ba2", "Understanding your goals, constraints and audience — what success looks like and who you're building for.")
+        .AddCard("bi-pencil-square", "Design",      "#f093fb", "#f5576c", "Wireframes and prototypes aligned with your brand. Every visual decision is intentional and documented.")
+        .AddCard("bi-code-slash",    "Development", "#4facfe", "#00f2fe", "Clean, well-tested code delivered in regular sprints. You stay in the loop at every stage.")
+        .AddCard("bi-check2-circle", "Review",      "#43e97b", "#38f9d7", "QA, accessibility checks and performance tuning before anything reaches production.")
+        .AddCard("bi-rocket",        "Launch",      "#fa709a", "#fee140", "Deployment, monitoring and full handover documentation. We stay available after go-live."))
+}
+
+@* ── Fan ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Fan", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:Cards fan out from a central anchor — independent top and bottom widths allow pure fan shapes or accordion layouts.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(FanEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsOverflowHidden().SetStyle("padding-top", "3rem").SetStyle("padding-bottom", "1rem").Begin())
+{
+    @using (Html.BlockBuilder().AsSectionSubLabel().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Character Selection · 7 cards · spread", TitleLevel.Six).AsSubSectionTitle().Render()
+    }
+    @(Html.FanBuilder()
+        .SetCardSize(widthPx: 200, heightPx: 300)
+        .SetSpreadByWidth(topWidthPx: 720, bottomWidthPx: 620)
+        .SetContainerHeight(350)
+        .SetEntrance(FanEffectEntranceDirection.Left)
+        .AddCards(
+            FanEffectCard.Character    ("/images/test/mage.png",   "The Mage",      VariantStyle.Primary,   "Mage",     "Kaïros"),
+            FanEffectCard.CharacterText(VariantStyle.Danger,       "Warrior",  "Aldric",  "Iron Shield · King's Guard"),
+            FanEffectCard.Character    ("/images/test/fight.png",  "The Duelist",   VariantStyle.Warning,   "Duelist",  "Veyra"),
+            FanEffectCard.CharacterText(VariantStyle.Secondary,    "Rogue",    "Sable",   "Shadow Step · Thieves Guild"),
+            FanEffectCard.Character    ("/images/test/armour.png", "The Guardian",  VariantStyle.Primary,   "Guardian", "Brennan"),
+            FanEffectCard.CharacterText(VariantStyle.Success,      "Healer",   "Lyren",   "Light Weaver · Temple Order"),
+            FanEffectCard.Character    ("/images/test/arcade.png", "The Trickster", VariantStyle.Warning,   "Trickster","Zix")))
+}
+
+@using (Html.BlockBuilder().AsOverflowHidden().SetStyle("padding-top", "3rem").SetStyle("padding-bottom", "2rem").Begin())
+{
+    @using (Html.BlockBuilder().AsSectionSubLabel().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Card Hand · 13 cards · pure fan", TitleLevel.Six).AsSubSectionTitle().Render()
+    }
+    @(Html.FanBuilder()
+        .SetCardSize(widthPx: 120, heightPx: 220)
+        .SetSpreadByWidth(topWidthPx: 340, bottomWidthPx: 0)
+        .SetContainerHeight(315)
+        .SetBottomOffset(65)
+        .SetEntrance(FanEffectEntranceDirection.Left, delayStepMs: 40)
+        .AddCards(
+            FanEffectCard.PlayingCard("1",  VariantStyle.Danger,   "Ace"),
+            FanEffectCard.PlayingCard("2",  VariantStyle.Warning,  "Two"),
+            FanEffectCard.PlayingCard("3",  VariantStyle.Success,  "Three"),
+            FanEffectCard.PlayingCard("4",  VariantStyle.Info,     "Four"),
+            FanEffectCard.PlayingCard("5",  VariantStyle.Primary,  "Five"),
+            FanEffectCard.PlayingCard("6",  VariantStyle.Danger,   "Six"),
+            FanEffectCard.PlayingCard("7",  VariantStyle.Warning,  "Seven"),
+            FanEffectCard.PlayingCard("8",  VariantStyle.Success,  "Eight"),
+            FanEffectCard.PlayingCard("9",  VariantStyle.Info,     "Nine"),
+            FanEffectCard.PlayingCard("10", VariantStyle.Primary,  "Ten"),
+            FanEffectCard.PlayingCard("J",  VariantStyle.Danger,   "Jack"),
+            FanEffectCard.PlayingCard("Q",  VariantStyle.Warning,  "Queen"),
+            FanEffectCard.PlayingCard("K",  VariantStyle.Success,  "King")))
+}
+
+@* ── Mosaic ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Mosaic", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:3×3 image grid — hovering a cell expands its column and row with a GSAP Flip transition. Requires exactly 9 items.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(MosaicGridEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsSectionContent().Begin())
+{
+    @(Html.MosaicGridBuilder()
+        .AddItem("/images/test/forest1.png", "Forêt — l'aube")
+        .AddItem("/images/test/fight.png",   "Combat — le duel")
+        .AddItem("/images/test/forest2.png", "Forêt — brume matinale")
+        .AddItem("/images/test/forest3.png", "Forêt — sous les frondaisons")
+        .AddItem("/images/test/terranova.png", "Terra Nova — monde ouvert")
+        .AddItem("/images/test/forest4.png", "Forêt — lumière rasante")
+        .AddItem("/images/test/forest5.png", "Forêt — sentier secret")
+        .AddItem("/images/test/rest.png",    "Repos — après la bataille")
+        .AddItem("/images/test/forest6.png", "Forêt — ombre et lumière"))
+}
+
+@* ── Retro TV ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Retro TV", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:A CRT television widget with configurable channels — each channel displays a solid color palette or a full-screen image with scanlines, phosphor glow and a channel-switch animation.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(RetroTvEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsSectionContent().Begin())
+{
+    @(Html.RetroTvBuilder()
+        .SetBrand("Idémobi")
+        .SetAutoAdvance(6000)
+        .AddColorChannel("Ink",   "#1a1814", "the sky at midnight")
+        .AddColorChannel("Storm", "#2e3d4f", "cumulonimbus at dusk")
+        .AddColorChannel("Slate", "#6b7f8e", "wet flagstone")
+        .AddColorChannel("Rain",  "#8fafc2", "first drops on glass")
+        .AddColorChannel("Moss",  "#4a5e45", "lichen on old walls")
+        .AddColorChannel("Clay",  "#9c7c5e", "exposed earth")
+        .AddColorChannel("Ochre", "#c4893a", "amber before the storm")
+        .AddColorChannel("Petal", "#d4a5a0", "wild rose, last bloom")
+        .AddColorChannel("Dust",  "#c8bfad", "dry road before rain")
+        .AddColorChannel("Stone", "#e8e2d9", "limestone in afternoon light")
+        .AddImageChannel("/images/test/mage.png",     "Kaïros",    "the arcane mage")
+        .AddImageChannel("/images/test/warrior.png",  "Aldric",    "iron shield · king's guard")
+        .AddImageChannel("/images/test/terranova.png","Terra Nova", "an open world of 80 km²"))
+}

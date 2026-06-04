@@ -1,0 +1,215 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@using DMBEffectBuilderLabs.Models
+@{
+    Layout = "_Layout";
+    string DocUrl(string c) =>
+        $"/Documentation/Show?packageId=DMBEffectBuilder&groupName=NuGet&namespaceName=DMBEffectBuilder&objectName={c}";
+}
+
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Stylised Effects", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Decorative and artistic treatments applied to images
+            }
+            @Html.Button(ActionItemFactory.Url(title: "Back to Catalog", url: "/ImageEffect/Index", icon: IconStruct.Bootstrap(value: "bi-arrow-left")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+}
+
+@using (Html.RowBuilder().SetGap(Gap.G4).SetPadding(SpacingSide.X, SpacingSize.Three).SetPadding(SpacingSide.Y, SpacingSize.Four).Begin())
+{
+    @* ── Frame, Rotation & Shadow ── *@
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Polaroid", Icon = "bi-card-image",
+        Description = "Adds a classic polaroid frame and subtle rotation to the image.",
+        Usage = "Handcrafted feel, photo galleries.",
+        DocUrl = DocUrl(nameof(PolaroidEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test1.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).PolaroidEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Rotate slightly", Icon = "bi-arrow-repeat",
+        Description = "Rotates the image by a few degrees. Hover to reset.",
+        Usage = "Scrapbook style, playful layouts.",
+        DocUrl = DocUrl(nameof(RotateSlightlyEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test2.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).RotateSlightlyEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Rotate random", Icon = "bi-shuffle",
+        Description = "Applies a random rotation angle to the image. Hover to reset.",
+        Usage = "Dynamic grids, scattered photos.",
+        DocUrl = DocUrl(nameof(RotateRandomEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test3.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).RotateRandomEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Soft shadow", Icon = "bi-shadows",
+        Description = "Adds a soft, elegant drop shadow to create depth.",
+        Usage = "Floating elements, clean designs.",
+        DocUrl = DocUrl(nameof(SoftShadowEffect_ImageExtension)),
+        Centered = true,
+        ImageContent = Html.ImageRender("/images/test/test4.png").SetWidth(180, UnitSize.px).SetHeight(140, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).SoftShadowEffect()
+    })
+
+    @* ── Overlay & Reveal ── *@
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Vignette", Icon = "bi-circle",
+        Description = "Applies a soft dark overlay at the edges of the image.",
+        Usage = "Cinematic feel, focus on center.",
+        DocUrl = DocUrl(nameof(VignetteEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/landscape.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).VignetteEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Retro scanlines", Icon = "bi-display",
+        Description = "Adds horizontal scanlines for a vintage CRT display effect.",
+        Usage = "Retro gaming, tech-themed UI.",
+        DocUrl = DocUrl(nameof(RetroScanlinesEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test6.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).RetroScanlinesEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Neon frame", Icon = "bi-box",
+        Description = "Adds a glowing neon border around the image.",
+        Usage = "Cyberpunk style, highlights.",
+        DocUrl = DocUrl(nameof(NeonFrameEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test7.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).NeonFrameEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Shine sweep", Icon = "bi-magic",
+        Description = "Sweeps a luminous highlight across the image on hover.",
+        Usage = "Glossy finish, premium feel.",
+        DocUrl = DocUrl(nameof(ShineSweepEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/portrait.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).ShineSweepEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Glass reveal", Icon = "bi-fullscreen",
+        Description = "Image starts blurred and reveals through a glass-like pane on hover.",
+        Usage = "Elegant reveals, modern UI.",
+        DocUrl = DocUrl(nameof(GlassRevealEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test1.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).GlassRevealEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Locked reveal", Icon = "bi-lock",
+        Description = "A lock icon that fades away to reveal the clear image on hover.",
+        Usage = "Restricted content, teaser reveals.",
+        DocUrl = DocUrl(nameof(LockedRevealEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test2.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).LockedRevealEffect()
+    })
+
+    @* ── Colour, FX & Animation ── *@
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Glitch", Icon = "bi-lightning-charge",
+        Description = "Applies a digital glitch animation to the image.",
+        Usage = "Cyberpunk, error-core aesthetics.",
+        DocUrl = DocUrl(nameof(GlitchEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test3.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).GlitchEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Color flicker", Icon = "bi-lightbulb",
+        Description = "Adds a colored flickering overlay for a dramatic lighting effect.",
+        Usage = "Horror, suspense, or tech themes.",
+        DocUrl = DocUrl(nameof(ColorFlickerEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test4.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).ColorFlickerEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Color invert", Icon = "bi-palette",
+        Description = "Inverts the colors of the image for a negative-film look.",
+        Usage = "Artistic filters, high contrast.",
+        DocUrl = DocUrl(nameof(ColorInvertEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test6.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).ColorInvertEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Sepia", Icon = "bi-camera",
+        Description = "Applies a classic warm sepia tone to the image.",
+        Usage = "Vintage, historical, warm aesthetics.",
+        DocUrl = DocUrl(nameof(SepiaEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/landscape.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).SepiaEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Ghost", Icon = "bi-person",
+        Description = "Adds a semi-transparent, drifting ghosting effect to the image.",
+        Usage = "Surreal, atmospheric sections.",
+        DocUrl = DocUrl(nameof(GhostEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/portrait.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).GhostEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Rainbow hue cycle", Icon = "bi-rainbow",
+        Description = "Continuously cycles the hue of the image through the rainbow.",
+        Usage = "Vibrant, psychedelic effects.",
+        DocUrl = DocUrl(nameof(RainbowEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test7.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).RainbowEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Continuous rotation", Icon = "bi-arrow-repeat",
+        Description = "Keeps the image rotating continuously.",
+        Usage = "Spinners, decorative icons.",
+        DocUrl = DocUrl(nameof(RotateEffect_ImageExtension)),
+        Centered = true,
+        ImageContent = Html.ImageRender("/images/test/square.png").SetWidth(140, UnitSize.px).SetHeight(140, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).RotateEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Distort warp", Icon = "bi-warp",
+        Description = "Animated warp distortion for a liquid or dream-like feel.",
+        Usage = "Surreal visuals, experimental UI.",
+        DocUrl = DocUrl(nameof(DistortEffect_ImageExtension)),
+        ImageContent = Html.ImageRender("/images/test/test1.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).DistortEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Pulse", Icon = "bi-heart",
+        Description = "A breathing zoom animation triggered on hover.",
+        Usage = "Living elements, notifications.",
+        DocUrl = DocUrl(nameof(PulseEffect_ImageExtension)),
+        Centered = true,
+        ImageContent = Html.ImageRender("/images/test/test2.png").SetWidth(180, UnitSize.px).SetHeight(140, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).PulseEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Shake", Icon = "bi-vibration",
+        Description = "Applies a rapid shaking movement on hover.",
+        Usage = "Attention seekers, error states.",
+        DocUrl = DocUrl(nameof(ShakeEffect_ImageExtension)),
+        Centered = true,
+        ImageContent = Html.ImageRender("/images/test/test3.png").SetWidth(180, UnitSize.px).SetHeight(140, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).ShakeEffect()
+    })
+}

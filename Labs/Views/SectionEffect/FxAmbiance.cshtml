@@ -1,0 +1,179 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@using DMBEffectBuilderLabs.Models
+@{
+    Layout = "_Layout";
+    string DocUrl(string c) => $"/Documentation/Show?packageId=DMBEffectBuilder&groupName=NuGet&namespaceName=DMBEffectBuilder&objectName={c}";
+}
+
+@* --- HEADER --- *@
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("FX & Ambiance", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Overlays, particles and animated layers applied on top of a section
+            }
+            @Html.Button(ActionItemFactory.Url("Back to Catalog", "/SectionEffect/Index", IconStruct.Bootstrap("bi-arrow-left")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+}
+
+@* --- GRILLE D'EFFETS --- *@
+@using (Html.RowBuilder().SetGap(Gap.G4).SetPadding(SpacingSide.X, SpacingSize.Three).SetPadding(SpacingSide.Y, SpacingSize.Four).Begin())
+{
+    @* 1. Highlight Sweep *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Highlight Sweep", Icon = "bi-magic",
+        Description = "Sweeps a luminous highlight across the section background.",
+        Usage = "Hero banners, image headers.",
+        EffectAction = s => s.HighlightSweepEffect(0.5m, "/images/test/landscape.png"),
+        DocUrl = DocUrl(nameof(HighlightSweepEffect_SectionExtensions))
+    })
+
+    @* 2. Noise / Grain *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Noise / Grain", Icon = "bi-film",
+        Description = "Animated film grain overlay composited over any background.",
+        Usage = "Retro, editorial, cinematic sections.",
+        EffectAction = s => s.AnimatedGradientEffect("#1a1a2e", "#16213e", 135m, 6m).NoiseEffect(0.20m, 0.35m),
+        DocUrl = DocUrl(nameof(NoiseEffect_SectionExtensions))
+    })
+
+    @* 3. Spotlight *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Spotlight", Icon = "bi-brightness-high",
+        Description = "Radial glow that follows the cursor or drifts automatically.",
+        Usage = "Dark hero sections, product showcases.",
+        EffectAction = s => s.BootstrapBackgroundEffect(VariantStyle.Dark, true).SpotlightEffect("#ffc832", 0.25m, 280, true),
+        DocUrl = DocUrl(nameof(SpotlightEffect_SectionExtensions))
+    })
+
+    @* 4. Curtain *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Curtain", Icon = "bi-layout-split",
+        Description = "Two panels slide apart on load to reveal section content.",
+        Usage = "Dramatic page intros, reveal animations.",
+        EffectAction = s => s.AnimatedGradientEffect("#9b5de5", "#f15bb5", 90m, 5m).CurtainEffect("#4a0e4e", CurtainStop.Meet),
+        DocUrl = DocUrl(nameof(CurtainEffect_SectionExtensions))
+    })
+
+    @* 5. Rain *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Rain", Icon = "bi-cloud-rain",
+        Description = "Animated rain streaks falling across the section canvas.",
+        Usage = "Atmospheric, moody, or tech-themed sections.",
+        EffectAction = s => s.BootstrapBackgroundEffect(VariantStyle.Dark, true).RainEffect("#00ff41", 0.7m, 100),
+        DocUrl = DocUrl(nameof(RainEffect_SectionExtensions))
+    })
+
+    @* 6. Bubble / Orbs *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Bubble / Orbs", Icon = "bi-circle",
+        Description = "Blurry colored orbs drifting slowly in the background.",
+        Usage = "Creative agencies, portfolios, landing pages.",
+        EffectAction = s => s.BootstrapBackgroundEffect(VariantStyle.Dark, true).BubbleEffect(new[] { "#ff6ecf", "#efff5c", "#00f5d4" }, 5, 100, 260, 55),
+        DocUrl = DocUrl(nameof(BubbleEffect_SectionExtensions))
+    })
+
+    @* 7. Ripple *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Ripple", Icon = "bi-water",
+        Description = "Expanding rings triggered on click or in auto ambient mode.",
+        Usage = "Interactive CTAs, event pages, calm backgrounds.",
+        EffectAction = s => s.AnimatedGradientEffect("#1a1a2e", "#16213e", 135m, 8m).RippleEffect("#ffffff", 0.4m, 2, true),
+        DocUrl = DocUrl(nameof(RippleEffect_SectionExtensions))
+    })
+
+    @* 8. Lava Lamp *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Lava Lamp", Icon = "bi-droplet-half",
+        Description = "Colored blobs floating and fusing via blur and contrast filters.",
+        Usage = "Bold hero banners, music or art platforms.",
+        EffectAction = s => s.LavaLampEffect("#0d0d0d", new[] { "#ff6ecf", "#00f5d4", "#efff5c" }, 5, 35),
+        DocUrl = DocUrl(nameof(LavaLampEffect_SectionExtensions))
+    })
+
+    @* 9. Starfield *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Starfield", Icon = "bi-stars",
+        Description = "Stars expanding outward on canvas — warp or cosmos feel.",
+        Usage = "Space, tech, or sci-fi themed sections.",
+        EffectAction = s => s.AnimatedGradientEffect("#0f0c29", "#24243e", 135m, 20m).StarfieldEffect("#ffffff", 120, 1.5m),
+        DocUrl = DocUrl(nameof(StarfieldEffect_SectionExtensions))
+    })
+
+    @* 10. Firefly *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Firefly", Icon = "bi-lightbulb",
+        Description = "Glowing dots floating with a soft random blink animation.",
+        Usage = "Nature, wellness, or ambient dark sections.",
+        EffectAction = s => s.AnimatedGradientEffect("#001a0a", "#003318", 135m, 15m).FireflyEffect("#aaff88", 22, 3m),
+        DocUrl = DocUrl(nameof(FireflyEffect_SectionExtensions))
+    })
+
+    @* 11. Matrix *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Matrix", Icon = "bi-terminal",
+        Description = "Falling katakana and latin characters drawn on canvas.",
+        Usage = "Hacker, cyberpunk, or developer-themed pages.",
+        EffectAction = s => s.AnimatedGradientEffect("#000000", "#001100", 180m, 20m).MatrixEffect("#00ff41", 14, 1m),
+        DocUrl = DocUrl(nameof(MatrixEffect_SectionExtensions))
+    })
+
+    @* 12. Scanline *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Scanline", Icon = "bi-display",
+        Description = "Retro CRT horizontal scanline overlay. Pure CSS, no JS.",
+        Usage = "Retro gaming, synthwave, or vintage UI themes.",
+        EffectAction = s => s.AnimatedGradientEffect("#1a1a2e", "#4a0080", 135m, 5m).ScanlineEffect(0.25m, 3),
+        DocUrl = DocUrl(nameof(ScanlineEffect_SectionExtensions))
+    })
+
+    @* 13. Glow Pulse *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Glow Pulse", Icon = "bi-radioactive",
+        Description = "Box-shadow glow that breathes in and out around the section.",
+        Usage = "Call-to-action blocks, feature highlights.",
+        EffectAction = s => s.BootstrapBackgroundEffect(VariantStyle.Normal, true).GlowPulseEffect(),
+        DocUrl = DocUrl(nameof(GlowPulseEffect_SectionExtensions))
+    })
+
+    @* 14. Pulse Ring *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Pulse Ring", Icon = "bi-record-circle",
+        Description = "Concentric expanding rings from the section center.",
+        Usage = "Radar, sonar, signal, or broadcast themes.",
+        EffectAction = s => s.BootstrapBackgroundEffect(VariantStyle.Dark, true).PulseRingEffect(),
+        DocUrl = DocUrl(nameof(PulseRingEffect_SectionExtensions))
+    })
+
+    @* 15. Confetti *@
+    @await Html.PartialAsync("_EffectCard", new EffectCardViewModel
+    {
+        Title = "Confetti", Icon = "bi-balloon",
+        Description = "Colored confetti pieces falling and rotating on canvas.",
+        Usage = "Celebrations, promotions, success pages.",
+        EffectAction = s => s.BootstrapBackgroundEffect(VariantStyle.Dark, true).ConfettiEffect(),
+        DocUrl = DocUrl(nameof(ConfettiEffect_SectionExtensions))
+    })
+}

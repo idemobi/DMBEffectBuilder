@@ -1,0 +1,74 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@using DMBEffectBuilderLabs.Models
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Concatenated Effects", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Combine multiple effects to create unique visual experiences
+            }
+            @Html.Button(ActionItemFactory.Url(title: "Back to Catalog", url: "/ImageEffect/Index", icon: IconStruct.Bootstrap(value: "bi-arrow-left")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+}
+
+@using (Html.RowBuilder().SetGap(Gap.G4).SetPadding(SpacingSide.X, SpacingSize.Three).SetPadding(SpacingSide.Y, SpacingSize.Four).Begin())
+{
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Focus & Zoom", Icon = "bi-plus-circle",
+        Description = "Combines GrayscaleHover and ZoomHover.",
+        Usage = "Interactive galleries, product highlights.",
+        ImageContent = Html.ImageRender("/images/test/test1.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).GrayscaleHoverEffect().ZoomHoverEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Cinematic Reveal", Icon = "bi-plus-circle",
+        Description = "Combines BlurToSharp and Vignette.",
+        Usage = "Ethereal transitions, storytelling.",
+        ImageContent = Html.ImageRender("/images/test/test2.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).BlurToSharpEffect().VignetteEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Vintage Scrapbook", Icon = "bi-plus-circle",
+        Description = "Combines Sepia and RotateSlightly.",
+        Usage = "Historical archives, memory walls.",
+        ImageContent = Html.ImageRender("/images/test/test3.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).SepiaEffect().RotateSlightlyEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Radiant Life", Icon = "bi-plus-circle",
+        Description = "Combines Pulse and GlowHover.",
+        Usage = "Call to actions, featured avatars.",
+        ImageContent = Html.ImageRender("/images/test/test4.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).PulseEffect().GlowHoverEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Cyber Negative", Icon = "bi-plus-circle",
+        Description = "Combines Glitch and ColorInvert.",
+        Usage = "High-tech glitches, horror FX.",
+        ImageContent = Html.ImageRender("/images/test/test6.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).GlitchEffect().ColorInvertEffect()
+    })
+
+    @await Html.PartialAsync("_ImageEffectCard", new ImageEffectCardViewModel
+    {
+        Title = "Unstable Reality", Icon = "bi-plus-circle",
+        Description = "Combines Shake and Distort.",
+        Usage = "Intense animations, abstract art.",
+        ImageContent = Html.ImageRender("/images/test/test7.png").SetWidth(100, UnitSize.percent).SetHeight(180, UnitSize.px).InMediaComponent(m => m.SetStyle("object-fit", "cover")).ShakeEffect().DistortEffect()
+    })
+}

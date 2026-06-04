@@ -1,0 +1,160 @@
+@using DMBBootstrapBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@{
+    Layout = "_Layout";
+    string DocUrl(string c) => $"/Documentation/Show?packageId=DMBEffectBuilder&groupName=NuGet&namespaceName=DMBEffectBuilder&objectName={c}";
+}
+
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Carousels", TitleLevel.One).Render()
+            @using (Html.PB_P().AsMuted().Begin())
+            {
+                @:Rotating or sliding collections of items.
+            }
+            @Html.Button(ActionItemFactory.Url(title: "Back to Catalog", url: "/InnerSectionEffect/Index", icon: IconStruct.Bootstrap(value: "bi-arrow-left")).SetVariant(VariantStyle.Primary)).Render()
+        }
+    }
+}
+
+@* ── Carousel ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Carousel", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:Slides with arrow navigation, dot indicators and optional auto-play — slide or fade transition.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(CarouselEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsSectionContent().Begin())
+{
+    @(Html.CarouselBuilder()
+        .SetHeight(380)
+        .SetAutoPlay(4000)
+        .SetTransition(CarouselTransition.Slide)
+        .AddSlide("bi-lightning-charge", "Intelligent autocompletion", "Understands the full context of your project.",    "#667eea", "#764ba2")
+        .AddSlide("bi-arrow-left-right", "Smart refactoring",          "Renames and restructures across every file.",      "#f093fb", "#f5576c")
+        .AddSlide("bi-check2-circle",    "Automatic test generation",  "Happy paths, edge cases and error conditions.",    "#4facfe", "#00f2fe")
+        .AddSlide("bi-file-earmark-text","Documentation on demand",    "Keeps docs in sync when you refactor.",            "#43e97b", "#38f9d7"))
+}
+
+@* ── Cylinder Carousel ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Cylinder Carousel", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:3D cylinder carousel — cards arranged on a rotating CSS cylinder. Three shapes: concave (opens toward viewer), convex (protrudes toward viewer), flat (marquee).
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(CylinderCarouselEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@using (Html.BlockBuilder().AsOverflowHidden().SetStyle("padding-top", "5rem").SetStyle("padding-bottom", "2rem").Begin())
+{
+    @using (Html.BlockBuilder().AsSectionSubLabel(largeMargin: true).Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Concave · Images · Grayscale → colour reveal + scale on hover", TitleLevel.Six).AsSubSectionTitle().Render()
+    }
+    @(Html.CylinderCarouselBuilder()
+        .SetShape(CylinderShapeMode.Concave)
+        .SetFilter(CylinderFilterMode.Grayscale)
+        .SetHoverClearFilter()
+        .SetHoverScale()
+        .PauseOnHover()
+        .SetSpeed(32)
+        .SetCardWidth("14em")
+        .SetPerspective("115em")
+        .AddImageCard("https://picsum.photos/seed/11/400/570", "photo 1")
+        .AddImageCard("https://picsum.photos/seed/22/400/570", "photo 2")
+        .AddImageCard("https://picsum.photos/seed/33/400/570", "photo 3")
+        .AddImageCard("https://picsum.photos/seed/44/400/570", "photo 4")
+        .AddImageCard("https://picsum.photos/seed/55/400/570", "photo 5")
+        .AddImageCard("https://picsum.photos/seed/66/400/570", "photo 6")
+        .AddImageCard("https://picsum.photos/seed/77/400/570", "photo 7")
+        .AddImageCard("https://picsum.photos/seed/88/400/570", "photo 8")
+        .AddImageCard("https://picsum.photos/seed/99/400/570", "photo 9")
+        .AddImageCard("https://picsum.photos/seed/10/400/570", "photo 10"))
+}
+
+@using (Html.BlockBuilder().AsOverflowHidden().SetStyle("padding-top", "5rem").SetStyle("padding-bottom", "2rem").Begin())
+{
+    @using (Html.BlockBuilder().AsSectionSubLabel(largeMargin: true).Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Convex · Images · Sepia → colour reveal on hover", TitleLevel.Six).AsSubSectionTitle().Render()
+    }
+    @(Html.CylinderCarouselBuilder()
+        .SetShape(CylinderShapeMode.Convex)
+        .SetFilter(CylinderFilterMode.Sepia)
+        .SetSpeed(32)
+        .SetCardWidth("14em")
+        .SetPerspective("115em")
+        .AddImageCard("https://picsum.photos/seed/11/400/570", "photo 1")
+        .AddImageCard("https://picsum.photos/seed/22/400/570", "photo 2")
+        .AddImageCard("https://picsum.photos/seed/33/400/570", "photo 3")
+        .AddImageCard("https://picsum.photos/seed/44/400/570", "photo 4")
+        .AddImageCard("https://picsum.photos/seed/55/400/570", "photo 5")
+        .AddImageCard("https://picsum.photos/seed/66/400/570", "photo 6")
+        .AddImageCard("https://picsum.photos/seed/77/400/570", "photo 7")
+        .AddImageCard("https://picsum.photos/seed/88/400/570", "photo 8")
+        .AddImageCard("https://picsum.photos/seed/99/400/570", "photo 9")
+        .AddImageCard("https://picsum.photos/seed/10/400/570", "photo 10"))
+}
+
+@using (Html.BlockBuilder().AsCarouselWrapper().Begin())
+{
+    @using (Html.BlockBuilder().AsSectionSubLabel(largeMargin: true).Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Flat · Horizontal marquee · Hover scale + pause", TitleLevel.Six).AsSubSectionTitle().Render()
+    }
+    @(Html.CylinderCarouselBuilder()
+        .SetShape(CylinderShapeMode.Flat)
+        .SetHoverScale()
+        .SetSpeed(20)
+        .SetCardWidth("13em")
+        .SetAspectRatio("3/4")
+        .AddImageCard("https://picsum.photos/seed/11/390/520", "photo 1")
+        .AddImageCard("https://picsum.photos/seed/22/390/520", "photo 2")
+        .AddImageCard("https://picsum.photos/seed/33/390/520", "photo 3")
+        .AddImageCard("https://picsum.photos/seed/44/390/520", "photo 4")
+        .AddImageCard("https://picsum.photos/seed/55/390/520", "photo 5")
+        .AddImageCard("https://picsum.photos/seed/66/390/520", "photo 6")
+        .AddImageCard("https://picsum.photos/seed/77/390/520", "photo 7")
+        .AddImageCard("https://picsum.photos/seed/88/390/520", "photo 8"))
+}
+
+@* ── Filmstrip Reveal ── *@
+@using (Html.BlockBuilder().AsSectionHeader().Begin())
+{
+    @using (Html.BlockBuilder().Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Filmstrip Reveal", TitleLevel.Three).Render()
+        @using (Html.PB_P().AsMuted().Begin())
+        {
+            @:Full-viewport cinematic hero: images scroll as a strip, the center one scales to fullscreen, then the title and thumbnail slideshow are revealed.
+        }
+    }
+    @Html.Button(ActionItemFactory.Url(title: "", url: DocUrl(nameof(FilmstripRevealEffect_InnerExtensions)), icon: IconStruct.Bootstrap("bi-book-half")).SetVariant(VariantStyle.Secondary).SetOutlined()).Render()
+}
+
+@(Html.FilmstripRevealBuilder()
+    .SetTitle("Filmstrip Reveal")
+    .SetBackgroundColor("#1a1a1a")
+    .SetForegroundColor("#f4f4f4")
+    .AddSlide("/images/test/fight.png",     "Combat — le duel")
+    .AddSlide("/images/test/rest.png",      "Repos — après la bataille")
+    .AddSlide("/images/test/forest6.png",   "Forêt — ombre et lumière")
+    .AddSlide("/images/test/forest1.png",   "Forêt — l'aube")
+    .AddSlide("/images/test/terranova.png", "Terra Nova — monde ouvert"))
