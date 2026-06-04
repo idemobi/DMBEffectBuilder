@@ -92,6 +92,17 @@ When copying this file to another PageBuilder ecosystem project, update this sec
 - `Labs/Views`: Razor pages and partials rendered by the host application through an MVC application part.
 - `Labs/Models`: view models used by effect preview cards.
 - `Labs/Helpers`: Razor helper extensions used by the Labs views without depending on `labs_idemobi_com`.
+- `Labs/Navigation/DMBEffectBuilderLabsNavigationAgent.cs`: reusable navbar, sidebar, title, and icon fragments for local and final labs hosts.
+
+## Website
+
+- `Website/DMBEffectBuilderWebsite.csproj`: local ASP.NET Core host for testing DMBEffectBuilder labs pages independently.
+- `Website/Program.cs`: local host startup, configuration, MVC application part, services, and default route.
+- `Website/Filters`: local MVC filters that attach the DMBEffectBuilder labs sidebar and breadcrumb.
+- `Website/Providers`: local navbar providers that assemble DMBEffectBuilder labs menu fragments.
+- `Website/Views/Shared/_Layout.cshtml`: local PageBuilder-compatible layout.
+- `Website/wwwroot/favicons`: local favicon assets copied from the labs host.
+- `Website/wwwroot/logo`: local logo assets copied from the labs host.
 
 ## Related projects
 

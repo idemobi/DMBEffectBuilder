@@ -1,0 +1,20 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="NuGet" />
+    <BuildType Name="Release" />
+  </Configurations>
+  <Folder Name="/Source/">
+    <Project Path="Source/DMBEffectBuilder.csproj" />
+  </Folder>
+  <Folder Name="/Labs/">
+    <Project Path="Labs/DMBEffectBuilderLabs.csproj">
+      <BuildType Solution="NuGet|*" Project="Debug" />
+    </Project>
+  </Folder>
+  <Folder Name="/Website/">
+    <Project Path="Website/DMBEffectBuilderWebsite.csproj">
+      <BuildType Solution="NuGet|*" Project="Debug" />
+    </Project>
+  </Folder>
+</Solution>
