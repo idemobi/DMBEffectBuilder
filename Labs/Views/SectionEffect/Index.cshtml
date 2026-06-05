@@ -24,7 +24,7 @@
 @using (Html.RowBuilder().SetGap(Gap.G4).SetPadding(SpacingSide.X, SpacingSize.Three).SetPadding(SpacingSide.Y, SpacingSize.Four).Begin())
 {
     @* ── Background ── *@
-    @await Html.PartialAsync("_CategoryCard", new CategoryCardViewModel
+    @await Html.PartialAsync("_DMBEffectBuilderCategoryCard", new CategoryCardViewModel
     {
         Title = "Background", Icon = "bi-image",
         Description = "Bootstrap colors, animated gradients, fixed images, parallax, aurora and zoom-pan effects.",
@@ -39,7 +39,7 @@
     })
 
     @* ── FX & Ambiance ── *@
-    @await Html.PartialAsync("_CategoryCard", new CategoryCardViewModel
+    @await Html.PartialAsync("_DMBEffectBuilderCategoryCard", new CategoryCardViewModel
     {
         Title = "FX & Ambiance", Icon = "bi-stars",
         Description = "Overlays, particles and animated layers composited on top of any background.",
@@ -54,7 +54,7 @@
     })
 
     @* ── Shape & Edge ── *@
-    @await Html.PartialAsync("_CategoryCard", new CategoryCardViewModel
+    @await Html.PartialAsync("_DMBEffectBuilderCategoryCard", new CategoryCardViewModel
     {
         Title = "Shape & Edge", Icon = "bi-pentagon",
         Description = "SVG wave masks and diagonal clip-path cuts applied to section edges.",
