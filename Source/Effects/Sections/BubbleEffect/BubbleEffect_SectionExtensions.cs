@@ -7,8 +7,6 @@
 
 #region
 
-using System;
-using System.Linq;
 using System.Text.Encodings.Web;
 using DMBBootstrapBuilder;
 using DMBPageBuilder;

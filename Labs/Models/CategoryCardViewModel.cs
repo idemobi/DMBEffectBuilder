@@ -7,7 +7,6 @@
 
 #region
 
-using System;
 using DMBBootstrapBuilder;
 
 #endregion
@@ -32,7 +31,7 @@ namespace DMBEffectBuilderLabs.Models
         public string Icon { get; set; } = string.Empty;
 
         /// <summary>
-        ///     Gets or sets the preview transformations applied to sample <see cref="SectionBuilder"/> instances.
+        ///     Gets or sets the preview transformations applied to sample <see cref="SectionBuilder" /> instances.
         /// </summary>
         public Func<SectionBuilder, SectionBuilder>[] Previews { get; set; } = [];
 

@@ -7,7 +7,6 @@
 
 #region
 
-using System;
 using DMBBootstrapBuilder;
 
 #endregion
@@ -37,7 +36,7 @@ namespace DMBEffectBuilderLabs.Models
         public string DocUrl { get; set; } = string.Empty;
 
         /// <summary>
-        ///     Gets or sets the action that applies the effect to the preview <see cref="SectionBuilder"/>.
+        ///     Gets or sets the action that applies the effect to the preview <see cref="SectionBuilder" />.
         /// </summary>
         public required Func<SectionBuilder, SectionBuilder> EffectAction { get; set; }
 

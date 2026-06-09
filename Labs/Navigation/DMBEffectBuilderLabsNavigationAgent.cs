@@ -7,7 +7,6 @@
 
 #region
 
-using System;
 using DMBBootstrapBuilder;
 using DMBPageBuilder;
 
@@ -36,7 +35,7 @@ public static class DMBEffectBuilderLabsNavigationAgent
     /// <param name="icon">The Bootstrap Icons CSS class used by the action.</param>
     /// <param name="currentController">The current MVC controller name used to mark the action active.</param>
     /// <param name="currentAction">The current MVC action name used to mark the action active.</param>
-    /// <returns>The configured <see cref="AspRouteActionItem"/>.</returns>
+    /// <returns>The configured <see cref="AspRouteActionItem" />.</returns>
     public static AspRouteActionItem CreateAction(
         string controller,
         string action,
@@ -59,7 +58,7 @@ public static class DMBEffectBuilderLabsNavigationAgent
     /// <summary>
     ///     Creates the DMBEffectBuilder navbar menu group.
     /// </summary>
-    /// <returns>The configured <see cref="GroupActionItem"/> containing DMBEffectBuilder labs page links.</returns>
+    /// <returns>The configured <see cref="GroupActionItem" /> containing DMBEffectBuilder labs page links.</returns>
     public static GroupActionItem CreateMenuGroup()
     {
         return ActionItemFactory.Group("DMBEffectBuilder", IconStruct.Bootstrap("bi-stars"))
@@ -100,11 +99,37 @@ public static class DMBEffectBuilderLabsNavigationAgent
     }
 
     /// <summary>
+    ///     Creates the DMBEffectBuilder sidebar component.
+    /// </summary>
+    /// <param name="currentController">The current MVC controller name used to mark the active item.</param>
+    /// <param name="currentAction">The current MVC action name used to mark the active item.</param>
+    /// <param name="sidebarId">The HTML identifier applied to the sidebar component.</param>
+    /// <param name="localStorageKey">The browser local-storage key used for sidebar state.</param>
+    /// <returns>The configured <see cref="SideBarComponent" />.</returns>
+    public static SideBarComponent CreateSidebar(
+        string? currentController,
+        string? currentAction,
+        string sidebarId = "effect_builder_sidebar",
+        string localStorageKey = "dmbeffectbuilder.labs.sidebar"
+    )
+    {
+        SideBarComponent sidebar = new SideBarComponent()
+            .WithId(sidebarId)
+            .WithLocalStorageKey(localStorageKey)
+            .WithAutoExpandActivePath()
+            .WithRememberExpandedState();
+
+        sidebar.AddSection(CreateSidebarSection(currentController, currentAction));
+
+        return sidebar;
+    }
+
+    /// <summary>
     ///     Creates the DMBEffectBuilder sidebar section.
     /// </summary>
     /// <param name="currentController">The current MVC controller name used to mark the active item.</param>
     /// <param name="currentAction">The current MVC action name used to mark the active item.</param>
-    /// <returns>The configured <see cref="SideBarSectionComponent"/>.</returns>
+    /// <returns>The configured <see cref="SideBarSectionComponent" />.</returns>
     public static SideBarSectionComponent CreateSidebarSection(string? currentController, string? currentAction)
     {
         return new SideBarSectionComponent("DMBEffectBuilder")
@@ -145,36 +170,10 @@ public static class DMBEffectBuilderLabsNavigationAgent
     }
 
     /// <summary>
-    ///     Creates the DMBEffectBuilder sidebar component.
-    /// </summary>
-    /// <param name="currentController">The current MVC controller name used to mark the active item.</param>
-    /// <param name="currentAction">The current MVC action name used to mark the active item.</param>
-    /// <param name="sidebarId">The HTML identifier applied to the sidebar component.</param>
-    /// <param name="localStorageKey">The browser local-storage key used for sidebar state.</param>
-    /// <returns>The configured <see cref="SideBarComponent"/>.</returns>
-    public static SideBarComponent CreateSidebar(
-        string? currentController,
-        string? currentAction,
-        string sidebarId = "effect_builder_sidebar",
-        string localStorageKey = "dmbeffectbuilder.labs.sidebar"
-    )
-    {
-        SideBarComponent sidebar = new SideBarComponent()
-            .WithId(sidebarId)
-            .WithLocalStorageKey(localStorageKey)
-            .WithAutoExpandActivePath()
-            .WithRememberExpandedState();
-
-        sidebar.AddSection(CreateSidebarSection(currentController, currentAction));
-
-        return sidebar;
-    }
-
-    /// <summary>
     ///     Determines whether a controller belongs to the DMBEffectBuilder labs module.
     /// </summary>
     /// <param name="controllerName">The MVC controller name to inspect.</param>
-    /// <returns><see langword="true"/> when the controller belongs to DMBEffectBuilder labs.</returns>
+    /// <returns><see langword="true" /> when the controller belongs to DMBEffectBuilder labs.</returns>
     public static bool IsModuleController(string? controllerName)
     {
         return controllerName is not null &&
@@ -185,51 +184,11 @@ public static class DMBEffectBuilderLabsNavigationAgent
     }
 
     /// <summary>
-    ///     Resolves the default controller for a DMBEffectBuilder labs module controller.
-    /// </summary>
-    /// <param name="controllerName">The MVC controller name to resolve.</param>
-    /// <returns>The root module controller name.</returns>
-    public static string ResolveModuleController(string? controllerName)
-    {
-        return "EffectBuilder";
-    }
-
-    /// <summary>
-    ///     Resolves the default action for a DMBEffectBuilder labs module controller.
-    /// </summary>
-    /// <param name="controllerName">The MVC controller name to resolve.</param>
-    /// <returns>The root module action name.</returns>
-    public static string ResolveModuleDefaultAction(string? controllerName)
-    {
-        return "Introduction";
-    }
-
-    /// <summary>
-    ///     Resolves the Bootstrap icon for a DMBEffectBuilder labs module controller.
-    /// </summary>
-    /// <param name="controllerName">The MVC controller name to resolve.</param>
-    /// <returns>The icon value represented as an <see cref="IconStruct"/>.</returns>
-    public static IconStruct ResolveModuleIcon(string? controllerName)
-    {
-        return IconStruct.Bootstrap("bi-stars");
-    }
-
-    /// <summary>
-    ///     Resolves the display title for a DMBEffectBuilder labs module controller.
-    /// </summary>
-    /// <param name="controllerName">The MVC controller name to resolve.</param>
-    /// <returns>The module display title.</returns>
-    public static string ResolveModuleTitle(string? controllerName)
-    {
-        return "DMBEffectBuilder";
-    }
-
-    /// <summary>
     ///     Resolves the Bootstrap icon for a DMBEffectBuilder labs action.
     /// </summary>
     /// <param name="controllerName">The MVC controller name to resolve.</param>
     /// <param name="actionName">The MVC action name to resolve.</param>
-    /// <returns>The icon value represented as an <see cref="IconStruct"/>.</returns>
+    /// <returns>The icon value represented as an <see cref="IconStruct" />.</returns>
     public static IconStruct ResolveActionIcon(string? controllerName, string? actionName)
     {
         return actionName switch
@@ -304,6 +263,46 @@ public static class DMBEffectBuilderLabsNavigationAgent
             "ImageEffect" or "SectionEffect" or "InnerSectionEffect" => "Catalog",
             _ => "Introduction"
         };
+    }
+
+    /// <summary>
+    ///     Resolves the default controller for a DMBEffectBuilder labs module controller.
+    /// </summary>
+    /// <param name="controllerName">The MVC controller name to resolve.</param>
+    /// <returns>The root module controller name.</returns>
+    public static string ResolveModuleController(string? controllerName)
+    {
+        return "EffectBuilder";
+    }
+
+    /// <summary>
+    ///     Resolves the default action for a DMBEffectBuilder labs module controller.
+    /// </summary>
+    /// <param name="controllerName">The MVC controller name to resolve.</param>
+    /// <returns>The root module action name.</returns>
+    public static string ResolveModuleDefaultAction(string? controllerName)
+    {
+        return "Introduction";
+    }
+
+    /// <summary>
+    ///     Resolves the Bootstrap icon for a DMBEffectBuilder labs module controller.
+    /// </summary>
+    /// <param name="controllerName">The MVC controller name to resolve.</param>
+    /// <returns>The icon value represented as an <see cref="IconStruct" />.</returns>
+    public static IconStruct ResolveModuleIcon(string? controllerName)
+    {
+        return IconStruct.Bootstrap("bi-stars");
+    }
+
+    /// <summary>
+    ///     Resolves the display title for a DMBEffectBuilder labs module controller.
+    /// </summary>
+    /// <param name="controllerName">The MVC controller name to resolve.</param>
+    /// <returns>The module display title.</returns>
+    public static string ResolveModuleTitle(string? controllerName)
+    {
+        return "DMBEffectBuilder";
     }
 
     #endregion

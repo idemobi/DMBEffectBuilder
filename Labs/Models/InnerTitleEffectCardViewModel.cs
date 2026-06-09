@@ -7,7 +7,6 @@
 
 #region
 
-using System;
 using DMBBootstrapBuilder;
 using DMBEffectBuilder;
 using DMBPageBuilder;
@@ -59,7 +58,7 @@ namespace DMBEffectBuilderLabs.Models
         public string Label { get; set; } = string.Empty;
 
         /// <summary>
-        ///     Gets or sets the action that applies the effect to the preview <see cref="SectionInnerEffectTitle"/>.
+        ///     Gets or sets the action that applies the effect to the preview <see cref="SectionInnerEffectTitle" />.
         /// </summary>
         public required Func<SectionInnerEffectTitle, SectionInnerEffectTitle> TitleConfig { get; set; }
 

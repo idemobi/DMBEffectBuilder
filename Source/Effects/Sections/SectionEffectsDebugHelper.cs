@@ -7,10 +7,6 @@
 
 #region
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.DependencyInjection;
